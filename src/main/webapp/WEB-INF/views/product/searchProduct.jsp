@@ -22,7 +22,7 @@
                         	<div class="col-3">
                             	<a href="<%=application.getContextPath() %>/product?productNo=${search.productNo}">
                                 	<div class="cetegory-product">
-                                    	<img src="<%=application.getContextPath() %>/getphoto?imgSname=${search.imgSname}&imgType=${search.imgType}">
+                                    	<img src="<%=application.getContextPath() %>/getphoto?cno=${search.productCategoryNo}&imgSname=${search.imgSname}&imgType=${search.imgType}">
                                 	</div>
                             	</a>
 	                            <div class="category-title">

@@ -54,7 +54,7 @@
          			<div class="col">
          			<a href="<%=application.getContextPath() %>/product?productNo=${orderProducts.productNo}">
 	                 <div class="img-sideline">
-	                     <img src="<%=application.getContextPath() %>/getphoto?imgSname=${orderProducts.imgSname}&imgType=${orderProducts.imgType}"id="changeImg">
+	                     <img src="<%=application.getContextPath() %>/getphoto?cno=${orderProducts.productCategoryNo}&imgSname=${orderProducts.imgSname}&imgType=${orderProducts.imgType}"id="changeImg">
 	                 </div>
 	                 </a>
 	             </div>

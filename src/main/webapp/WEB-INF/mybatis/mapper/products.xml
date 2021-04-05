@@ -363,14 +363,15 @@
 	
 	
 	<select id="selectBySearchPage"  resultType="product">
-		select rnum,productNo,productName,productPrice,imgSname,imgType
+		select rnum,productNo,productName,productPrice,productCategoryNo,imgSname,imgType
 	      from (
-	          select rownum as rnum,productNo,productName,productPrice,imgSname,imgType
+	          select rownum as rnum,productNo,productName,productPrice,productCategoryNo,imgSname,imgType
 	          from (
 				        SELECT 
 						 p.product_no as productNo, 
 						 p.product_name as productName, 
 						 p.product_price as productPrice, 
+						 p.product_category_no as productCategoryNo,
 						 i.img_sname as imgSname,
 						 i.img_type as imgType
 					FROM 

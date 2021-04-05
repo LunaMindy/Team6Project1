@@ -123,19 +123,19 @@ public class ProductController {
 	         InputStream is;
 	         OutputStream os;
 	    	 if(cno == 1) {
-	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/캔들/" + imgSname + "." + imgType);
+	    		 is = new FileInputStream("D:/상품사진들/캔들/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 2) {
-	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/조명/" + imgSname + "." + imgType);
+	    		 is = new FileInputStream("D:/상품사진들/조명/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 3) {
-	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/트리/" + imgSname + "." + imgType);
+	    		 is = new FileInputStream("D:/상품사진들/트리/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else {
-	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/기타/" + imgSname + "." + imgType);
+	    		 is = new FileInputStream("D:/상품사진들/기타/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }
