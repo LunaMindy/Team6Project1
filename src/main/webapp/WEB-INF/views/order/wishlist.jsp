@@ -8,7 +8,7 @@
 
    <!-- 컨텐츠 -->
     <div class="container-fluid">
-        <div>
+    
 
             <!-- 마이페이지 타이틀 -->
             <div>
@@ -31,32 +31,29 @@
             </div>
                    
             <div class="wishlist-wrapper">
-        	     <table>
+        	   
                 <!--카테고리 12개-->
                 <div class="row">
           
                 <c:forEach var="wishlist" items="${list}">
                     <div class="col-3">
-                        
+                        <a href="<%=application.getContextPath() %>/product?productNo=${wishlist.productNo}">
                             <div class="wishlist-product">
-                              <img src="<%=application.getContextPath()%>/getphoto?imgSname=${wishlist.imgSname}&imgType=${wishlist.imgType}"> 
+                              <img src="<%=application.getContextPath()%>/getphoto?cno=${wishlist.productCategoryNo}&imgSname=${wishlist.imgSname}&imgType=${wishlist.imgType}"> 
                             </div>
-                        
+                        </a>
                         <div class="wishlist-title">
-                            <p>${wishlist.productName}</p>
-                            
-	                       
-	                          <a class="btn btn-primary bt-sm" href="delwishlist?productNo=${wishlist.productNo}">삭제</a>
-	                           
-                            </p>
+                            <p>${wishlist.productName} </p>
+	                          <a class="btn btn-primary bt-sm " href="delwishlist?productNo=${wishlist.productNo}">삭제</a>
+                           </p>
                         </div>
                     </div>
                     
                   </c:forEach> 
                   
         
-         <tr>
-	      <td colspan="5" style="text-center">
+         </div>
+	      <div class="col text-center">
 	      	<div class="d-flex">
 	      		<div class="flex-grow-1">
 			         <a class="btn btn-outline-primary btn-sm"
@@ -89,11 +86,10 @@
 		         </div>
 		     
 		      </div>
-	      </td>
-   </tr>
-     </table>               
-
-             
+	
+             </div>
+       </div>
+   </div>
          
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

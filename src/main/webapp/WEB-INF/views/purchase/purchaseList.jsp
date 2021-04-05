@@ -30,7 +30,7 @@
    <div class="container-fluid border">
        <h3 id="mypageTitle-under">구매내역</h3>
        <hr/>
-        <table>
+      
        <c:forEach var="order" items="${list}">
        	<form method="post" action="<%=application.getContextPath()%>/user/exchangerefund?orderNo=${order.orderNo}">
        		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -44,16 +44,18 @@
 		           </div>
 		           
 		           <div class="col">
-		               <a href="<%=application.getContextPath()%>/user/purchaselistdetail?orderNo=${order.orderNo}" class="exchange-btn">주문상세정보</a>
+		               <a href="<%=application.getContextPath()%>/user/purchaselistdetail?orderNo=${order.orderNo}" 
+		               class="exchange-btn1">주문상세정보</a>
 		           </div>
+           		 
            		 	<c:if test="${order.orderState eq 0}">
                    	 	 <div class="col">
-                   	 	   <button class="exchange-btn" type="submit">교환/환불/구매취소</button>                        
+                   	 	   <button class="exchange-btn2" type="submit">교환/환불/구매취소</button>                        
                    		 </div>
                 	 </c:if>
                 	 <c:if test="${order.orderState eq 1}">
                     	 <div class="col">
-                    	   <button class="exchange-btn" type="button" onclick="alert('이미 구매 취소된 주문입니다.')">교환/환불/구매취소</button>                        
+                    	   <button class="exchange-btn2" type="button" onclick="alert('이미 구매 취소된 주문입니다.')">교환/환불/구매취소</button>                        
                     	</div>
                 	 </c:if>
 		       </div>
@@ -61,43 +63,43 @@
 
        </c:forEach>
 
-	<tr>
-	      <td colspan="5" style="text-center">
+	
+	      <div class="text-center">
 	      	<div class="d-flex">
 	      		<div class="flex-grow-1">
 			         <a class="btn btn-outline-primary btn-sm"
-			           href="purchaselist?pageNo=1">처음</a>
+			           href="purchaselist?pageNo=1&userId=${userId}">처음</a>
 			            
 			         <c:if test="${pager.groupNo>1}">
 			            <a class="btn btn-outline-info btn-sm"
-			            href="purchaselist?pageNo=${pager.startPageNo-1}">이전</a>
+			            href="purchaselist?pageNo=${pager.startPageNo-1}&userId=${userId}">이전</a>
 			         </c:if>
 			         
 			         <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 			            <c:if test="${pager.pageNo == i}">
 			               <a class="btn btn-outline-success btn-sm" 
-			                  href="purchaselist?pageNo=${i}">${i}</a>
+			                  href="purchaselist?pageNo=${i}&userId=${userId}">${i}</a>
 			            </c:if>
 			            <c:if test="${pager.pageNo != i}">
 			               <a class="btn btn-outline-danger btn-sm" 
-			                  href="purchaselist?pageNo=${i}">${i}</a>
+			                  href="purchaselist?pageNo=${i}&userId=${userId}">${i}</a>
 			            </c:if>
 			         </c:forEach>
 			         
 			         <c:if test="${pager.groupNo<pager.totalGroupNo}">
 			            <a class="btn btn-outline-info btn-sm"
-			            href="purchaselist?pageNo=${pager.endPageNo+1}">다음</a>
+			            href="purchaselist?pageNo=${pager.endPageNo+1}&userId=${userId}">다음</a>
 			         </c:if>
 			            
 			         <a class="btn btn-outline-primary btn-sm"
-			            href="purchaselist?pageNo=${pager.totalPageNo}">맨끝</a>
+			            href="purchaselist?pageNo=${pager.totalPageNo}&userId=${userId}">맨끝</a>
 			         <!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
 		         </div>
 		     
 		      </div>
-	      </td>
-   		</tr>
-     </table> 
+	    
+    	</div>
+    
 	</div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

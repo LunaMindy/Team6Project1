@@ -19,6 +19,6 @@ public interface OrdersDao {
 	//public List<Orders> selectAll(String userId);
 	/*주문디테일페지이*/
 	public List<Orders> selectByPage(@Param("pager") Pager pager,@Param("userId") String userId);
-	public int count();
+	public int count(String userId);
 	
 }

@@ -19,6 +19,7 @@
 					 op.price as price, 
 					 op.review_state as reviewState,
 			         p.product_name as productName,
+			         p.product_category_no as productCategoryNo,
 			         i.img_sname as imgSname,
 			         i.img_type as imgType
 			from orders o, order_products op, products p, products_img i

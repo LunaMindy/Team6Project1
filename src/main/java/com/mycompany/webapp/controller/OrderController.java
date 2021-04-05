@@ -62,6 +62,7 @@ public class OrderController {
 		model.addAttribute("clist",clist);
 		model.addAttribute("size", clist.size());
 		cartArray = new Cart[clist.size()];
+	
 		return "order/cart";
 	}
 
