@@ -160,12 +160,12 @@ body{
 
 
 .footer{
-	   clear:both;
     margin-top: 100px;
     background-color: #f3f3f3 ;
     padding: 10px;
     text-align: center;
     height: 150px;
+    clear:both;
 }
 
 /* footer top line */

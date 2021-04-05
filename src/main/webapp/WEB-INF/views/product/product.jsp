@@ -188,8 +188,10 @@ const getList = (pageNo) => {
                     </p>
                 </div>
             </div>
-
-           <div class="row review-section" id="review">
+			
+			<div id="reivew">
+			</div>
+           <%--  <div class="row review-section" id="review">
                 <div class="col-md-12">
                     <hr>
                     <h3>| Reviews |</h3>
@@ -255,8 +257,8 @@ const getList = (pageNo) => {
 						</div>
 					</div>
 				</div>               
-            </div>
-        </div>
+            </div> --%>
+        </div> 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 

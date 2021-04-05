@@ -46,9 +46,16 @@
 		           <div class="col">
 		               <a href="<%=application.getContextPath()%>/user/purchaselistdetail?orderNo=${order.orderNo}" class="exchange-btn">주문상세정보</a>
 		           </div>
-           		 <div class="col">
-           			 <button class="exchange-btn" type="submit">교환/환불/구매취소</button>		               	
-           		 </div>
+           		 	<c:if test="${order.orderState eq 0}">
+                   	 	 <div class="col">
+                   	 	   <button class="exchange-btn" type="submit">교환/환불/구매취소</button>                        
+                   		 </div>
+                	 </c:if>
+                	 <c:if test="${order.orderState eq 1}">
+                    	 <div class="col">
+                    	   <button class="exchange-btn" type="button" onclick="alert('이미 구매 취소된 주문입니다.')">교환/환불/구매취소</button>                        
+                    	</div>
+                	 </c:if>
 		       </div>
        	</form>
 

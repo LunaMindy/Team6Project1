@@ -29,9 +29,11 @@
 		              		<c:forEach var="cart" items="${clist}">                        		                       		
 		              			<tr>
 		                      <td class="cart-img-line">
-		                          <div class="cart-img">
+		                          <a href="<%=application.getContextPath() %>/product?productNo=${cart.productNo}">
+		                          	<div class="cart-img">
 		                              <img src="<%=application.getContextPath()%>/getphoto?cno=${cart.categoryNo}&imgSname=${cart.imgSname}&imgType=${cart.imgType}">
-		                          </div>
+		                          	</div>
+		                          </a>
 		                      </td>
 		                      <td class="cart-img-name">
 		                          <p class="text">${cart.productName}</p>
