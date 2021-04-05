@@ -12,13 +12,11 @@ import com.mycompany.webapp.dto.Pager;
 public interface OrdersDao {
 
 	public void createOrder(String userId, int orderNo);
-	public void updateOrder(int orderNo);
-	public void deleteOrder(int orderNo);
 	public void insert(Orders orders);
 	/*주문디테일*/
 	//public List<Orders> selectAll(String userId);
 	/*주문디테일페지이*/
 	public List<Orders> selectByPage(@Param("pager") Pager pager,@Param("userId") String userId);
 	public int count();
-	
+	public void updateOrder(int orderNo);
 }

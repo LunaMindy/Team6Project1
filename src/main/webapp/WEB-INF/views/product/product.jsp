@@ -38,12 +38,13 @@ $(function() {
 });
 
 const getList = (pageNo) => {
-	const args = {url:"list", method:"get"}
+	console.log("실행");
+	const var1 = {url:"list", method:"get"}
 	if (pageNo) {
-		args.data = {pageNo};
+		var1.data = {pageNo};
 	}
-	$.ajax(agrs).then(data => {
-		$('#review').html(data)
+	$.ajax(var1).then(data => {
+		$("#review").html(data)
 	});	
 };
 </script>
@@ -159,8 +160,10 @@ const getList = (pageNo) => {
                     </p>
                 </div>
             </div>
-
-           <div class="row review-section" id="review">
+			
+			<div id="reivew">
+			</div>
+           <%-- <div class="row review-section" id="review">
                 <div class="col-md-12">
                     <hr>
                     <h3>| Reviews |</h3>
@@ -185,48 +188,55 @@ const getList = (pageNo) => {
                             <p>${reviews.reviewContent}</p>
                         </div>
                         <div class="col-md-2 review-part-right">
-                        	<c:if test=""></c:if>
+                        	<c:if test="${loginId != reviews.userId}">
                         		<button class="btn review-btn" onclick="alert('삭제할 수 없습니다.')" type="button">remove</button>
-                        		<a class="btn review-btn" href="<%=application.getContextPath()%>/user/delreview?reviewNo=${reviews.reviewNo}&productNo=${product.productNo}">remove</a>                        	                                                 	                         
+                        	</c:if>
+                        	<c:if test="${loginId == reviews.userId}">
+                        		<a class="btn review-btn" href="<%=application.getContextPath()%>/user/delreview?reviewNo=${reviews.reviewNo}&productNo=${product.productNo}">remove</a>
+                        	</c:if>
+                        		                        	                                                 	                         
                         </div>
                     </div>
                 	</div>
                 </c:forEach>     
                 
-                <div class="col-5 text-center">
-					<div class="d-flex">
-						<div class="flex-grow-1">							
-							<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
-							<button class="btn btn-outline-primary btn-sm"
-								onclick="getList(1)">처음</button>
-							
-							<c:if test="${pager.groupNo>1}">
-								<button class="btn btn-outline-info btn-sm"
-								onclick="getList(${pager.startPageNo-1})">이전</button>
-							</c:if>
-							
-							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-								<c:if test="${pager.pageNo!=i}">
-									<button class="btn btn-outline-success btn-sm"
-									onclick="getList(${i})">${i}</button>
+                <c:if test="${size != 0}">
+                	<div class="col-5 text-center">
+						<div class="d-flex">
+							<div class="flex-grow-1">							
+								<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
+								<button class="btn btn-outline-primary btn-sm"
+									onclick="getList(1)">처음</button>
+								
+								<c:if test="${pager.groupNo>1}">
+									<button class="btn btn-outline-info btn-sm"
+									onclick="getList(${pager.startPageNo-1})">이전</button>
 								</c:if>
-								<c:if test="${pager.pageNo==i}">
-									<button class="btn btn-danger btn-sm"
-									onclick="getList(${i})">${i}</button>
+								
+								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+									<c:if test="${pager.pageNo!=i}">
+										<button class="btn btn-outline-success btn-sm"
+										onclick="getList(${i})">${i}</button>
+									</c:if>
+									<c:if test="${pager.pageNo==i}">
+										<button class="btn btn-danger btn-sm"
+										onclick="getList(${i})">${i}</button>
+									</c:if>
+								</c:forEach>
+								
+								<c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<button class="btn btn-outline-info btn-sm"
+									onclick="getList(${pager.endPageNo+1})">다음</button>
 								</c:if>
-							</c:forEach>
-							
-							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<button class="btn btn-outline-info btn-sm"
-								onclick="getList(${pager.endPageNo+1})">다음</button>
-							</c:if>
-							
-							<button class="btn btn-outline-primary btn-sm"
-								onclick="getList(${pager.totalPageNo})">맨끝</button>
+								
+								<button class="btn btn-outline-primary btn-sm"
+									onclick="getList(${pager.totalPageNo})">맨끝</button>
+							</div>
 						</div>
-					</div>
-				</div>               
-            </div>
+					</div> 
+                </c:if>
+                              
+            </div> --%>
         </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

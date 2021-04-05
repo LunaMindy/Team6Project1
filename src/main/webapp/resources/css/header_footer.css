@@ -165,6 +165,7 @@ body{
     padding: 10px;
     text-align: center;
     height: 150px;
+    clear:both;
 }
 
 /* footer top line */

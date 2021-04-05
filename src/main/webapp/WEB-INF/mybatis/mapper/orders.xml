@@ -41,10 +41,15 @@
   	
   	</select>
 
-	 <select id = "count" resultType="int">
-  	select count(*) 
-  	 from orders 
-				 
-  </select>
+	<select id = "count" resultType="int">
+	  	select count(*) 
+	  	 from orders 				 
+   </select>
+   
+   <update id="updateOrder" parameterType="int">
+   		update orders set
+   			order_state = 1
+   		where order_no = #{orderNo}
+   </update>
   
 </mapper>

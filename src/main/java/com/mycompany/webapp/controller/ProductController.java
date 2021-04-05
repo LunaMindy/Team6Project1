@@ -45,37 +45,39 @@ public class ProductController {
 		product = list.get(0);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("product", product);
-		
+		model.addAttribute("product", product);		
 		
 		//리뷰
 		//List<Reviews> rlist = reviewsService.getReview(productNo);
-		int intPageNo = 1;
-		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
-			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			Pager pager = (Pager)session.getAttribute("pager");
-			if (pager != null) {
-				intPageNo = pager.getPageNo();
-			}
-		} else {	//클라이언트에서 pageNo가 넘어왔을 경우
-			intPageNo = Integer.parseInt(pageNo);
-		}
-				
-		int totalRows = reviewsService.getTotalRows(productNo);
-		logger.info(String.valueOf(totalRows));
-		Pager pager = new Pager(2, 5, totalRows, intPageNo);
-		session.setAttribute("pager", pager);
-		
-		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-		logger.info(String.valueOf(rlist.size()));
-		model.addAttribute("rlist", rlist);
-		model.addAttribute("pager", pager);						
+//		int intPageNo = 1;
+//		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
+//			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
+//			Pager pager = (Pager)session.getAttribute("pager");
+//			if (pager != null) {
+//				intPageNo = pager.getPageNo();
+//			}
+//		} else {	//클라이언트에서 pageNo가 넘어왔을 경우
+//			intPageNo = Integer.parseInt(pageNo);
+//		}
+//				
+//		int totalRows = reviewsService.getTotalRows(productNo);
+//		logger.info(String.valueOf(totalRows));
+//		Pager pager = new Pager(2, 5, totalRows, intPageNo);
+//		session.setAttribute("pager", pager);
+//		
+//		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
+//		logger.info(String.valueOf(rlist.size()));
+//		model.addAttribute("size", rlist.size());
+//		model.addAttribute("rlist", rlist);
+//		model.addAttribute("pager", pager);						
 				
 		return "product/product";
 	}
 	
 	@GetMapping("/list")
 	public String list(int productNo, Model model, HttpSession session, String pageNo) {
+		logger.info("상품 리뷰 보기");
+		
 		
 		int intPageNo = 1;
 		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
@@ -95,6 +97,7 @@ public class ProductController {
 		
 		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
 		logger.info(String.valueOf(rlist.size()));
+		model.addAttribute("size", rlist.size());
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("pager", pager);						
 				
