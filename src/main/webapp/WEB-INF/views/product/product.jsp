@@ -9,6 +9,32 @@
 <script>
 var amount;
 
+
+const addCartCheck = () => {
+	
+		event.preventDefault();
+		
+		var data = {
+				userId : $("#userId").val(),
+				productNo : $("#productNo").val(),
+				price : $("#price").val(),
+				amount : $("#amount").val()
+			}
+		
+				$.ajax({
+						url: "user/addcart",
+						data: data,
+						method: "post"
+					}).done(data => {
+						if(data.result == "success"){
+							console.log("실행");
+							alert("장바구니에 추가되었습니다.")
+					 	}else if(data.result == "danger"){
+					 		alert('이미 추가된 상품입니다.');
+					 	}
+				});
+	}
+
 function init () {
 	amount = document.amountForm.amount.value;
 	change();
@@ -18,19 +44,19 @@ function add () {
 	resultAmount = document.amountForm.amount;
 	resultAmount.value ++ ;
 
-}
+};
 function del () {
 	resultAmount = document.amountForm.amount;
 		if (resultAmount.value > 1) {
 			resultAmount.value -- ;
 		}
-}
+};
 function change () {
 	resultAmount = document.amountForm.amount;
 		if (resultAmount.value < 0) {
 			resultAmount.value = 0;
 		}
-}  
+};  
 
 //review paging
 $(function() {
@@ -65,16 +91,16 @@ const getList = (pageNo) => {
                     <div class="preview-pic tab-content">
                     	<c:forEach var="product" items="${list}" varStatus="status">
 	                    	<c:if test="${status.count eq 1}"> 
-								<div class="tab-pane active" id="pic-1" style="width:80%"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>	   		
+								<div class="tab-pane active" id="pic-1" style="width:80%"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>	   		
 							</c:if>
 							<c:if test="${status.count eq 2}"> 
-								<div class="tab-pane" id="pic-2" style="width:80%"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>	   		
+								<div class="tab-pane" id="pic-2" style="width:80%"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>	   		
 							</c:if>
 							<c:if test="${status.count eq 3}"> 
-								<div class="tab-pane" id="pic-3" style="width:80%"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>	   		
+								<div class="tab-pane" id="pic-3" style="width:80%"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>	   		
 							</c:if>
 							<c:if test="${status.count eq 4}"> 
-								<div class="tab-pane" id="pic-4" style="width:80%" ><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>
+								<div class="tab-pane" id="pic-4" style="width:80%" ><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></div>
 							</c:if>
                     	</c:forEach>
                         
@@ -84,22 +110,22 @@ const getList = (pageNo) => {
                     	<c:forEach var="product" items="${list}" varStatus="status">
 	                    	<c:if test="${status.count eq 1}"> 
 								 <li class="active">
-                            		<a data-target="#pic-1" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
+                            		<a data-target="#pic-1" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
                        			 </li>	   		
 							</c:if>
 							<c:if test="${status.count eq 2}"> 
 								<li>
-		                            <a data-target="#pic-2" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
+		                            <a data-target="#pic-2" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
 		                        </li>	   		
 							</c:if>
 							<c:if test="${status.count eq 3}"> 
 								 <li>
-		                            <a data-target="#pic-3" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
+		                            <a data-target="#pic-3" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
 		                        </li>	   		
 							</c:if>
 							<c:if test="${status.count eq 4}"> 
 								<li>
-		                            <a data-target="#pic-4" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
+		                            <a data-target="#pic-4" data-toggle="tab"><img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}"/></a>
 		                        </li>	   		
 							</c:if>
                     	</c:forEach>
@@ -119,22 +145,25 @@ const getList = (pageNo) => {
                     
                     <div class="product-action">
                         <!-- 장바구니 추가 post -->
-                    <form method="post" name="amountForm" action="<%=application.getContextPath()%>/user/addcart" style="display:inline-block">
+                    <form id="amountForm" name="amountForm" method="post" action="<%=application.getContextPath()%>/user/addcart" style="display:inline-block" onsubmit="addCartCheck()">
                     	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    	<input type="hidden" name="productNo" value="${product.productNo}" />
-                    	<input type="hidden" name="userId" value="" />
-                    	<input type="hidden" name="price" value="${product.productPrice}" />
+                    	<input type="hidden" id="productNo" name="productNo" value="${product.productNo}" />
+                    	<input type="hidden" id="userId" name="userId" value="" />
+                    	<input type="hidden" id="price" name="price" value="${product.productPrice}" />
                     	<div style="margin-bottom:20%;">
-                    		<input type="text" name="amount" value="1" size="3" onchange="change();">
+                    		<input type="text" id="amount" name="amount" value="1" size="3" onchange="change()">
 												<input type="button" value=" + " onclick="add();">
 												<input type="button" value=" - " onclick="del();"><br>
 											</div>
-                        <button
-                            class="add-to-cart btn btn-default"
-                            type="submit"
-                            onclick="alert('장바구니에 추가되었습니다.')">add to cart</button>
-										</form>
-										<form method="post" action="<%=application.getContextPath()%>/user/addwishlist" style="display:inline-block">
+											
+						<sec:authorize access="isAnonymous()">
+                     		<button class="add-to-cart btn btn-default" type="button" style="font-size:1rem;">장바구니에 담으려면 로그인하십시오.</button>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+					 		<input class="add-to-cart btn btn-default" type="submit" value="장바구니 담기" />
+						</sec:authorize>
+					</form>
+					<form method="post" action="<%=application.getContextPath()%>/user/addwishlist" style="display:inline-block">
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 											<input type="hidden" name="productNo" value="${product.productNo}" />
                     	<input type="hidden" name="userId" value="" />
@@ -159,8 +188,10 @@ const getList = (pageNo) => {
                     </p>
                 </div>
             </div>
-
-           <div class="row review-section" id="review">
+			
+			<div id="reivew">
+			</div>
+           <%--  <div class="row review-section" id="review">
                 <div class="col-md-12">
                     <hr>
                     <h3>| Reviews |</h3>
@@ -226,8 +257,8 @@ const getList = (pageNo) => {
 						</div>
 					</div>
 				</div>               
-            </div>
-        </div>
+            </div> --%>
+        </div> 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 

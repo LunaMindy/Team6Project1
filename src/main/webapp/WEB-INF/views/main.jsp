@@ -21,7 +21,7 @@
 				                    <div class="product-box">
 				                        <a href="<%=application.getContextPath() %>/product?productNo=${product.productNo}">
 				                            <div class="main-product">
-				                                 <img src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}">
+				                                 <img src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}">
 				                            </div>
 				                        </a>
 				                        <div class="main-product-name">
@@ -50,7 +50,7 @@
 				                    <div class="product-box">
 				                        <div class="main-product">
 				                            <a href="<%=application.getContextPath() %>/product?productNo=${product.productNo}">
-				                                 <img src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}">
+				                                 <img src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${product.imgSname}&imgType=${product.imgType}">
 				                            </a>
 				                        </div>
 				                        <div class="main-product-name">

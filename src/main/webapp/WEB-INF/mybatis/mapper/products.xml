@@ -27,18 +27,21 @@
             p.product_no as productNo,
 			p.product_name as productName, 
 			p.product_price as productPrice, 
+			p.product_category_no as productCategoryNo,
 			i.img_oname as imgOname, 
 			i.img_sname as imgSname, 
 			i.img_type as imgType
         FROM(
             SELECT 
                 product_no,
-                product_name, 
+                product_name,
+                product_category_no, 
                 product_price
             FROM(
                 SELECT 
                     product_no,
                     product_name, 
+                    product_category_no,
                     product_price
                 FROM
                     products
@@ -60,18 +63,21 @@
             p.product_no as productNo,
 			p.product_name as productName, 
 			p.product_price as productPrice, 
+			p.product_category_no as productCategoryNo,
 			i.img_oname as imgOname, 
 			i.img_sname as imgSname, 
 			i.img_type as imgType
         FROM(
             SELECT 
                 product_no,
-                product_name, 
+                product_name,
+                product_category_no, 
                 product_price
             FROM(
                 SELECT 
                     product_no,
-                    product_name, 
+                    product_name,
+                    product_category_no, 
                     product_price
                 FROM
                     products

@@ -16,4 +16,6 @@ public interface CartDao {
 	public int deleteCart(@Param("productNo") int productNo, @Param("userId") String userId);
 	public int count(String userId);
 	public void updateCart(Cart cart);
+	
+	public int cartCheckCount(@Param("productNo") int productNo, @Param("userId") String userId);
 }

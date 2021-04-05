@@ -40,7 +40,7 @@
 								<div class="col-3">
                             		<a href="<%=application.getContextPath() %>/product?productNo=${product.productNo}">
                                 		<div class="cetegory-product">
-													<img src="<%=application.getContextPath()%>/getphoto?imgSname=${product.imgSname}&imgType=${product.imgType}">
+													<img src="<%=application.getContextPath()%>/getphoto?cno=${cno}&imgSname=${product.imgSname}&imgType=${product.imgType}">
 		                                </div>
                             		</a>
                			            <div class="category-title">
@@ -61,31 +61,31 @@
 		       <tr>
 				<td colspan="5" style="text-center;">
 						<a class="btn btn-outline-primary btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=1">처음</a>
+							href="category?cno=${product.productCategoryNo}&pageNo=1&kind=${kind}">처음</a>
 
 						<c:if test="${pager.groupNo>1}">
 							<a class="btn btn-outline-info btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=${pager.startPageNo-1}">이전</a>
+							href="category?cno=${product.productCategoryNo}&pageNo=${pager.startPageNo-1}&kind=${kind}">이전</a>
 						</c:if>
 						
 						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 							<c:if test="${pager.pageNo == i}">
 								<a class="btn btn-outline-danger btn-sm" 
-									href="category?cno=${product.productCategoryNo}&pageNo=${i}">${i}</a>
+									href="category?cno=${product.productCategoryNo}&pageNo=${i}&kind=${kind}">${i}</a>
 							</c:if>
 							<c:if test="${pager.pageNo != i}">
 								<a class="btn btn-outline-success btn-sm" 
-									href="category?cno=${product.productCategoryNo}&pageNo=${i}">${i}</a>
+									href="category?cno=${product.productCategoryNo}&pageNo=${i}&kind=${kind}">${i}</a>
 							</c:if>
 						</c:forEach>
 						
 						<c:if test="${pager.groupNo<pager.totalGroupNo}">
 							<a class="btn btn-outline-info btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=${pager.endPageNo+1}">다음</a>
+							href="category?cno=${product.productCategoryNo}&pageNo=${pager.endPageNo+1}&kind=${kind}">다음</a>
 						</c:if>
 							
 						<a class="btn btn-outline-primary btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=${pager.totalPageNo}">맨끝</a>
+							href="category?cno=${product.productCategoryNo}&pageNo=${pager.totalPageNo}&kind=${kind}">맨끝</a>
 								
 								<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
 					</td>

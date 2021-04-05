@@ -11,6 +11,7 @@
 					 c.regdate,
 					 p.product_name as productName, 
 					 p.product_price as price,
+					 p.product_category_no as categoryNo,
 					 i.img_oname as imgOname, 
 					 i.img_sname as imgSname, 
 					 i.img_type as imgType
@@ -80,6 +81,18 @@
 	      and c.user_id = u.user_id
 	      and i.img_state = 1
 	      and c.user_id = #{userId}
+	</select>
+	
+	<select id="cartCheckCount" parameterType="cart" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			cart
+		WHERE 
+			product_no = #{productNo}
+		AND
+			user_id = #{userId}
+		
 	</select>
 	
 </mapper>

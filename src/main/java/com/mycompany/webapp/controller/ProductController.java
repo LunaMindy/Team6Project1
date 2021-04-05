@@ -51,32 +51,36 @@ public class ProductController {
 		
 		//리뷰
 		//List<Reviews> rlist = reviewsService.getReview(productNo);
-		int intPageNo = 1;
-		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
-			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
-			Pager pager = (Pager)session.getAttribute("pager");
-			if (pager != null) {
-				intPageNo = pager.getPageNo();
-			}
-		} else {	//클라이언트에서 pageNo가 넘어왔을 경우
-			intPageNo = Integer.parseInt(pageNo);
-		}
+//		int intPageNo = 1;
+//		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
+//			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
+//			Pager pager = (Pager)session.getAttribute("pager");
+//			if (pager != null) {
+//				intPageNo = pager.getPageNo();
+//			}
+//		} else {	//클라이언트에서 pageNo가 넘어왔을 경우
+//			intPageNo = Integer.parseInt(pageNo);
+//		}
+//				
+//		int totalRows = reviewsService.getTotalRows(productNo);
+//		logger.info(String.valueOf(totalRows));
+//		Pager pager = new Pager(2, 5, totalRows, intPageNo);
+//		session.setAttribute("pager", pager);
+//		
+//		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
+//		logger.info(String.valueOf(rlist.size()));
+//		model.addAttribute("size", rlist.size());
+//		model.addAttribute("rlist", rlist);
+//		model.addAttribute("pager", pager);						
 				
-		int totalRows = reviewsService.getTotalRows(productNo);
-		logger.info(String.valueOf(totalRows));
-		Pager pager = new Pager(2, 5, totalRows, intPageNo);
-		session.setAttribute("pager", pager);
 		
-		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-		logger.info(String.valueOf(rlist.size()));
-		model.addAttribute("rlist", rlist);
-		model.addAttribute("pager", pager);						
-				
 		return "product/product";
 	}
 	
 	@GetMapping("/list")
 	public String list(int productNo, Model model, HttpSession session, String pageNo) {
+		logger.info("상품 리뷰 보기");
+		
 		
 		int intPageNo = 1;
 		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
@@ -103,7 +107,7 @@ public class ProductController {
 	}
 	
 	 @GetMapping("/getphoto")
-	   public void getPhoto(String imgSname, String imgType, HttpServletResponse response) {
+	   public void getPhoto(int cno, String imgSname, String imgType, HttpServletResponse response) {
 	      try {
 	 
 	    	  
@@ -112,13 +116,30 @@ public class ProductController {
 
 	         // 한글 파일일 경우, 깨짐 현상을 방지
 	    	 imgSname = new String(imgSname.getBytes("UTF-8"), "ISO-8859-1");
+	
 	         response.setHeader("Content-Disposition", "attachment; filename=\"" + imgSname+ "\";");
 
-	         
 	         // 응답 HTTP 바디에 이미지 데이터를 출력
-	         InputStream is = new FileInputStream("D:/상품사진들/캔들/" + imgSname + "." + imgType);
-	         OutputStream os = response.getOutputStream();
-	         FileCopyUtils.copy(is, os);
+	         InputStream is;
+	         OutputStream os;
+	    	 if(cno == 1) {
+	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/캔들/" + imgSname + "." + imgType);
+		         os = response.getOutputStream();
+		         FileCopyUtils.copy(is, os);
+	    	 }else if(cno == 2) {
+	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/조명/" + imgSname + "." + imgType);
+		         os = response.getOutputStream();
+		         FileCopyUtils.copy(is, os);
+	    	 }else if(cno == 3) {
+	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/트리/" + imgSname + "." + imgType);
+		         os = response.getOutputStream();
+		         FileCopyUtils.copy(is, os);
+	    	 }else {
+	    		 is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/기타/" + imgSname + "." + imgType);
+		         os = response.getOutputStream();
+		         FileCopyUtils.copy(is, os);
+	    	 }
+	        
 	         os.flush();
 	         is.close();
 	         os.close();

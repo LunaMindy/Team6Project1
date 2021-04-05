@@ -31,7 +31,7 @@
             <div class="col-md-2 review-part-right">
             	<c:if test=""></c:if>
             		<button class="btn review-btn" onclick="alert('삭제할 수 없습니다.')" type="button">remove</button>
-            		<a class="btn review-btn" href="<%=application.getContextPath()%>/user/delreview?reviewNo=${reviews.reviewNo}&productNo=${product.productNo}">remove</a>                        	                                                 	                         
+            		<a class="btn review-btn" href="<%=application.getContextPath()%>/user/delreview?reviewNo=${reviews.reviewNo}&productNo=${reviews.productNo}">remove</a>                        	                                                 	                         
             </div>
         </div>
     	</div>

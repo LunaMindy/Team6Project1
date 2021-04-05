@@ -79,12 +79,16 @@
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 					<li style="margin-top:0;">
+					<li>
+						사용자: <sec:authentication property="name"/>
+					</li>
+					<li>
 						<form method="post" class="d-inline-block" action="<%=application.getContextPath()%>/logout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-								사용자: <sec:authentication property="name"/>
-								<button class="logout-button">로그아웃</button>
+								<input type="submit" style="outline:0; border:0; background:transparent; color:white; padding-top:0px; padding-left:6px; padding-right:0;" value="로그아웃" />
 						</form>
 					</li>
+					
 					</sec:authorize>
                 </ul>
             </div>

@@ -50,7 +50,8 @@
                                             <input type="button" class="btn btn-primary form-control signup-btn" value="회원 확인"
                                             onclick="checkUser()">
                                       </div>
-                                      <div id="checkUser" class="success"></div>
+                                      <div id="checkUserSuccess" class="success"></div>
+                                      <div id="checkUserError" class="error"></div>
 						  
                                     <!-- 비밀번호 확인 진행 password.js 파일 -->
                                     <div class="input-group form-group" style="margin-bottom:0;">

@@ -10,31 +10,39 @@ var overlap = false;
 			userId : $("#userId").val()
 		}
 		
-		$.ajax({
-				url: "overlapuserid",
-				data: data,
-				method: "post"
-			}).done(data => {
-				if(data.result == "success"){
-					alert('사용가능한 아이디입니다.');
-					$("#successId").html("통과");
-					$("#successId").css('display', 'block');
-					$("#errorId").css('display', 'none');
-					overlap = true;
-			 	}else if(data.result == "fail"){
-			 		alert('중복 아이디입니다.');
-			 		$("#errorId").html("다시 작성해주세요.");
-			 		$("#errorId").css('display', 'block');
-			 		$("#successId").css('display', 'none');
-					overlap = false;
-			 	}else{
-			 		alert('필수 사항입니다.');
-			 		$("#errorId").html("필수 사항입니다.");
-			 		$("#errorId").css('display', 'block');
-			 		$("#successId").css('display', 'none');
-			 		overlap = false;
-			 	}
-			});
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if (!re.test(data.userId)) {
+				$("#errorId").html("올바른 이메일 형식으로 입력해주세요.");
+				$("#errorId").css('display', 'block');
+				$("#successId").css('display', 'none');
+				overlap = false;
+			}else{
+				$.ajax({
+						url: "overlapuserid",
+						data: data,
+						method: "post"
+					}).done(data => {
+						if(data.result == "success"){
+							alert('사용가능한 아이디입니다.');
+							$("#successId").html("통과");
+							$("#successId").css('display', 'block');
+							$("#errorId").css('display', 'none');
+							overlap = true;
+					 	}else if(data.result == "fail"){
+					 		alert('중복 아이디입니다.');
+					 		$("#errorId").html("다시 작성해주세요.");
+					 		$("#errorId").css('display', 'block');
+					 		$("#successId").css('display', 'none');
+							overlap = false;
+					 	}else{
+					 		alert('필수 사항입니다.');
+					 		$("#errorId").html("필수 사항입니다.");
+					 		$("#errorId").css('display', 'block');
+					 		$("#successId").css('display', 'none');
+					 		overlap = false;
+					 	}
+					});
+			}
 		
 	}	
 	function passwordCk(){

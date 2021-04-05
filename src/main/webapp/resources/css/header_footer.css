@@ -68,7 +68,7 @@ body{
     margin:0;
     padding:0;
     height: 150px;
-    background-image: url(../images/로고배경.png);                                                              
+                                                                 
     background-size: 100% 100%;
 }
 
@@ -165,6 +165,7 @@ body{
     padding: 10px;
     text-align: center;
     height: 150px;
+    clear:both;
 }
 
 /* footer top line */
