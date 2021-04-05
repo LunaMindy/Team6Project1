@@ -60,14 +60,17 @@ public class PurchaseController {
 		} else {
 			intPageNo = Integer.parseInt(pageNo);
 		}
-		int totalRows = ordersService.getTotalRows();
+		
+		String userId = auth.getName();
+		int totalRows = ordersService.getTotalRows(userId);
 		Pager pager = new Pager(12, 10, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 
-		String userId = auth.getName();
+		
 		List<Orders> list = ordersService.getOrdersPage(pager, userId);
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
+		model.addAttribute("userId",userId);
 
 		logger.info("주문페이지리스트 실행");
 		return "purchase/purchaseList";

@@ -34,6 +34,8 @@
 			        order_state as orderState
 					from orders
 					where user_id = #{userId}
+					order by orderDate desc
+					
 	          )
 	          where rownum &lt;= #{pager.endRowNo}
 	      )
@@ -43,7 +45,8 @@
 
 	 <select id = "count" resultType="int">
   	select count(*) 
-  	 from orders 
+  	 from orders where user_id = #{userId}
+  	 
 				 
   </select>
   

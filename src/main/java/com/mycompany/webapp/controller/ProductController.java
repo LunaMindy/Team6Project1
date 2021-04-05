@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Products;
@@ -161,7 +162,7 @@ public class ProductController {
 
 	 
 	@GetMapping("/search")
-	public String searchProductPager(String pageNo, Model model, HttpSession session,String keyword) {
+	public String searchProductPager(String pageNo, Model model, HttpSession session,String keyword,RedirectAttributes redirect) {
 
 		int intPageNo = 1;
 		if (pageNo == null) {
@@ -182,10 +183,12 @@ public class ProductController {
 		List<Products> list = productsService.getProductsSearchListPager(pager,keyword);
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
-
+		model.addAttribute("keyword",keyword);
+		
+	
 		return "product/searchProduct";
+		
 	}
-
 
 
 

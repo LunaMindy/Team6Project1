@@ -40,8 +40,8 @@ public class OrdersService {
 		ordersDao.insert(orders);
 	}
 	
-	public int getTotalRows() {
-		int rows = ordersDao.count();
+	public int getTotalRows(String userId) {
+		int rows = ordersDao.count(userId);
 		return rows;
 	}
 }

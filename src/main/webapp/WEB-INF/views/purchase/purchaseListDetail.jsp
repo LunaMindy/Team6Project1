@@ -52,9 +52,11 @@
          		<form method="post" action="<%=application.getContextPath()%>/user/review?orderNo=${orderProducts.orderNo}&productNo=${orderProducts.productNo}">
          			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
          			<div class="col">
+         			<a href="<%=application.getContextPath() %>/product?productNo=${orderProducts.productNo}">
 	                 <div class="img-sideline">
 	                     <img src="<%=application.getContextPath() %>/getphoto?imgSname=${orderProducts.imgSname}&imgType=${orderProducts.imgType}"id="changeImg">
 	                 </div>
+	                 </a>
 	             </div>
 	             <div class="col refund-product-details">
 									<p>

@@ -340,10 +340,19 @@
 		WHERE product_category_no = #{cno}
 	</select>
 	
-	<select id="countKeyword" parameterType="String" resultType="int">
+	<select id="countKeyword" resultType="int">
 		SELECT count(*)
-		FROM products
-		WHERE product_name LIKE '%'||#{keyword}||'%'
+		FROM products p
+		JOIN 
+	  		 products_img i	
+	  	ON 
+	  		 p.product_no = i.product_no
+	    JOIN
+	      	 product_categories c  
+	    ON	
+	    	 p.product_category_no = c.category_no
+		
+		WHERE p.product_name LIKE '%'||#{keyword}||'%' and i.img_state=1
 	</select>
 	
 	
