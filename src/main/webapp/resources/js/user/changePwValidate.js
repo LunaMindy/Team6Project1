@@ -26,10 +26,14 @@ var check = true;
 				method: "post"
 			}).done(data => {
 				if(data.result == "success"){
-					$("#checkUser").html("확인되었습니다.");
+				 	$("#checkUserError").css('display', 'none');
+			        $("#checkUserSuccess").css('display', 'block');
+					$("#checkUserSuccess").html("확인되었습니다.");
 					check = true;
 			 	}else{
-			 		$("#checkUser").html("회원이 존재하지 않습니다.");
+			 		$("#checkUserSuccess").css('display', 'none');
+			        $("#checkUserError").css('display', 'block');
+			 		$("#checkUserError").html("회원이 존재하지 않습니다.");
 			 		check = false;
 			 	}
 			});

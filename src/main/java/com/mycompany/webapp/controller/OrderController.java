@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.OrderProducts;
@@ -35,13 +37,13 @@ public class OrderController {
 			LoggerFactory.getLogger(OrderController.class);
 
 	Cart[] cartArray;
-	
+
 	@Autowired
 	private CartService cartService;
-	
+
 	@Autowired
 	private ProductsService productService;
-	
+
 	@Autowired
 	private WishlistService wishlistService;
 
@@ -51,7 +53,7 @@ public class OrderController {
 
 	@Autowired
 	private OrderProductsService orderProductsService;
-	
+
 	@GetMapping("/cart")
 	public String openCart(Authentication auth, Model model) {
 		String userId = auth.getName();
@@ -62,11 +64,11 @@ public class OrderController {
 		cartArray = new Cart[clist.size()];
 		return "order/cart";
 	}
-	
+
 	/*	@GetMapping("/cart")
 		public String openCart(Authentication auth, String pageNo, Model model, HttpSession session) {
 			String userId = auth.getName();
-			
+
 			int intPageNo = 1;
 			if(pageNo == null ) {
 				Pager pager = (Pager)session.getAttribute("pager");
@@ -76,50 +78,52 @@ public class OrderController {
 			} else {
 				intPageNo = Integer.parseInt(pageNo);
 			}
-					
+
 			int totalRows = cartService.getTotalRows(userId);
 			Pager pager = new Pager(5, 5, totalRows, intPageNo);
 			session.setAttribute("pager", pager);		
-			
+
 			List<Cart> clist = cartService.getCart(pager, userId);
 			cartArray = new Cart[clist.size()];
-			
+
 			//logger.info(String.valueOf(clist.size()));
 			//logger.info(clist.getIndex(1).getIndex);
 			model.addAttribute("clist",clist);
 			model.addAttribute("pager", pager);	
-			
+
 			return "order/cart";
 		}*/
-	
+
+
 	//선택옵션 정보
-	@PostMapping("/addcart")
+	@PostMapping(value = "/addcart", produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public String addCart(Authentication auth, Cart cart) {
-
-		boolean check = true;
+		
 		cart.setUserId(auth.getName());
-
+		
+		boolean check = true;
+		
 		Products product = productService.getProductDetail(cart.getProductNo()).get(0);
 		int allprice = cart.getAmount()*product.getProductPrice();
 		cart.setAllPrice(allprice);
 		
+
 		List<Cart> list = cartService.getCart(auth.getName());
 
-		for(int i=0; i<list.size(); i++) { 
-			if(list.get(i).getProductNo() == cart.getProductNo() 
-					&& list.get(i).getUserId().equals(cart.getUserId())) {
-				check = false; 
-				break; 
-			} 
+		
+		int result = cartService.getCartCheckCount(cart.getProductNo(), auth.getName());
+		
+		JSONObject jsonObject = new JSONObject();
+		if(result != 1) {
+			int addResult = cartService.saveCart(cart);
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
+		}else {
+			jsonObject.put("result", "danger");
+			return jsonObject.toString();
 		}
 		
-		if(check == true) {
-			int result = cartService.saveCart(cart);
-		}else {
-			logger.info("false다");
-		}
-
-		return "redirect:/product?productNo=" + cart.getProductNo();
 	}
 
 	@GetMapping("/delcart")
@@ -127,7 +131,7 @@ public class OrderController {
 		logger.info("실행");
 		int pno = productNo;
 		String userID = auth.getName();
-		
+
 		/*Cart cart = new Cart();
 		cart.setUserId("a1@gmail.com");
 		cart.setProductNo(productNo);
@@ -139,14 +143,14 @@ public class OrderController {
 		cart.setImgOname("26.jpg");
 		cart.setImgSname("132546-1231");
 		cart.setImgType("image");*/
-		
+
 		logger.info(String.valueOf(productNo));
-		
+
 		cartService.deleteCart(pno, userID);
-		
+
 		return "redirect:/user/cart";
 	}
-	
+
 	@PostMapping("/updateamount")
 	public String updateAmount(Cart cart) {
 		//Products product = productsService.getProduct(cart.getProductNo());
@@ -159,7 +163,7 @@ public class OrderController {
 	@PostMapping("/order")
 	public String openOrder(HttpServletRequest request, Authentication auth, Cart cart, Model model) {
 		String userId = auth.getName();
-		
+
 		String[] productNo = request.getParameterValues("productNo");
 		String[] amount = request.getParameterValues("amount");
 		String[] allPrice = request.getParameterValues("allPrice");
@@ -168,11 +172,11 @@ public class OrderController {
 		String[] imgOname = request.getParameterValues("imgOname");
 		String[] imgSname = request.getParameterValues("imgSname");
 		String[] imgType = request.getParameterValues("imgType");
-		
+
 		for(int i =0; i < cartArray.length; i++) {
 			cartArray[i] = new Cart();
-//			logger.info(productName[i]);
-//			logger.info(String.valueOf(productNo[i]));
+			//			logger.info(productName[i]);
+			//			logger.info(String.valueOf(productNo[i]));
 			if(cartArray[i].getProductName() == null) {
 				cartArray[i].setProductNo(Integer.parseInt(productNo[i]));
 				cartArray[i].setUserId(userId);
@@ -184,23 +188,23 @@ public class OrderController {
 				cartArray[i].setImgSname(imgSname[i]);
 				cartArray[i].setImgType(imgType[i]);							
 			}
-//			logger.info(String.valueOf(cartArray[i].getProductNo()));
-//			logger.info(cartArray[i].getUserId());
-//			logger.info(String.valueOf(cartArray[i].getAmount()));
-//			logger.info(String.valueOf(cartArray[i].getAllPrice()));
-//			logger.info(cartArray[i].getProductName());
-//			logger.info(cartArray[i].getImgOname());
-//			logger.info(cartArray[i].getImgSname());
-//			logger.info(cartArray[i].getImgType());			
+			//			logger.info(String.valueOf(cartArray[i].getProductNo()));
+			//			logger.info(cartArray[i].getUserId());
+			//			logger.info(String.valueOf(cartArray[i].getAmount()));
+			//			logger.info(String.valueOf(cartArray[i].getAllPrice()));
+			//			logger.info(cartArray[i].getProductName());
+			//			logger.info(cartArray[i].getImgOname());
+			//			logger.info(cartArray[i].getImgSname());
+			//			logger.info(cartArray[i].getImgType());			
 		}
-		
+
 		String sum = request.getParameter("sum");
 		String count = request.getParameter("count");
-//		logger.info(sum);
-//		logger.info(count);
+		//		logger.info(sum);
+		//		logger.info(count);
 		model.addAttribute("sum", Integer.parseInt(sum));
 		model.addAttribute("count", Integer.parseInt(count));
-		
+
 		return "order/order";
 	}
 
@@ -210,20 +214,20 @@ public class OrderController {
 		String allPrice = request.getParameter("allPrice");
 		String zipCode = request.getParameter("zipCode");
 		String userId = auth.getName();
-		
+
 		orders.setUserId(userId);	
 		orders.setAllPrice(Integer.parseInt(allPrice));
 		orders.setZipCode(Integer.parseInt(zipCode));
 		orders.setRoadAddress(request.getParameter("roadAddress"));
 		orders.setDetailAddress(request.getParameter("detailAddress"));
-		
-//		logger.info(orders.getUserId());
-//		logger.info(orders.getRoadAddress());
-//		logger.info(orders.getDetailAddress());
+
+		//		logger.info(orders.getUserId());
+		//		logger.info(orders.getRoadAddress());
+		//		logger.info(orders.getDetailAddress());
 		ordersService.saveOrder(orders);
-		
+
 		OrderProducts orderProducts = new OrderProducts();
-		
+
 		for(int i = 0; i < cartArray.length; i++) {
 			if(cartArray[i].getProductName() == null) {
 				break;
@@ -234,15 +238,15 @@ public class OrderController {
 				orderProducts.setUserId(cartArray[i].getUserId());
 				orderProducts.setAmount(cartArray[i].getAmount());
 				orderProducts.setPrice(cartArray[i].getAllPrice());
-//				
-//				logger.info(String.valueOf(orderProducts.getProductNo()));
-//				logger.info(orderProducts.getUserId());
-				
+				//				
+				//				logger.info(String.valueOf(orderProducts.getProductNo()));
+				//				logger.info(orderProducts.getUserId());
+
 				orderProductsService.saveOrderProduct(orderProducts);
 				cartService.deleteCart(orderProducts.getProductNo(), orderProducts.getUserId());
 			} 
 		}		
-		
+
 		return "order/ordercomplete";
 	}
 
@@ -279,7 +283,7 @@ public class OrderController {
 
 	@PostMapping("/addwishlist")
 	public String addWishList(Wishlist wishlist) {
-		
+
 		boolean check = true;
 		wishlist.setUserId("a1@gmail.com");
 
@@ -299,7 +303,7 @@ public class OrderController {
 				break; 
 			} 
 		}
-		
+
 		if(check == true) {
 			int result = wishlistService.saveWishlist(wishlist);;
 		}else {
@@ -315,7 +319,7 @@ public class OrderController {
 
 		String userId = auth.getName();
 		wishlistService.deleteWishlist(productNo, userId);
-		
+
 		return "redirect:/user/wishlist";
 	}
 

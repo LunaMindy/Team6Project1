@@ -49,4 +49,9 @@ public class CartService {
 		cartDao.updateCart(cart);
 	}
 
+	public int getCartCheckCount(int productNo, String userId) {
+		logger.info(String.valueOf(userId));
+		int result = cartDao.cartCheckCount(productNo, userId);
+		return result;
+	}
 }

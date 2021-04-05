@@ -13,7 +13,16 @@ public class Cart {
 	private String imgOname;	//상품 이미지
 	private String imgSname;
 	private String imgType;
+	private int categoryNo;
+	
+	
 		
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
 	public int getProductNo() {
 		return productNo;
 	}

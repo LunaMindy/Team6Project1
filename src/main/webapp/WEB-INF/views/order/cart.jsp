@@ -6,11 +6,10 @@
 
   <!-- 컨텐츠 -->
   <div class="cart-content">
-      <div class="container-fluid">
+     <div class="container-fluid">
           <div class="cart-line">
               <p class="text">장바구니</p>
           </div>
-
 					<!-- 카트 목록 -->
 		      <div class="cart-list">
 		       		<table class="cart-table">
@@ -31,7 +30,7 @@
 		              			<tr>
 		                      <td class="cart-img-line">
 		                          <div class="cart-img">
-		                              <img src="<%=application.getContextPath()%>/getphoto?imgSname=${cart.imgSname}&imgType=${cart.imgType}">
+		                              <img src="<%=application.getContextPath()%>/getphoto?cno=${cart.categoryNo}&imgSname=${cart.imgSname}&imgType=${cart.imgType}">
 		                          </div>
 		                      </td>
 		                      <td class="cart-img-name">
