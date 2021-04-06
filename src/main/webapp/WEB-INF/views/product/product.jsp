@@ -131,7 +131,7 @@ const getList = (productNo,pageNo) => {
                         
                         
                     </div>
-                    <ul class="preview-thumbnail nav nav-tabs">
+                    <ul class="preview-thumbnail nav nav-tabs" style="border:none;">
                     	<c:forEach var="product" items="${list}" varStatus="status">
 	                    	<c:if test="${status.count eq 1}"> 
 								 <li class="active">

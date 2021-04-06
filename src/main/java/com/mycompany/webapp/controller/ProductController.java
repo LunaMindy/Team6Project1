@@ -62,7 +62,6 @@ public class ProductController {
 	
 	@GetMapping("/list")
 	public String list(int productNo, Model model, String pageNo, HttpSession session) {
-		logger.info("상품 리뷰 보기");
 		
 		int intPageNo = 1;
 		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
@@ -76,20 +75,15 @@ public class ProductController {
 		}
 				
 		int totalRows = reviewsService.getTotalRows(productNo);
-		logger.info(String.valueOf(totalRows));
 		Pager pager = new Pager(4, 5, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
 		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-		logger.info(String.valueOf(rlist.size()));
-		//logger.info(rlist.get(1).getProductName());
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("size", rlist.size());
 		model.addAttribute("pager", pager);	
 		model.addAttribute("productNo", productNo);
 		
-		//logger.info("pageno :" +  pageNo);
-		//logger.info("productno : " + productNo);					
 				
 		return "product/productReviews";
 	}

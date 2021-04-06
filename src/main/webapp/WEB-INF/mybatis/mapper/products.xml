@@ -180,7 +180,7 @@
 	 			WHERE 
 	 					p.product_category_no = #{cno}
         		ORDER BY 
-		           		p.product_hitcount desc
+		           		p.product_sellcount desc
              )
              WHERE rownum &lt;= #{pager.endRowNo}
          )
