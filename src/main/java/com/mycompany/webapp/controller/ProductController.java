@@ -5,12 +5,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -36,7 +38,7 @@ public class ProductController {
 
 
 	@GetMapping("/product")
-	public String openProduct(int productNo, Model model, HttpSession session, String pageNo) 	{	
+	public String openProduct(int productNo, Model model) 	{	
 		productsService.addHitCount(productNo);
 		List<Products> list = productsService.getProductDetail(productNo);
 		
@@ -51,7 +53,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public String list(int productNo, Model model, HttpSession session, String pageNo) {
+	public String list(int productNo, Model model, String pageNo, HttpSession session) {
 		logger.info("상품 리뷰 보기");
 		
 		int intPageNo = 1;
@@ -78,8 +80,8 @@ public class ProductController {
 		model.addAttribute("pager", pager);	
 		model.addAttribute("productNo", productNo);
 		
-		logger.info("pageno :" +  pageNo);
-		logger.info("productno : " + productNo);					
+		//logger.info("pageno :" +  pageNo);
+		//logger.info("productno : " + productNo);					
 				
 		return "product/productReviews";
 	}

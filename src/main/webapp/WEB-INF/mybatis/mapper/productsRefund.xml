@@ -5,18 +5,11 @@
 <mapper namespace="com.mycompany.webapp.dao.ProductsRefundDao">
 
 	<!-- È¯ºÒÁß -->
- <insert id="insert" parameterType="int">
+ <insert id="insert">
 		insert into products_refund
-		(order_no, refund_state, refund_date)
+		(order_no, refund_state, refund_date, refund_reason)
 		values
-		(#{orderNo}, 0, sysdate)
+		(#{orderNo}, 0, sysdate, #{refundReason})
 	</insert>
-	
-	<update id="update">
-		update products_refund set
-			refund_state = 1,
-			refund_reason = #{refundReason}
-		where order_no = #{orderNo}			
-	</update>
 	
 </mapper>

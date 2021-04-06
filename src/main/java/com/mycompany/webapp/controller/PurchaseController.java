@@ -106,9 +106,8 @@ public class PurchaseController {
 	@PostMapping("/exchangerefund")
 	public String ExchangeRefund(int orderNo, Model model) {
 		logger.info(String.valueOf(orderNo));
-		model.addAttribute("orderNo", orderNo);
+		model.addAttribute("orderNo", orderNo);		
 		
-		productsRefundService.saveRefund(orderNo);
 		return "purchase/exchangeRefund";
 	}
 		
@@ -132,7 +131,8 @@ public class PurchaseController {
 		}		
 		
 		logger.info(refundReason);
-		productsRefundService.updateRefund(ono, refundReason);
+		productsRefundService.saveRefund(orderNo, refundReason);
+		ordersService.updateRefund(orderNo);
 		return "redirect:/user/purchaselist";
 	}
 	

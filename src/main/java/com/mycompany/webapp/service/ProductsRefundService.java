@@ -18,19 +18,8 @@ public class ProductsRefundService {
 		return list;
 	}
 
-	public void saveRefund(int orderNo) {
-		refundDao.insert(orderNo);
+	public void saveRefund(int orderNo, String refundReason) {
+		refundDao.insert(orderNo, refundReason);
 	}
 
-	public void updateRefund(int orderNo, String refundReason) {
-		refundDao.update(orderNo, refundReason);
-	}
-	
-	/*public void saveReview(ProductsRefund refund) {
-		refundDao.insert(refund);
-	}
-	
-	public void updateRefund(ProductsRefund refund) {
-		refundDao.update(refund);
-	}*/
 }
