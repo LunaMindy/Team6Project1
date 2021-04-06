@@ -183,9 +183,12 @@ public class ProductController {
 		Pager pager = new Pager(12, 10, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
-		logger.info(keyword);
+	
 		List<Products> list = productsService.getProductsSearchListPager(pager,keyword);
+		logger.info(keyword);
+		logger.info(String.valueOf(list.size()));
 		model.addAttribute("list", list);
+		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);
 		model.addAttribute("keyword",keyword);
 		

@@ -277,7 +277,9 @@ public class OrderController {
 
 		
 		List<Wishlist> list = wishlistService.getWishlist(pager,userId);
+		logger.info(String.valueOf(list.size()));
 		model.addAttribute("list", list);
+		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);
 
 		return "order/wishlist";
