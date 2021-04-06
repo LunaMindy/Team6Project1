@@ -25,12 +25,13 @@
  
   	
   	<select id="selectByPage" resultType="wishlist">
-	  	select rnum,userId,productName,regdate,productNo,imgSname,imgType
+	  	select rnum,userId,productName,regdate,productNo,productCategoryNo,imgSname,imgType
 	      from (
-	          select rownum as rnum,userId,productName,regdate,productNo,imgSname,imgType
+	          select rownum as rnum,userId,productName,regdate,productNo,productCategoryNo,imgSname,imgType
 	          from (
 	              select w.user_id as userId, p.product_name as productName,
-	              w.regdate as regdate,w.product_no as productNo,i.img_sname as imgSname, i.img_type as imgType 
+	              w.regdate as regdate,w.product_no as productNo,p.product_category_no as productCategoryNo,
+	              i.img_sname as imgSname, i.img_type as imgType 
 	              from wishlist w
 				  join products p
 				  on w.product_no = p.product_no

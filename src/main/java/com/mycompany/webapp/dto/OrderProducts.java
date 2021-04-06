@@ -15,7 +15,17 @@ public class OrderProducts {
 	private String imgType;
 	private Date orderDate;	
 	private String productName;
+	private int productCategoryNo;
 	
+	
+	
+	public int getProductCategoryNo() {
+		return productCategoryNo;
+	}
+
+	public void setProductCategoryNo(int productCategoryNo) {
+		this.productCategoryNo = productCategoryNo;
+	}
 	public int getOrderNo() {
 		return orderNo;
 	}

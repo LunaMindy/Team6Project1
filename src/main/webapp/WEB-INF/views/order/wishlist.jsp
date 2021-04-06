@@ -39,7 +39,7 @@
                     <div class="col-3">
                         <a href="<%=application.getContextPath() %>/product?productNo=${wishlist.productNo}">
                             <div class="wishlist-product">
-                              <img src="<%=application.getContextPath()%>/getphoto?imgSname=${wishlist.imgSname}&imgType=${wishlist.imgType}"> 
+                              <img src="<%=application.getContextPath()%>/getphoto?cno=${wishlist.productCategoryNo}&imgSname=${wishlist.imgSname}&imgType=${wishlist.imgType}"> 
                             </div>
                         </a>
                         <div class="wishlist-title">

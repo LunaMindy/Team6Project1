@@ -12,7 +12,7 @@ public class Wishlist {
 	private String imgSname;
 	
 	private String imgType;
-	
+	private int productCategoryNo;
 	
 	
 	public String getImgType() {
@@ -55,6 +55,13 @@ public class Wishlist {
 
 	public void setImgSname(String imgSname) {
 		this.imgSname = imgSname;
+	}
+	
+	public int getProductCategoryNo() {
+		return productCategoryNo;
+	}
+	public void setProductCategoryNo(int productCategoryNo) {
+		this.productCategoryNo = productCategoryNo;
 	}
 	
 }

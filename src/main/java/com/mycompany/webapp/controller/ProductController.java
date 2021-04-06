@@ -46,32 +46,6 @@ public class ProductController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("product", product);
-	
-		
-//		int intPageNo = 1;
-//		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
-//			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
-//			Pager pager = (Pager)session.getAttribute("pager");
-//			if (pager != null) {
-//				intPageNo = pager.getPageNo();
-//			}
-//		} else {	//클라이언트에서 pageNo가 넘어왔을 경우
-//			intPageNo = Integer.parseInt(pageNo);
-//		}
-//				
-//		int totalRows = reviewsService.getTotalRows(productNo);
-//		logger.info(String.valueOf(totalRows));
-//		Pager pager = new Pager(2, 5, totalRows, intPageNo);
-//		session.setAttribute("pager", pager);
-//		
-//		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-//		logger.info(String.valueOf(rlist.size()));
-//		//logger.info(rlist.get(1).getProductName());
-//		model.addAttribute("rlist", rlist);
-//		model.addAttribute("pager", pager);					
-//		
-//		logger.info("pageno :" +  pageNo);
-//		logger.info("productno : " + productNo);
 		
 		return "product/product";
 	}
@@ -127,19 +101,23 @@ public class ProductController {
 	         InputStream is;
 	         OutputStream os;
 	    	 if(cno == 1) {
-	    		 is = new FileInputStream("D:/상품사진들/캔들/" + imgSname + "." + imgType);
+	    		 is = new FileInputStream("D://상품사진들/캔들/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 2) {
 	    		 is = new FileInputStream("D://상품사진들/조명/" + imgSname + "." + imgType);
+
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 3) {
+
 	    		 is = new FileInputStream("D://상품사진들/트리/" + imgSname + "." + imgType);
+
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else {
 	    		 is = new FileInputStream("D://상품사진들/기타/" + imgSname + "." + imgType);
+
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }
