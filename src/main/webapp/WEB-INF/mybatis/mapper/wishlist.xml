@@ -54,15 +54,15 @@
          (product_no, user_id, regdate)
        values
          (#{productNo}, #{userId}, sysdate)
-   </insert>
+    </insert>
    
  
-     <delete id="deleteByWishlistNo" >
+    <delete id="deleteByWishlistNo" >
 		delete from wishlist 
 		where product_no=#{productNo}
 		and user_id = #{userId}
 		   
-   </delete>
+    </delete>
    
  
   
@@ -73,6 +73,18 @@
 				  on w.product_no = p.product_no
 				 
   </select>
+  
+  <select id="wishlistCheckCount" parameterType="wishlist" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			wishlist
+		WHERE 
+			product_no = #{productNo}
+		AND
+			user_id = #{userId}
+		
+	</select>
   
   
   

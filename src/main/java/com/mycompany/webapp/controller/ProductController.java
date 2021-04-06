@@ -39,14 +39,24 @@ public class ProductController {
 	public String openProduct(int productNo, Model model, HttpSession session, String pageNo) {
 		
 		productsService.addHitCount(productNo);
-		List<Products> list = productsService.getProductDetail(productNo);
 		
+		//상품 모든 사진뽑기
+		List<Products> list = productsService.getProductDetail(productNo);
 	
+		//상품 정보 뽑기
 		Products product = new Products();
 		product = list.get(0);
 		
+		
+		//상품 디테일 사진 뽑기
+		Products detailImg = productsService.getProductDetailImg(productNo);
+		if(detailImg != null) {
+			model.addAttribute("detailImg", detailImg);
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("product", product);
+		
 		
 		
 		//리뷰

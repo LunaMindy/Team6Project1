@@ -1,22 +1,27 @@
 
 		/*상품 상세페이지*/
 		.preview {
-			
 			display: flex;
 			box-direction: normal;
 			flex-direction: column;
 			margin-bottom: 20px; 	
 		}
 		.preview-pic {
-		
 			flex-grow: 1;
 		}
+		
+		.tab-pane img {
+			width: 100%;
+			height:100%;
+		}
+		
 		.preview-thumbnail.nav-tabs li {
 			width: 18%;
-			margin-right: 2.5%; 
+			margin-right: 2.65%; 
 		}
 		.preview-thumbnail.nav-tabs li img {
-			max-width: 100%;
+			width:100%;
+			height:100px;
 			display: block; 
 		}
 

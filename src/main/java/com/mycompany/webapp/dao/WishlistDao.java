@@ -23,6 +23,7 @@ public interface WishlistDao{
 	
 	public int deleteByWishlistNo(@Param("productNo") int productNo,@Param("userId") String userId);
 	public int count();
+	public int wishlistCheckCount(@Param("productNo") int productNo,@Param("userId") String userId);
 	
 
 }

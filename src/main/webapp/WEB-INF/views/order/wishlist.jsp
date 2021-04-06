@@ -16,7 +16,7 @@
             </div>
 
             <!-- 마이페이지 탭 목록 -->
-            <div id="mypageList">
+            <div id="mypageList" style="height: 42px;">
                 <a href="<%=application.getContextPath() %>/user/purchaselist" class="mypage-tab">구매내역</a>
                 <a href="<%=application.getContextPath() %>/user/wishlist" class="mypage-tab-clicked">위시리스트</a>
                 <a href="<%=application.getContextPath() %>/user/changeinfo" class="mypage-tab">개인정보수정</a>

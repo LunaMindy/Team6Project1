@@ -48,6 +48,11 @@ public class WishlistService {
 		return rows;
 	}
 
+	public int getwishListCheckCount(int productNo, String userId) {
+		int result = wishlistDao.wishlistCheckCount(productNo, userId);
+		return result;
+	}
+
 	
 
 }

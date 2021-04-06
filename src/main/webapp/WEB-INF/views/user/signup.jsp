@@ -148,7 +148,7 @@
                                             type="submit"
                                             value="회원가입"
                                             id="saveUser"
-                                            class="btn float-right signup-btn-complete"
+                                            class="btn float-right sisgnup-btn-complete"
                                             >
                                     </div>
 
