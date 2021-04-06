@@ -62,7 +62,7 @@
 
        </c:forEach>
 
-	
+		 <c:if test="${size != 0}">  
 	      <div class="text-center">
 	      	<div class="d-flex">
 	      		<div class="flex-grow-1">
@@ -98,7 +98,7 @@
 		      </div>
 	    
     	</div>
-    
+    	</c:if>
 	</div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

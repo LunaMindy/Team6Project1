@@ -3,7 +3,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=application.getContextPath() %>/resources/css/mypage.css" rel="stylesheet" type="text/css"/>
-<link href="<%=application.getContextPath() %>/resources/css/exchangeRefund.css" rel="stylesheet" type="text/css"/>
+<link href="<%=application.getContextPath() %>/resources/css/purchaseListDetail.css" rel="stylesheet" type="text/css"/>
 	
 	<script type="text/javascript">
 		$(document).on('click','#btnRefund',function(e){
@@ -36,45 +36,47 @@
           <a href="<%=application.getContextPath()%>/user/withdrawal" class="mypage-tab">회원탈퇴</a>
           <a href="<%=application.getContextPath()%>/faq" class="mypage-tab">FAQ</a>
       </div>
-  </div>
+ </div>
 
   <div>
      <!-- 구매내역-교환/환불신청 타이틀 -->
      <h3 id="mypageTitle-under">구매 상세 내역</h3>
      <hr/>
 
-     <!-- 교환/환불하고자하는 상품의 구매내역 상세정보 -->
+     <!-- 구매내역 -->
      <div class="container-fluid border">
-     	
          <div class="row exchangeContent">
-         
+         	<div class="col-md-12">
          	<c:forEach var="orderProducts" items="${list}">
          		<form method="post" action="<%=application.getContextPath()%>/user/review?orderNo=${orderProducts.orderNo}&productNo=${orderProducts.productNo}">
-         			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-         			<div class="col">
-         			<a href="<%=application.getContextPath() %>/product?productNo=${orderProducts.productNo}">
-	                 <div class="img-sideline">
-	                     <img src="<%=application.getContextPath() %>/getphoto?cno=${orderProducts.productCategoryNo}&imgSname=${orderProducts.imgSname}&imgType=${orderProducts.imgType}"id="changeImg">
-	                 </div>
-	                 </a>
-	             </div>
-	             <div class="col refund-product-details">
-									<p>
-										상품번호 : ${orderProducts.productNo}<br/>
-										주문상품 : ${orderProducts.productName}<br/>
-										선택옵션 : 단일품목<br/>
-										구매수량 : ${orderProducts.amount}<br/>
-										구매가격 : ${orderProducts.price}
-	             		</p>
-	             </div>
-	             <div class="col">
-		             <c:if test="${orderProducts.reviewState eq 0}">
-		             		 <button class="review-btn" type="submit">리뷰 작성</button> 	
-		              </c:if>
-	       			</div>
+         		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+         			
+	         			<div class="col">
+	         				<a href="<%=application.getContextPath() %>/product?productNo=${orderProducts.productNo}">
+		                 		
+		                     		<img id="changeImg" src="<%=application.getContextPath() %>/getphoto?cno=${orderProducts.productCategoryNo}&imgSname=${orderProducts.imgSname}&imgType=${orderProducts.imgType}">
+		                 	
+		                 	</a>
+		             	</div>
+		            	<div class="col refund-product-details">
+							<p>
+								상품번호 : ${orderProducts.productNo}<br/>
+								주문상품 : ${orderProducts.productName}<br/>
+								선택옵션 : 단일품목<br/>
+								구매수량 : ${orderProducts.amount}<br/>
+								구매가격 : ${orderProducts.price}
+		             		</p>
+		             	</div>
+		             	<div class="col">
+			            	<c:if test="${orderProducts.reviewState eq 0}">
+			            		<!-- <div id="refund-btn-div"> -->
+			             			<button class="review-btn" type="submit" id="review-btn">리뷰 작성</button> 	
+			            	</c:if>
+		       			</div>
+		       	
          		</form>
           </c:forEach>
-             
+            </div> 
         </div>
  
      </div>
