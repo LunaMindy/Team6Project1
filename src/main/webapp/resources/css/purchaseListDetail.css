@@ -1,15 +1,9 @@
 
 
-.exchangeBox {
+.exchangeContent {
     background-color: #f3f3f3;
     padding: 10px;
     color: #595959;
-}
-
-.exchangeContent {
-		display: table; 
-    margin-left: auto; 
-    margin-right: auto; 
 }
 
 #changeImg {
@@ -31,12 +25,14 @@
 #select-refund-reason-title{
     margin: 20px; 
     font-weight: bold;
-    color: #595959;    
+    color: #595959;
+    margin-left: 100px;
+    
 }
 
 #select-reason{
     padding: 30px;
-    padding-left: 80px;
+    padding-left: 100px;
     display:inline-block;
     align-self: center;
 }
@@ -60,7 +56,7 @@
 }
 
 
-#btnRefund{
+#refund-btn{
     background-color: #d15851; 
     color: #f3f3f3; 
     padding: 10px;

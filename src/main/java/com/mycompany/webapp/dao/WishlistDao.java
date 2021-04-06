@@ -22,7 +22,7 @@ public interface WishlistDao{
 	public int insert(Wishlist wishlist);
 	
 	public int deleteByWishlistNo(@Param("productNo") int productNo,@Param("userId") String userId);
-	public int count();
+	public int count(String userId);
 	public int wishlistCheckCount(@Param("productNo") int productNo,@Param("userId") String userId);
 	
 

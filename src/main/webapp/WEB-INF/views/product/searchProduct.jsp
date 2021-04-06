@@ -33,7 +33,8 @@
                      	</c:forEach>     
                   </div>
                     
-               </div>   
+               </div> 
+                <c:if test="${size != 0}">  
 		      <div class="col text-center">
 		      	<div class="d-flex">
 		      		<div class="flex-grow-1">
@@ -61,6 +62,7 @@
 			     
 			      </div>
 		      </div>
+		      </c:if>
       </div>
  	</div>
 

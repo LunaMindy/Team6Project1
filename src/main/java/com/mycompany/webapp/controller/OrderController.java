@@ -263,14 +263,17 @@ public class OrderController {
 		/*Wishlist wishlist = new Wishlist();
 		wishlist.setUserId("a3@gmail.com");
 		wishlist.setProductNo(intPageNo);*/
-
-		int totalRows = wishlistService.getTotalRows();
+		
+		String userId = auth.getName();
+		int totalRows = wishlistService.getTotalRows(userId);
 		Pager pager = new Pager(12, 10, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 
-		String userId = auth.getName();
+		
 		List<Wishlist> list = wishlistService.getWishlist(pager,userId);
+		logger.info(String.valueOf(list.size()));
 		model.addAttribute("list", list);
+		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);
 
 		return "order/wishlist";

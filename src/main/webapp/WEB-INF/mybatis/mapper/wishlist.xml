@@ -71,6 +71,10 @@
   	 from wishlist w
 				  join products p
 				  on w.product_no = p.product_no
+				  join products_img i
+				  on p.product_no = i.product_no
+	where i.img_state=1
+				  and w.user_id = #{userId}
 				 
   </select>
   

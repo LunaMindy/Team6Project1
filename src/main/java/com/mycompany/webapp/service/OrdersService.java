@@ -44,4 +44,8 @@ public class OrdersService {
 		int rows = ordersDao.count(userId);
 		return rows;
 	}
+
+	public void updateRefund(int orderNo) {
+		ordersDao.update(orderNo);
+	}
 }

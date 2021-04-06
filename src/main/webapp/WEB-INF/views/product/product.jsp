@@ -82,19 +82,22 @@ function change () {
 
 //review paging
 $(function() {
-	getList(1);
+	getList(${product.productNo}, 1);
 });
 
-const getList = (pageNo) => {
-	const args = {url:"list", method:"get"}
-	if (pageNo) {
-		args.data = {pageNo};
-	}
-	$.ajax(agrs).then(data => {
-		$('#review').html(data)
-	});	
-};
+const getList = (productNo,pageNo) => {
+	//console.log(productNo+" "+pageNo);
+	$.ajax({
+		url:"<%=application.getContextPath()%>/list",
+		data:{productNo, pageNo},
+		method:"get"
+	}).then(data=>{
+		 $("#review").html(data); 
+		console.log(data);
+	}) 
+}
 </script>
+
 <!--상세페이지를 위한-->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             rel="stylesheet">
@@ -213,9 +216,9 @@ const getList = (pageNo) => {
                 </div>
             </div>
 			
-			<div id="reivew">
-			</div>
            
+		
+           <div id="review"></div>
         </div> 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
