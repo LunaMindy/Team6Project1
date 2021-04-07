@@ -58,7 +58,7 @@ public class OrderController {
 	public String openCart(Authentication auth, Model model) {
 		String userId = auth.getName();
 		List<Cart> clist = cartService.getCart(userId);
-		logger.info(String.valueOf(clist.size()));
+		//logger.info(String.valueOf(clist.size()));
 		model.addAttribute("clist",clist);
 		model.addAttribute("size", clist.size());
 		cartArray = new Cart[clist.size()];
@@ -127,19 +127,7 @@ public class OrderController {
 		int pno = productNo;
 		String userID = auth.getName();
 
-		/*Cart cart = new Cart();
-		cart.setUserId("a1@gmail.com");
-		cart.setProductNo(productNo);
-		cart.setAmount(2);
-		cart.setAllprice(20000);
-		cart.setRegdate(new Date());
-		cart.setProductName("샘플1");
-		cart.setPrice(10000);
-		cart.setImgOname("26.jpg");
-		cart.setImgSname("132546-1231");
-		cart.setImgType("image");*/
-
-		logger.info(String.valueOf(productNo));
+		//logger.info(String.valueOf(productNo));
 
 		cartService.deleteCart(pno, userID);
 
@@ -239,6 +227,7 @@ public class OrderController {
 
 				orderProductsService.saveOrderProduct(orderProducts);
 				cartService.deleteCart(orderProducts.getProductNo(), orderProducts.getUserId());
+				productService.addSellCount(orderProducts.getProductNo());
 			} 
 		}		
 

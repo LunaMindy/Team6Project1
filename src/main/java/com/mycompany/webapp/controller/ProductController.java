@@ -75,12 +75,12 @@ public class ProductController {
 		}
 				
 		int totalRows = reviewsService.getTotalRows(productNo);
-		Pager pager = new Pager(4, 5, totalRows, intPageNo);
+		Pager pager = new Pager(5, 5, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
 		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
 		model.addAttribute("rlist", rlist);
-		model.addAttribute("size", rlist.size());
+		model.addAttribute("size", totalRows);
 		model.addAttribute("pager", pager);	
 		model.addAttribute("productNo", productNo);
 		

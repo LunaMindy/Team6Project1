@@ -89,6 +89,10 @@ public class ProductsService {
 		return product;
 	}
 
+	public void addSellCount(int productNo) {
+		productsDao.updatePsellcount(productNo);
+	}
+
 		
 	
 }

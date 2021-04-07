@@ -63,7 +63,7 @@ public class PurchaseController {
 		
 		String userId = auth.getName();
 		int totalRows = ordersService.getTotalRows(userId);
-		Pager pager = new Pager(12, 10, totalRows, intPageNo);
+		Pager pager = new Pager(5, 10, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 
 		
