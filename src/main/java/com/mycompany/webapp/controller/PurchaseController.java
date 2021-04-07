@@ -68,11 +68,16 @@ public class PurchaseController {
 
 		
 		List<Orders> list = ordersService.getOrdersPage(pager, userId);
+				
+		if(list.size() != 0) {
+			model.addAttribute("size", 1);
+		}else {
+			model.addAttribute("size", 0);
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
 		model.addAttribute("userId",userId);
 
-		logger.info("주문페이지리스트 실행");
 		return "purchase/purchaseList";
 	}
 	
