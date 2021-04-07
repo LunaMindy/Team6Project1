@@ -19,7 +19,7 @@
       <!-- 마이페이지 탭 목록 -->
       <div id="mypageList">
           <a href="<%=application.getContextPath()%>/user/purchaselist" class="mypage-tab-clicked">구매내역</a>
-          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">위시리스트</a>
+          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">찜목록</a>
           <a href="<%=application.getContextPath()%>/user/changeinfo" class="mypage-tab">개인정보수정</a>
           <a href="<%=application.getContextPath()%>/user/withdrawal" class="mypage-tab">회원탈퇴</a>
           <a href="<%=application.getContextPath()%>/faq" class="mypage-tab">FAQ</a>
@@ -77,32 +77,32 @@
 	      <div class="text-center">
 	      	<div class="d-flex">
 	      		<div class="flex-grow-1">
-			         <a class="btn btn-outline-primary btn-sm"
-			           href="purchaselist?pageNo=1&userId=${userId}">처음</a>
+			         <a class="btn btn-sm page-item"
+			           href="purchaselist?pageNo=1&userId=${userId}">&laquo;</a>
 			            
 			         <c:if test="${pager.groupNo>1}">
-			            <a class="btn btn-outline-info btn-sm"
-			            href="purchaselist?pageNo=${pager.startPageNo-1}&userId=${userId}">이전</a>
+			            <a class="btn btn-sm page-item"
+			            href="purchaselist?pageNo=${pager.startPageNo-1}&userId=${userId}">&lt;</a>
 			         </c:if>
 			         
 			         <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 			            <c:if test="${pager.pageNo == i}">
-			               <a class="btn btn-outline-success btn-sm" 
+			               <a class="btn btn-sm page-now" 
 			                  href="purchaselist?pageNo=${i}&userId=${userId}">${i}</a>
 			            </c:if>
 			            <c:if test="${pager.pageNo != i}">
-			               <a class="btn btn-outline-danger btn-sm" 
+			               <a class="btn btn-sm page-item" 
 			                  href="purchaselist?pageNo=${i}&userId=${userId}">${i}</a>
 			            </c:if>
 			         </c:forEach>
 			         
 			         <c:if test="${pager.groupNo<pager.totalGroupNo}">
-			            <a class="btn btn-outline-info btn-sm"
-			            href="purchaselist?pageNo=${pager.endPageNo+1}&userId=${userId}">다음</a>
+			            <a class="btn btn-sm page-item"
+			            href="purchaselist?pageNo=${pager.endPageNo+1}&userId=${userId}">&gt;</a>
 			         </c:if>
 			            
-			         <a class="btn btn-outline-primary btn-sm"
-			            href="purchaselist?pageNo=${pager.totalPageNo}&userId=${userId}">맨끝</a>
+			         <a class="btn btn-sm page-item"
+			            href="purchaselist?pageNo=${pager.totalPageNo}&userId=${userId}">&raquo;</a>
 			         <!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
 		         </div>
 		     

@@ -66,3 +66,22 @@
     padding-top: 10px;
 }
 
+/* 페이징 처리 */
+.page-item {
+	/* background-color:#f3f3f3; */ 
+	border-color:#f3f3f3; 
+	background-color:white; 
+	color: #d15851;
+	font-size:medium;
+}
+
+.page-item:hover {
+	color: #39613a;
+}
+
+.page-now {
+	/* border-color:#f3f3f3;  */
+	background-color: #d15851; 
+	color: white;
+	font-size:medium;
+}

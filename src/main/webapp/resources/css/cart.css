@@ -122,3 +122,15 @@
     font-size: 1.2em;
 }
 
+#cart-info {
+	height:auto;
+	background-color:#f3f3f3;
+	margin-top:50px;
+	padding:120px;
+	text-align:center;
+}
+
+#cart-img {	
+	height:50px;
+	margin-bottom:20px;
+}
