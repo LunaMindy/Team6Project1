@@ -3,7 +3,18 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=application.getContextPath() %>/resources/css/cart.css" rel="stylesheet" type="text/css"/>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function popup(){
+	swal({
+		  title: "Error",
+		  text: "장바구니가 비었습니다.",
+		  dangerMode: true,
+		  button: "확인",
+		});
+		
+}
+</script>
   <!-- 컨텐츠 -->
   <div class="cart-content">
      <div class="container-fluid">
@@ -104,7 +115,7 @@
 								<input type="hidden" name="sum" value="${sum}"/>
 				        	<input type="hidden" name="count" value="${count}"/>
 				       	 	<c:if test="${size eq 0}">
-				       	 		<button class="btn btn-info btn-lg btn-block" onclick="alert('장바구니가 비어있습니다.')" type="button">결제하기</button>
+				       	 		<button class="btn btn-info btn-lg btn-block" onclick="popup()" type="button">결제하기</button>
 				       	 	</c:if>
 				       	 	<c:if test="${size > 0}">
 				       	 		<button class="btn btn-info btn-lg btn-block">결제하기</button>

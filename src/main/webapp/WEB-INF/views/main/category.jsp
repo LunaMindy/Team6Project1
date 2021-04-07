@@ -14,7 +14,19 @@
             <div class="container-fluid">
                 <div class="new-popular-wrapper">
                     <div class="category-path">
-                        <p>홈 > ${product.categoryName}</p>
+                    <c:if test="${product.categoryName eq '캔들'}">
+                    	<p>HOME > CANDLE</p>
+                    </c:if>
+                    <c:if test="${product.categoryName eq '조명'}">
+                    	<p>HOME > LIGHT</p>
+                    </c:if>
+                    <c:if test="${product.categoryName eq '트리'}">
+                    	<p>HOME > TREE</p>
+                    </c:if>
+                    <c:if test="${product.categoryName eq '기타'}">
+                    	<p>HOME > ETC</p>
+                    </c:if>
+                        
                     </div>
                     <div class="new-popular">
                     	<c:if test="${kind==0}">
@@ -60,7 +72,7 @@
             <table style="margin-left:45%; margin-top:5%;">
 		       <tr>
 				<td colspan="5" style="text-center;">
-						<a class="btn btn-outline-primary btn-sm"
+						<a class="btn btn-sm" style="border:1px solid #39613a; color:#39613a"
 							href="category?cno=${product.productCategoryNo}&pageNo=1&kind=${kind}">처음</a>
 
 						<c:if test="${pager.groupNo>1}">
@@ -84,7 +96,7 @@
 							href="category?cno=${product.productCategoryNo}&pageNo=${pager.endPageNo+1}&kind=${kind}">다음</a>
 						</c:if>
 							
-						<a class="btn btn-outline-primary btn-sm"
+						<a class="btn btn-sm" style="border:1px solid #d15851; color:#97a497;"
 							href="category?cno=${product.productCategoryNo}&pageNo=${pager.totalPageNo}&kind=${kind}">맨끝</a>
 								
 								<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->

@@ -4,8 +4,18 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=application.getContextPath() %>/resources/css/withdrawal.css" rel="stylesheet" type="text/css"/>
 <link href="<%=application.getContextPath() %>/resources/css/mypage.css" rel="stylesheet" type="text/css"/>
-        
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function popup(){
+	swal({
+		  title: "Success",
+		  text: "탈퇴가 완료되었습니다.",
+		  dangerMode: false,
+		  button: "확인",
+		});
+		
+}
+</script>
 
   <!-- 컨텐츠 -->
   <div >
@@ -52,7 +62,7 @@
          <input
              type="submit"
              id="withdraw-btn"
-             onclick="alert('탈퇴가 완료되었습니다.')"
+             onclick="popup()"
              value="회원탈퇴">
 		
 		<input

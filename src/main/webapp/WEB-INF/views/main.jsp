@@ -7,7 +7,7 @@
 
  <!-- 컨텐츠 -->
         <div class="container-fluid">
-            <div class="main-middle-title-line">
+            <div class="main-middle-title-line" style="margin-top:100px;">
                 <div class="line-img"></div>
                 <div class="main-middle-title">BEST</div>
                 <div class="line-img"></div>
@@ -36,7 +36,7 @@
    			</c:forEach>
    					
 
-            <div class="main-middle-title-line">
+            <div class="main-middle-title-line" style="margin-top:100px;">
                 <div class="line-img"></div>
                 <div class="main-middle-title">NEW</div>
                 <div class="line-img"></div>
@@ -44,7 +44,7 @@
             <!--신상품 12개-->
             <c:forEach var="product" items="${nlist}" varStatus="status">
                     	<c:if test="${status.count % 4 eq 1}"> 
-						   	<div class="row">     
+						   	<div class="row" style="margin-bottom:50px;">     
 						</c:if>
 								<div class="col-3">
 				                    <div class="product-box">

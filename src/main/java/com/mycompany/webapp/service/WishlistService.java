@@ -43,9 +43,14 @@ public class WishlistService {
 		wishlistDao.deleteByWishlistNo(productNo,userId);
 	}
 	
-	public int getTotalRows() {
-		int rows = wishlistDao.count();
+	public int getTotalRows(String userId) {
+		int rows = wishlistDao.count(userId);
 		return rows;
+	}
+
+	public int getwishListCheckCount(int productNo, String userId) {
+		int result = wishlistDao.wishlistCheckCount(productNo, userId);
+		return result;
 	}
 
 	

@@ -16,7 +16,7 @@
             </div>
 
             <!-- 마이페이지 탭 목록 -->
-            <div id="mypageList">
+            <div id="mypageList" style="height: 42px;">
                 <a href="<%=application.getContextPath() %>/user/purchaselist" class="mypage-tab">구매내역</a>
                 <a href="<%=application.getContextPath() %>/user/wishlist" class="mypage-tab-clicked">위시리스트</a>
                 <a href="<%=application.getContextPath() %>/user/changeinfo" class="mypage-tab">개인정보수정</a>
@@ -53,41 +53,44 @@
                   
         
          </div>
+         
+         <c:if test="${size != 0}">
 	      <div class="col text-center">
 	      	<div class="d-flex">
 	      		<div class="flex-grow-1">
 			         <a class="btn btn-outline-primary btn-sm"
-			           href="wishlist?pageNo=1">처음</a>
+			           href="wishlist?pageNo=1&userId=${userId}">처음</a>
 			            
 			         <c:if test="${pager.groupNo>1}">
 			            <a class="btn btn-outline-info btn-sm"
-			            href="wishlist?pageNo=${pager.startPageNo-1}">이전</a>
+			            href="wishlist?pageNo=${pager.startPageNo-1}&userId=${userId}">이전</a>
 			         </c:if>
 			         
 			         <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 			            <c:if test="${pager.pageNo == i}">
 			               <a class="btn btn-outline-success btn-sm" 
-			                  href="wishlist?pageNo=${i}">${i}</a>
+			                  href="wishlist?pageNo=${i}&userId=${userId}">${i}</a>
 			            </c:if>
 			            <c:if test="${pager.pageNo != i}">
 			               <a class="btn btn-outline-danger btn-sm" 
-			                  href="wishlist?pageNo=${i}">${i}</a>
+			                  href="wishlist?pageNo=${i}&userId=${userId}">${i}</a>
 			            </c:if>
 			         </c:forEach>
 			         
 			         <c:if test="${pager.groupNo<pager.totalGroupNo}">
 			            <a class="btn btn-outline-info btn-sm"
-			            href="wishlist?pageNo=${pager.endPageNo+1}">다음</a>
+			            href="wishlist?pageNo=${pager.endPageNo+1}&userId=${userId}">다음</a>
 			         </c:if>
 			            
 			         <a class="btn btn-outline-primary btn-sm"
-			            href="wishlist?pageNo=${pager.totalPageNo}">맨끝</a>
+			            href="wishlist?pageNo=${pager.totalPageNo}&userId=${userId}">맨끝</a>
 			         <!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
 		         </div>
 		     
 		      </div>
 	
              </div>
+         </c:if>
        </div>
    </div>
          

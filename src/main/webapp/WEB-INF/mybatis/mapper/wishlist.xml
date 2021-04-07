@@ -54,15 +54,15 @@
          (product_no, user_id, regdate)
        values
          (#{productNo}, #{userId}, sysdate)
-   </insert>
+    </insert>
    
  
-     <delete id="deleteByWishlistNo" >
+    <delete id="deleteByWishlistNo" >
 		delete from wishlist 
 		where product_no=#{productNo}
 		and user_id = #{userId}
 		   
-   </delete>
+    </delete>
    
  
   
@@ -71,8 +71,24 @@
   	 from wishlist w
 				  join products p
 				  on w.product_no = p.product_no
+				  join products_img i
+				  on p.product_no = i.product_no
+	where i.img_state=1
+				  and w.user_id = #{userId}
 				 
   </select>
+  
+  <select id="wishlistCheckCount" parameterType="wishlist" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			wishlist
+		WHERE 
+			product_no = #{productNo}
+		AND
+			user_id = #{userId}
+		
+	</select>
   
   
   

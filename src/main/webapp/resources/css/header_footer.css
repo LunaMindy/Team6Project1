@@ -6,7 +6,6 @@ body{
     padding-right: 10%;
     position: relative;
     background-image: url(../images/배경.png);                                                              
-    background-size: cover;
     font-family: 'Noto Sans KR', serif;
 }
 .header{

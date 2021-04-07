@@ -103,15 +103,9 @@ public class OrderController {
 		
 		cart.setUserId(auth.getName());
 		
-		boolean check = true;
-		
 		Products product = productService.getProductDetail(cart.getProductNo()).get(0);
-		int allprice = cart.getAmount()*product.getProductPrice();
+		int allprice = cart.getAmount() * (Integer.parseInt(product.getProductPrice()));
 		cart.setAllPrice(allprice);
-		
-
-		List<Cart> list = cartService.getCart(auth.getName());
-
 		
 		int result = cartService.getCartCheckCount(cart.getProductNo(), auth.getName());
 		
@@ -269,50 +263,66 @@ public class OrderController {
 		/*Wishlist wishlist = new Wishlist();
 		wishlist.setUserId("a3@gmail.com");
 		wishlist.setProductNo(intPageNo);*/
-
-		int totalRows = wishlistService.getTotalRows();
+		
+		String userId = auth.getName();
+		int totalRows = wishlistService.getTotalRows(userId);
 		Pager pager = new Pager(12, 10, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 
-		String userId = auth.getName();
+		
 		List<Wishlist> list = wishlistService.getWishlist(pager,userId);
+		logger.info(String.valueOf(list.size()));
 		model.addAttribute("list", list);
+		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);
 
 		return "order/wishlist";
 	}
 
-	@PostMapping("/addwishlist")
-	public String addWishList(Wishlist wishlist) {
-
+	
+	@PostMapping(value = "/addwishlist", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String addWishlist(Authentication auth, Wishlist wishlist) {
+		
+		wishlist.setUserId(auth.getName());
+		
 		boolean check = true;
-		wishlist.setUserId("a1@gmail.com");
 
-		List<Wishlist> list = wishlistService.getWishlist();
-		logger.info(String.valueOf(list.get(0).getProductNo()));
-		logger.info(String.valueOf(list.get(0).getUserId()));
-
-		for(int i=0; i<list.size(); i++) { 
-			if(list.get(i).getProductNo() == wishlist.getProductNo() 
-					&& list.get(i).getUserId().equals(wishlist.getUserId())) {
-				logger.info("찾음");
-				logger.info("찾음");
-				logger.info("찾음");
-				logger.info("찾음");
-				logger.info("찾음");
-				check = false; 
-				break; 
-			} 
-		}
-
-		if(check == true) {
-			int result = wishlistService.saveWishlist(wishlist);;
+		
+		int result = wishlistService.getwishListCheckCount(wishlist.getProductNo(), auth.getName());
+		
+		JSONObject jsonObject = new JSONObject();
+		if(result != 1) {
+			int addResult = wishlistService.saveWishlist(wishlist);
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
 		}else {
-			logger.info("false다");
+			jsonObject.put("result", "danger");
+			return jsonObject.toString();
 		}
-
-		return "redirect:/product?productNo=" + wishlist.getProductNo();
+		
 	}
+	
+	/*
+	 * @PostMapping("/addwishlist") public String addWishList(Wishlist wishlist) {
+	 * 
+	 * boolean check = true; wishlist.setUserId("a1@gmail.com");
+	 * 
+	 * List<Wishlist> list = wishlistService.getWishlist();
+	 * logger.info(String.valueOf(list.get(0).getProductNo()));
+	 * logger.info(String.valueOf(list.get(0).getUserId()));
+	 * 
+	 * for(int i=0; i<list.size(); i++) { if(list.get(i).getProductNo() ==
+	 * wishlist.getProductNo() &&
+	 * list.get(i).getUserId().equals(wishlist.getUserId())) { logger.info("찾음");
+	 * logger.info("찾음"); logger.info("찾음"); logger.info("찾음"); logger.info("찾음");
+	 * check = false; break; } }
+	 * 
+	 * if(check == true) { int result = wishlistService.saveWishlist(wishlist);;
+	 * }else { logger.info("false다"); }
+	 * 
+	 * return "redirect:/product?productNo=" + wishlist.getProductNo(); }
+	 */
 
 	@GetMapping("/delwishlist")
 	public String delWishList(int productNo, Authentication auth) {

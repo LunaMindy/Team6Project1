@@ -6,7 +6,8 @@
         <link href="<%=application.getContextPath() %>/resources/css/changeInfo.css" rel="stylesheet" type="text/css"/>
         <link href="<%=application.getContextPath() %>/resources/css/login.css" rel="stylesheet" type="text/css"/>
 		<script src="<%=application.getContextPath() %>/resources/js/user/changeInfoValidate.js"></script>
-	
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 		 
   <!-- 컨텐츠 -->
   <div >

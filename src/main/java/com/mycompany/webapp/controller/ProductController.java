@@ -39,48 +39,29 @@ public class ProductController {
 	public String openProduct(int productNo, Model model, HttpSession session, String pageNo) {
 		
 		productsService.addHitCount(productNo);
-		List<Products> list = productsService.getProductDetail(productNo);
 		
+		//상품 모든 사진뽑기
+		List<Products> list = productsService.getProductDetail(productNo);
 	
+		//상품 정보 뽑기
 		Products product = new Products();
 		product = list.get(0);
 		
+		
+		//상품 디테일 사진 뽑기
+		Products detailImg = productsService.getProductDetailImg(productNo);
+		if(detailImg != null) {
+			model.addAttribute("detailImg", detailImg);
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("product", product);
-		
-		
-		//리뷰
-		//List<Reviews> rlist = reviewsService.getReview(productNo);
-//		int intPageNo = 1;
-//		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
-//			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
-//			Pager pager = (Pager)session.getAttribute("pager");
-//			if (pager != null) {
-//				intPageNo = pager.getPageNo();
-//			}
-//		} else {	//클라이언트에서 pageNo가 넘어왔을 경우
-//			intPageNo = Integer.parseInt(pageNo);
-//		}
-//				
-//		int totalRows = reviewsService.getTotalRows(productNo);
-//		logger.info(String.valueOf(totalRows));
-//		Pager pager = new Pager(2, 5, totalRows, intPageNo);
-//		session.setAttribute("pager", pager);
-//		
-//		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-//		logger.info(String.valueOf(rlist.size()));
-//		model.addAttribute("size", rlist.size());
-//		model.addAttribute("rlist", rlist);
-//		model.addAttribute("pager", pager);						
-				
 		
 		return "product/product";
 	}
 	
 	@GetMapping("/list")
-	public String list(int productNo, Model model, HttpSession session, String pageNo) {
-		logger.info("상품 리뷰 보기");
-		
+	public String list(int productNo, Model model, String pageNo, HttpSession session) {
 		
 		int intPageNo = 1;
 		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
@@ -94,16 +75,17 @@ public class ProductController {
 		}
 				
 		int totalRows = reviewsService.getTotalRows(productNo);
-		logger.info(String.valueOf(totalRows));
-		Pager pager = new Pager(2, 5, totalRows, intPageNo);
+		Pager pager = new Pager(4, 5, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
 		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-		logger.info(String.valueOf(rlist.size()));
 		model.addAttribute("rlist", rlist);
-		model.addAttribute("pager", pager);						
+		model.addAttribute("size", rlist.size());
+		model.addAttribute("pager", pager);	
+		model.addAttribute("productNo", productNo);
+		
 				
-		return "product/productReivews";
+		return "product/productReviews";
 	}
 	
 	 @GetMapping("/getphoto")
@@ -201,8 +183,12 @@ public class ProductController {
 		Pager pager = new Pager(12, 10, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
+	
 		List<Products> list = productsService.getProductsSearchListPager(pager,keyword);
+		logger.info(keyword);
+		logger.info(String.valueOf(list.size()));
 		model.addAttribute("list", list);
+		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);
 		model.addAttribute("keyword",keyword);
 		

@@ -32,7 +32,7 @@
        <hr/>
        
        	<c:if test="${size eq 0}">
-             <div style="border:1px solid #f3f3f3; padding-left:38%; height:300px;">
+             <div style="border:1px solid #f3f3f3; background-color:#f3f3f3; padding-left:38%; height:300px; margin-bottom:1%;">
              	<h1 style="padding-left:15%; margin-top:10%;">
              		<i class="bi bi-bucket"></i>
              	</h1>
@@ -73,7 +73,7 @@
 	       	</form>
 	
 	       </c:forEach>
-	       
+		<c:if test="${size != 0}">  
 	      <div class="text-center">
 	      	<div class="d-flex">
 	      		<div class="flex-grow-1">
@@ -109,11 +109,11 @@
 		      </div>
 	    
     	</div>
-	       
-	      </c:if>
 
-	
-    
+    	</c:if>
+ 	</c:if>
+     		
+ 
 	</div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

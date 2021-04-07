@@ -84,6 +84,11 @@ public class ProductsService {
 		return list;
 	}
 
+	public Products getProductDetailImg(int productNo) {
+		Products product = productsDao.selectByPnoDetail(productNo);
+		return product;
+	}
+
 		
 	
 }

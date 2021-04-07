@@ -43,7 +43,7 @@
                                         data-toggle="collapse"
                                         data-target="#collapseOne"
                                         aria-expanded="false"
-                                        aria-controls="collapseOne">[반품]반품 교환 정책은 무엇입니까?
+                                        aria-controls="collapseOne">[배송]배송완료인데 아직 못 받았어요.
                                         <i class="material-icons">add</i>
                                     </a>
                                 </h2>
@@ -53,7 +53,10 @@
                                 class="collapse show"
                                 aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <div class="card-body">어쩌구저쩌구</div>
+                                <div class="card-body">택배사 또는 해당 지역의 택배 기사님 사정에 의해 실제 물품 전달일이 1~2일 지연될 수 있습니다. 
+                                주문 시 작성하신 수령 정보 및 배송 메시지를 확인바랍니다. 이후에도 수령하지 못하셨다면 
+                                고객센터 02-000-0000 또는 QNA 문의를 통하여 연락 부탁드립니다.
+                                </div>
                             </div>
                         </div>
                         <div class="card">
@@ -74,7 +77,7 @@
                                 class="collapse"
                                 aria-labelledby="headingTwo"
                                 data-parent="#accordionExample">
-                                <div class="card-body">Anim par3 wolf mo eiusm nulla assumenda shoreditch et.</div>
+                                <div class="card-body">[주문 내역 조회]에서 배송 조회가 가능하오니 참고 부탁드리겠습니다.</div>
                             </div>
                         </div>
                         <div class="card">
@@ -95,7 +98,8 @@
                                 class="collapse"
                                 aria-labelledby="headingThree"
                                 data-parent="#accordionExample">
-                                <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. sagittlum.</div>
+                                <div class="card-body">불량 또는 오배송인 경우 전액 배송비를 부담하여 교환처리 해드립니다. 불량 상품, 오배송이 된 경우라도 제품박스에 송장부착 제품만 보낸 경우
+                                교환이 불가능 합니다. 초기 배송된 상태와 같이 이중 포장 부탁드립니다.</div>
                             </div>
                         </div>
                         <div class="card">
@@ -106,7 +110,7 @@
                                         data-toggle="collapse"
                                         data-target="#collapseFour"
                                         aria-expanded="false"
-                                        aria-controls="collapseFour">[배송] 잘못된 주소를 입력했습니다. 어떻게 해야 할까요?<i class="material-icons">add</i>
+                                        aria-controls="collapseFour">[배송] 주문한 상품과 다른 상품이 배송되었어요.<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -115,10 +119,70 @@
                                 class="collapse"
                                 aria-labelledby="headingFour"
                                 data-parent="#accordionExample">
-                                <div class="card-body">Anim pariatur cl on it squid single-origin coffee nulla assumenda shoreditch et.</div>
+                                <div class="card-body">오배송이 된 경우, 마이페이지>구매내역>교환/환불 요청을 한 뒤, QNA 폼 양식에 따라 문의해 주시면 처리 해드리겠습니다.</div>
                             </div>
                         </div>
-
+						
+						<div class="card">
+                            <div class="card-header" id="headingFive">
+                                <h2 class="mb-0">
+                                    <a
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#collapseFive"
+                                        aria-expanded="false"
+                                        aria-controls="collapseFive">[주문취소/환불] 입금 전 주문취소는 어떻게 하나요?<i class="material-icons">add</i>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div
+                                id="collapseFive"
+                                class="collapse"
+                                aria-labelledby="headingFive"
+                                data-parent="#accordionExample">
+                                <div class="card-body">마이페이지>구매내역에서 주문 취소할 수 있습니다.</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingSix">
+                                <h2 class="mb-0">
+                                    <a
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#collapseSix"
+                                        aria-expanded="false"
+                                        aria-controls="collapseSix">[배송] 잘못된 주소를 입력했습니다. 어떻게 해야 할까요?<i class="material-icons">add</i>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div
+                                id="collapseSix"
+                                class="collapse"
+                                aria-labelledby="headingSix"
+                                data-parent="#accordionExample">
+                                <div class="card-body">구매완료된 후에는 주문 정보 변경이 불가능합니다.</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingSeven">
+                                <h2 class="mb-0">
+                                    <a
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#collapseSeven"
+                                        aria-expanded="false"
+                                        aria-controls="collapseSeven">[리뷰] 리뷰를 수정하고 싶습니다. 어디서 해야하나요?<i class="material-icons">add</i>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div
+                                id="collapseSeven"
+                                class="collapse"
+                                aria-labelledby="headingSeven"
+                                data-parent="#accordionExample">
+                                <div class="card-body">리뷰수정은 불가합니다. 해당상세보기에서 리뷰 삭제후, 마이페이지>구매내역>상세보기에서 재등록이 가능합니다.</div>
+                            </div>
+                        </div>
                         <br/>
                         <br/>
 
