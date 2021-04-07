@@ -4,7 +4,6 @@
     width: 15%;
     height: 25px;
     margin-top: 50px;
-    margin-left: 10%;
     font-weight: bold;
     color:#d15851;
 }
@@ -90,7 +89,7 @@
     color: white;
 }
 
-
+/* 페이징 처리 */
 .page-item {
 	/* background-color:#f3f3f3; */ 
 	border-color:#f3f3f3; 
@@ -108,4 +107,18 @@
 	background-color: #d15851; 
 	color: white;
 	font-size:medium;
+}
+
+#wishlist-info {
+	height:auto;
+	background-color:#f3f3f3;
+	margin-top:50px;
+	margin-bottom:50px;
+	padding:120px;
+	text-align:center;
+}
+
+#wishlist-img {	
+	height:50px;
+	margin-bottom:20px;
 }

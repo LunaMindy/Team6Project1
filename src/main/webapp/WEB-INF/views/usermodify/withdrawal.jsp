@@ -17,7 +17,7 @@
       <!-- 마이페이지 탭 목록 -->
        <div id="mypageList">
           <a href="<%=application.getContextPath()%>/user/purchaselist" class="mypage-tab">구매내역</a>
-          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">위시리스트</a>
+          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">찜목록</a>
           <a href="<%=application.getContextPath()%>/user/changeinfo" class="mypage-tab">개인정보수정</a>
           <a href="<%=application.getContextPath()%>/user/withdrawal" class="mypage-tab-clicked">회원탈퇴</a>
           <a href="<%=application.getContextPath()%>/faq" class="mypage-tab">FAQ</a>
