@@ -29,7 +29,7 @@
             </div>
             <div class="footer-address-box">
                 <ul class="ul-address">
-                    <li>문의 전화 : 02-000-0000</li>
+                    <li>문의 전화 : 010-2902-7969</li>
                     <li>문의 이메일 : 629jyh7@naver.com</li>
                     <li>서울특별시 송파구 00로1길 2</li>
                 </ul>

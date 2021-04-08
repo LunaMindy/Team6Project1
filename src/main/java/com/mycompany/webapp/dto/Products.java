@@ -9,7 +9,7 @@ public class Products {
 	private int productNo; //PK
 	private int productCategoryNo; //FK
 	private String productName;
-	private int productPrice;
+	private String productPrice;
 	private String productContent;
 	private int productState;
 	private Date productRegdate;
@@ -23,11 +23,18 @@ public class Products {
 	private String imgOname;
 	private String imgSname;
 	private String imgType;
+	private String imgState;
 	
 	private String keyword;
 	
 	
-		
+	
+	public String getImgState() {
+		return imgState;
+	}
+	public void setImgState(String imgState) {
+		this.imgState = imgState;
+	}
 	public String getKeyword() {
 		return keyword;
 	}
@@ -52,10 +59,10 @@ public class Products {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public int getProductPrice() {
+	public String getProductPrice() {
 		return productPrice;
 	}
-	public void setProductPrice(int productPrice) {
+	public void setProductPrice(String productPrice) {
 		this.productPrice = productPrice;
 	}
 	public String getProductContent() {

@@ -46,9 +46,13 @@
 
 	 <select id = "count" resultType="int">
   	select count(*) 
-  	 from orders where user_id = #{userId}
-  	 
-				 
+  	 from orders where user_id = #{userId}				 
   </select>
+  
+  <update id="update" parameterType="int">
+  	update orders set
+  		order_state = 1
+  	where order_no = #{orderNo}
+  </update>
   
 </mapper>

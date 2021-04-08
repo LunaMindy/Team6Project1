@@ -36,13 +36,23 @@ public class ProductController {
 
 
 	@GetMapping("/product")
-	public String openProduct(int productNo, Model model, HttpSession session, String pageNo) 	{	
-		productsService.addHitCount(productNo);
-		List<Products> list = productsService.getProductDetail(productNo);
+	public String openProduct(int productNo, Model model, HttpSession session, String pageNo) {
 		
+		productsService.addHitCount(productNo);
+		
+		//상품 모든 사진뽑기
+		List<Products> list = productsService.getProductDetail(productNo);
 	
+		//상품 정보 뽑기
 		Products product = new Products();
 		product = list.get(0);
+		
+		
+		//상품 디테일 사진 뽑기
+		Products detailImg = productsService.getProductDetailImg(productNo);
+		if(detailImg != null) {
+			model.addAttribute("detailImg", detailImg);
+		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("product", product);
@@ -51,8 +61,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public String list(int productNo, Model model, HttpSession session, String pageNo) {
-		logger.info("상품 리뷰 보기");
+	public String list(int productNo, Model model, String pageNo, HttpSession session) {
 		
 		int intPageNo = 1;
 		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
@@ -66,20 +75,15 @@ public class ProductController {
 		}
 				
 		int totalRows = reviewsService.getTotalRows(productNo);
-		logger.info(String.valueOf(totalRows));
-		Pager pager = new Pager(4, 5, totalRows, intPageNo);
+		Pager pager = new Pager(5, 5, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
 		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-		logger.info(String.valueOf(rlist.size()));
-		//logger.info(rlist.get(1).getProductName());
 		model.addAttribute("rlist", rlist);
-		model.addAttribute("size", rlist.size());
+		model.addAttribute("size", totalRows);
 		model.addAttribute("pager", pager);	
 		model.addAttribute("productNo", productNo);
 		
-		logger.info("pageno :" +  pageNo);
-		logger.info("productno : " + productNo);					
 				
 		return "product/productReviews";
 	}
@@ -101,23 +105,19 @@ public class ProductController {
 	         InputStream is;
 	         OutputStream os;
 	    	 if(cno == 1) {
-	    		 is = new FileInputStream("D://상품사진들/캔들/" + imgSname + "." + imgType);
+	    		 is = new FileInputStream("D:/상품사진들/캔들/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 2) {
-	    		 is = new FileInputStream("D://상품사진들/조명/" + imgSname + "." + imgType);
-
+	    		 is = new FileInputStream("D:/상품사진들/조명/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 3) {
-
-	    		 is = new FileInputStream("D://상품사진들/트리/" + imgSname + "." + imgType);
-
+	    		 is = new FileInputStream("D:/상품사진들/트리/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else {
-	    		 is = new FileInputStream("D://상품사진들/기타/" + imgSname + "." + imgType);
-
+	    		 is = new FileInputStream("D:/상품사진들/기타/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }
@@ -185,6 +185,7 @@ public class ProductController {
 		
 	
 		List<Products> list = productsService.getProductsSearchListPager(pager,keyword);
+		
 		logger.info(keyword);
 		logger.info(String.valueOf(list.size()));
 		model.addAttribute("list", list);

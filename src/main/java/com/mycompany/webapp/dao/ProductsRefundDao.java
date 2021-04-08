@@ -12,8 +12,5 @@ import com.mycompany.webapp.dto.ProductsRefund;
 @Mapper
 public interface ProductsRefundDao {
 	public List<ProductsRefund> selectAll(int orderNo);
-	public int insert(ProductsRefund productsefund);
-	public int update(ProductsRefund productsrefund);
-	public void insert(int orderNo);
-	public void update(@Param("orderNo") int ono, @Param("refundReason") String refundReason);
+	public void insert(@Param("orderNo") int orderNo, @Param("refundReason") String refundReason);
 }

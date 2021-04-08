@@ -3,14 +3,34 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=application.getContextPath() %>/resources/css/cart.css" rel="stylesheet" type="text/css"/>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function popup(){
+	swal({
+		  title: "Error",
+		  text: "장바구니가 비었습니다.",
+		  dangerMode: true,
+		  button: "확인",
+		});
+		
+}
+</script>
   <!-- 컨텐츠 -->
   <div class="cart-content">
      <div class="container-fluid">
           <div class="cart-line">
               <p class="text">장바구니</p>
           </div>
-					<!-- 카트 목록 -->
+  
+		  <c:if test="${size eq 0}">
+		  	<div id="cart-info">
+		  		<img id="cart-img" src="<%=application.getContextPath()%>/resources/images/카트.png">
+		  		<h3 style="margin:0;">장바구니가 비어있습니다.</h3>
+		  	</div>
+		  </c:if>
+		  
+		  <c:if test="${size > 0}">	
+			<!-- 카트 목록 -->
 		      <div class="cart-list">
 		       		<table class="cart-table">
 		              <thead>
@@ -86,32 +106,28 @@
                   </tr>
               </table>         
 
-							<!-- 결제세부 창으로 넘어가는 버튼 -->
+				<!-- 결제세부 창으로 넘어가는 버튼 -->
 				
-							<form method="post" action="<%=application.getContextPath()%>/user/order">
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				   				<c:forEach var="cart" items="${clist}">										
-				
-									<input type="hidden" name="productNo" value="${cart.productNo}"/>
-									<input type="hidden" name="amount" value="${cart.amount}">
-				           	<input type="hidden" name="allPrice"  value="${cart.allPrice}"/>
-				         		<input type="hidden" name="productName" value="${cart.productName}"/>
-				         		<input type="hidden" name="price" value="${cart.price}"/>
-				         		<input type="hidden" name="imgOname" value="${cart.imgOname}"/>
-				         		<input type="hidden" name="imgSname" value="${cart.imgSname}"/>
-				         		<input type="hidden" name="imgType" value="${cart.imgType}"/>	                  	
-								</c:forEach>
-								<input type="hidden" name="sum" value="${sum}"/>
-				        	<input type="hidden" name="count" value="${count}"/>
-				       	 	<c:if test="${size eq 0}">
-				       	 		<button class="btn btn-info btn-lg btn-block" onclick="alert('장바구니가 비어있습니다.')" type="button">결제하기</button>
-				       	 	</c:if>
-				       	 	<c:if test="${size > 0}">
-				       	 		<button class="btn btn-info btn-lg btn-block">결제하기</button>
-				       	 	</c:if>
-							</form>					 
+				<form method="post" action="<%=application.getContextPath()%>/user/order">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	   				<c:forEach var="cart" items="${clist}">										
+						<input type="hidden" name="productNo" value="${cart.productNo}"/>
+						<input type="hidden" name="amount" value="${cart.amount}">
+		           		<input type="hidden" name="allPrice"  value="${cart.allPrice}"/>
+		         		<input type="hidden" name="productName" value="${cart.productName}"/>
+		         		<input type="hidden" name="price" value="${cart.price}"/>
+		         		<input type="hidden" name="imgOname" value="${cart.imgOname}"/>
+		         		<input type="hidden" name="imgSname" value="${cart.imgSname}"/>
+		         		<input type="hidden" name="imgType" value="${cart.imgType}"/>	                  	
+					</c:forEach>
+					<input type="hidden" name="sum" value="${sum}"/>
+	        	<input type="hidden" name="count" value="${count}"/>
+	       	 		<button class="btn btn-info btn-lg btn-block">결제하기</button>
+				</form>			 
         	</div>
-     	</div>
-  </div>
+     
+ 		 </c:if>
+  	</div>
+ </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

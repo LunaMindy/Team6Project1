@@ -58,7 +58,7 @@ public class OrderController {
 	public String openCart(Authentication auth, Model model) {
 		String userId = auth.getName();
 		List<Cart> clist = cartService.getCart(userId);
-		logger.info(String.valueOf(clist.size()));
+		//logger.info(String.valueOf(clist.size()));
 		model.addAttribute("clist",clist);
 		model.addAttribute("size", clist.size());
 		cartArray = new Cart[clist.size()];
@@ -103,15 +103,9 @@ public class OrderController {
 		
 		cart.setUserId(auth.getName());
 		
-		boolean check = true;
-		
 		Products product = productService.getProductDetail(cart.getProductNo()).get(0);
-		int allprice = cart.getAmount()*product.getProductPrice();
+		int allprice = cart.getAmount() * (Integer.parseInt(product.getProductPrice()));
 		cart.setAllPrice(allprice);
-		
-
-		List<Cart> list = cartService.getCart(auth.getName());
-
 		
 		int result = cartService.getCartCheckCount(cart.getProductNo(), auth.getName());
 		
@@ -133,19 +127,7 @@ public class OrderController {
 		int pno = productNo;
 		String userID = auth.getName();
 
-		/*Cart cart = new Cart();
-		cart.setUserId("a1@gmail.com");
-		cart.setProductNo(productNo);
-		cart.setAmount(2);
-		cart.setAllprice(20000);
-		cart.setRegdate(new Date());
-		cart.setProductName("샘플1");
-		cart.setPrice(10000);
-		cart.setImgOname("26.jpg");
-		cart.setImgSname("132546-1231");
-		cart.setImgType("image");*/
-
-		logger.info(String.valueOf(productNo));
+		//logger.info(String.valueOf(productNo));
 
 		cartService.deleteCart(pno, userID);
 
@@ -245,6 +227,7 @@ public class OrderController {
 
 				orderProductsService.saveOrderProduct(orderProducts);
 				cartService.deleteCart(orderProducts.getProductNo(), orderProducts.getUserId());
+				productService.addSellCount(orderProducts.getProductNo());
 			} 
 		}		
 
@@ -285,37 +268,50 @@ public class OrderController {
 		return "order/wishlist";
 	}
 
-	@PostMapping("/addwishlist")
-	public String addWishList(Wishlist wishlist) {
-
+	
+	@PostMapping(value = "/addwishlist", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String addWishlist(Authentication auth, Wishlist wishlist) {
+		
+		wishlist.setUserId(auth.getName());
+		
 		boolean check = true;
-		wishlist.setUserId("a1@gmail.com");
 
-		List<Wishlist> list = wishlistService.getWishlist();
-		logger.info(String.valueOf(list.get(0).getProductNo()));
-		logger.info(String.valueOf(list.get(0).getUserId()));
-
-		for(int i=0; i<list.size(); i++) { 
-			if(list.get(i).getProductNo() == wishlist.getProductNo() 
-					&& list.get(i).getUserId().equals(wishlist.getUserId())) {
-				logger.info("찾음");
-				logger.info("찾음");
-				logger.info("찾음");
-				logger.info("찾음");
-				logger.info("찾음");
-				check = false; 
-				break; 
-			} 
-		}
-
-		if(check == true) {
-			int result = wishlistService.saveWishlist(wishlist);;
+		
+		int result = wishlistService.getwishListCheckCount(wishlist.getProductNo(), auth.getName());
+		
+		JSONObject jsonObject = new JSONObject();
+		if(result != 1) {
+			int addResult = wishlistService.saveWishlist(wishlist);
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
 		}else {
-			logger.info("false다");
+			jsonObject.put("result", "danger");
+			return jsonObject.toString();
 		}
-
-		return "redirect:/product?productNo=" + wishlist.getProductNo();
+		
 	}
+	
+	/*
+	 * @PostMapping("/addwishlist") public String addWishList(Wishlist wishlist) {
+	 * 
+	 * boolean check = true; wishlist.setUserId("a1@gmail.com");
+	 * 
+	 * List<Wishlist> list = wishlistService.getWishlist();
+	 * logger.info(String.valueOf(list.get(0).getProductNo()));
+	 * logger.info(String.valueOf(list.get(0).getUserId()));
+	 * 
+	 * for(int i=0; i<list.size(); i++) { if(list.get(i).getProductNo() ==
+	 * wishlist.getProductNo() &&
+	 * list.get(i).getUserId().equals(wishlist.getUserId())) { logger.info("찾음");
+	 * logger.info("찾음"); logger.info("찾음"); logger.info("찾음"); logger.info("찾음");
+	 * check = false; break; } }
+	 * 
+	 * if(check == true) { int result = wishlistService.saveWishlist(wishlist);;
+	 * }else { logger.info("false다"); }
+	 * 
+	 * return "redirect:/product?productNo=" + wishlist.getProductNo(); }
+	 */
 
 	@GetMapping("/delwishlist")
 	public String delWishList(int productNo, Authentication auth) {

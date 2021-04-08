@@ -56,11 +56,12 @@
 }
 
 
-#refund-btn{
+.refund-btn{
     background-color: #d15851; 
     color: #f3f3f3; 
     padding: 10px;
-    border: 2px solid white;
+    /* border: 2px solid white; */
+    display:right;
 }
 
 #refund-btn-div{

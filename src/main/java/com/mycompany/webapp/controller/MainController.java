@@ -74,9 +74,9 @@ public class MainController {
 		if(kind == 1) {
 			list = productsService.getProductsList(pager, cno);
 		}else if(kind == 2) {
-			list = productsService.getProductsNewList(pager, cno);
-		}else {
 			list = productsService.getProductsBestList(pager, cno);
+		}else {
+			list = productsService.getProductsNewList(pager, cno);
 		}
 
 		Products product = new Products();

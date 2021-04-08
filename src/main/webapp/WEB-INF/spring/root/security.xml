@@ -20,7 +20,8 @@
                       username-parameter="userId"
                       password-parameter="userPassword"
                       login-processing-url="/login"
-                      authentication-failure-url="/auth/login"
+                      authentication-success-handler-ref="authSuccessHandler"
+					  authentication-failure-handler-ref="authFailureHandler"
                       />
    	
 	  <security:csrf disabled="true"/> 
@@ -64,5 +65,10 @@
          </bean>
       </constructor-arg>
    </bean>
+   
+    <bean id="authSuccessHandler" class="com.mycompany.webapp.security.AuthSuccessHandler"></bean>
+	<bean id="authFailureHandler" class="com.mycompany.webapp.security.AuthFailureHandler">
+		<property name="defaultFailureUrl" value="/auth/login"></property>	
+	</bean>
    
 </beans>

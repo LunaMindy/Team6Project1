@@ -4,10 +4,18 @@
     width: 15%;
     height: 25px;
     margin-top: 50px;
-    margin-left: 10%;
     font-weight: bold;
     color:#d15851;
 }
+
+.deletebtn {
+    position: relative;
+    left: 40%;
+    margin-right: 0;
+    background-color: #d15851; 
+    color: #f3f3f3;
+}
+
 
 /* 최신순, 인기순 버튼 */
 .wishlist-popular{
@@ -88,4 +96,38 @@
 #mypageList > a {
     text-decoration-line: none;
     color: white;
+}
+
+/* 페이징 처리 */
+.page-item {
+	/* background-color:#f3f3f3; */ 
+	border-color:#f3f3f3; 
+	background-color:white; 
+	color: #d15851;
+	font-size:medium;
+}
+
+.page-item:hover {
+	color: #39613a;
+}
+
+.page-now {
+	/* border-color:#f3f3f3;  */
+	background-color: #d15851; 
+	color: white;
+	font-size:medium;
+}
+
+#wishlist-info {
+	height:auto;
+	background-color:#f3f3f3;
+	margin-top:50px;
+	margin-bottom:50px;
+	padding:120px;
+	text-align:center;
+}
+
+#wishlist-img {	
+	height:50px;
+	margin-bottom:20px;
 }

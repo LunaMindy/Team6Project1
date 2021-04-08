@@ -78,11 +78,6 @@
     font-weight:500;
 }
 
-.category-title .origin-price{
-    color : orange;
-    text-decoration: line-through;
-    margin-bottom: 0;
-}
 
 .pagination{
     width: 20%;
@@ -90,7 +85,6 @@
     padding-top: 0px;
 }
 
-/* 페이징 처리 */
 .page-item {
 	/* background-color:#f3f3f3; */ 
 	border-color:#f3f3f3; 
@@ -108,4 +102,18 @@
 	background-color: #d15851; 
 	color: white;
 	font-size:medium;
+}
+
+#search-info {
+	height:auto;
+	background-color:#f3f3f3;
+	margin-top:50px;
+	margin-bottom:50px;
+	padding:120px;
+	text-align:center;
+}
+
+#search-img {	
+	height:50px;
+	margin-bottom:20px;
 }

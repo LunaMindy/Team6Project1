@@ -27,6 +27,7 @@ public interface ProductsDao{
 	public List<Products> selectBySearchPage(@Param("pager")Pager pager,@Param("keyword")String keyword);
 	
 	public int countKeyword(String keyword);
+	public Products selectByPnoDetail(int productNo);
 	
 	
 		

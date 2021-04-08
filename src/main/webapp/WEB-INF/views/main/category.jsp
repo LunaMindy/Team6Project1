@@ -14,7 +14,19 @@
             <div class="container-fluid">
                 <div class="new-popular-wrapper">
                     <div class="category-path">
-                        <p>홈 > ${product.categoryName}</p>
+                    <c:if test="${product.categoryName eq '캔들'}">
+                    	<p>HOME > CANDLE</p>
+                    </c:if>
+                    <c:if test="${product.categoryName eq '조명'}">
+                    	<p>HOME > LIGHT</p>
+                    </c:if>
+                    <c:if test="${product.categoryName eq '트리'}">
+                    	<p>HOME > TREE</p>
+                    </c:if>
+                    <c:if test="${product.categoryName eq '기타'}">
+                    	<p>HOME > ETC</p>
+                    </c:if>
+                        
                     </div>
                     <div class="new-popular">
                     	<c:if test="${kind==0}">
@@ -60,34 +72,34 @@
             <table style="margin-left:45%; margin-top:5%;">
 		       <tr>
 				<td colspan="5" style="text-center;">
-						<a class="btn btn-outline-primary btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=1&kind=${kind}">처음</a>
+						<a class="btn btn-sm page-item"
+							href="category?cno=${product.productCategoryNo}&pageNo=1&kind=${kind}">&laquo;</a>
 
 						<c:if test="${pager.groupNo>1}">
-							<a class="btn btn-outline-info btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=${pager.startPageNo-1}&kind=${kind}">이전</a>
+							<a class="btn btn-sm page-item"
+							href="category?cno=${product.productCategoryNo}&pageNo=${pager.startPageNo-1}&kind=${kind}">before</a>
 						</c:if>
 						
 						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 							<c:if test="${pager.pageNo == i}">
-								<a class="btn btn-outline-danger btn-sm" 
+								<a class="btn btn-sm page-now" 
 									href="category?cno=${product.productCategoryNo}&pageNo=${i}&kind=${kind}">${i}</a>
 							</c:if>
 							<c:if test="${pager.pageNo != i}">
-								<a class="btn btn-outline-success btn-sm" 
+								<a class="btn btn-sm page-item" 
 									href="category?cno=${product.productCategoryNo}&pageNo=${i}&kind=${kind}">${i}</a>
 							</c:if>
 						</c:forEach>
 						
 						<c:if test="${pager.groupNo<pager.totalGroupNo}">
-							<a class="btn btn-outline-info btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=${pager.endPageNo+1}&kind=${kind}">다음</a>
+							<a class="btn btn-sm page-item"
+							href="category?cno=${product.productCategoryNo}&pageNo=${pager.endPageNo+1}&kind=${kind}">next</a>
 						</c:if>
 							
-						<a class="btn btn-outline-primary btn-sm"
-							href="category?cno=${product.productCategoryNo}&pageNo=${pager.totalPageNo}&kind=${kind}">맨끝</a>
+						<a class="btn btn-sm page-item"
+							href="category?cno=${product.productCategoryNo}&pageNo=${pager.totalPageNo}&kind=${kind}">&raquo;</a>
 								
-								<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
+								<!-- [<<][<] 1 2 3 4 5 [>][>>] -->
 					</td>
 				</tr>
 			</table>

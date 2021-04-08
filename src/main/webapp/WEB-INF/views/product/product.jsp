@@ -4,37 +4,22 @@
  
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=application.getContextPath() %>/resources/css/product.css" rel="stylesheet" type="text/css"/>
-
+<script src="<%=application.getContextPath() %>/resources/js/product/addCartWishlist.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-var amount;
 
+function popup(){
+	swal({
+		  title: "Error",
+		  text: "로그인이 필요한 서비스입니다.",
+		  dangerMode: true,
+		  button: "확인",
+		});
+		
+}
 
-const addCartCheck = () => {
 	
-		event.preventDefault();
-		
-		var data = {
-				userId : $("#userId").val(),
-				productNo : $("#productNo").val(),
-				price : $("#price").val(),
-				amount : $("#amount").val()
-			}
-		
-				$.ajax({
-						url: "user/addcart",
-						data: data,
-						method: "post"
-					}).done(data => {
-						if(data.result == "success"){
-							console.log("실행");
-							alert("장바구니에 추가되었습니다.")
-					 	}else if(data.result == "danger"){
-					 		alert('이미 추가된 상품입니다.');
-					 	}
-				});
-	}
-
 function init () {
 	amount = document.amountForm.amount.value;
 	change();
@@ -63,22 +48,8 @@ $(function() {
 	getList(${product.productNo}, 1);
 });
 
-/* const getList = (productNo, pageNo) => {
-	const var1 = {
-			url:"list",
-			method:"get"}
-	if (pageNo) {
-		var1.data = {productNo, pageNo};
-	} else {
-		console.log("실패");
-	}
-	$.ajax(var1).then(data => {
-		$('#review').html(data)
-	});	
-}; */
-
 const getList = (productNo,pageNo) => {
-	console.log(productNo+" "+pageNo);
+	//console.log(productNo+" "+pageNo);
 	$.ajax({
 		url:"<%=application.getContextPath()%>/list",
 		data:{productNo, pageNo},
@@ -123,7 +94,7 @@ const getList = (productNo,pageNo) => {
                         
                         
                     </div>
-                    <ul class="preview-thumbnail nav nav-tabs">
+                    <ul class="preview-thumbnail nav nav-tabs" style="border:none;">
                     	<c:forEach var="product" items="${list}" varStatus="status">
 	                    	<c:if test="${status.count eq 1}"> 
 								 <li class="active">
@@ -153,10 +124,10 @@ const getList = (productNo,pageNo) => {
                     class="product-details col-md-6"
                     style="position:relative; left: 2%; top:25%; padding-top: 50px;">
                     <h3 class="product-title">| ${product.productName} |</h3>
-                    <h5 class="product-price">가격 :
+                    <h5 class="product-price">price :
                         <span>${product.productPrice}원</span></h5>
                     <div class="quantity-section">
-                        <h5 class="product-quantity">수량
+                        <h5 class="product-quantity">amount
                         </h5>
                     </div>
                     
@@ -171,23 +142,27 @@ const getList = (productNo,pageNo) => {
                     		<input type="text" id="amount" name="amount" value="1" size="3" onchange="change()">
 												<input type="button" value=" + " onclick="add();">
 												<input type="button" value=" - " onclick="del();"><br>
-											</div>
+						</div>
 											
 						<sec:authorize access="isAnonymous()">
-                     		<button class="add-to-cart btn btn-default" type="button" style="font-size:1rem;">장바구니에 담으려면 로그인하십시오.</button>
+                     		<input class="add-to-cart btn btn-default" type="button" value="add to cart" onclick="popup()"/>
 						</sec:authorize>
 						<sec:authorize access="isAuthenticated()">
-					 		<input class="add-to-cart btn btn-default" type="submit" value="장바구니 담기" />
+					 		<input class="add-to-cart btn btn-default" type="submit" value="add to cart" />
 						</sec:authorize>
 					</form>
-					<form method="post" action="<%=application.getContextPath()%>/user/addwishlist" style="display:inline-block">
-											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-											<input type="hidden" name="productNo" value="${product.productNo}" />
+					<form method="post" action="<%=application.getContextPath()%>/user/addwishlist" style="display:inline-block" onsubmit="addwishlistCheck()">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<input type="hidden" name="productNo" value="${product.productNo}" />
                     	<input type="hidden" name="userId" value="" />
-                        <button
-                            class="like btn btn-default"
-                            type="submit"
-                            onclick="alert('찜 리스트에 추가되었습니다.')"><span class="fa fa-heart"></span></button>
+                    	
+                    	<sec:authorize access="isAnonymous()">
+                    		<button type="button" class="like btn btn-default" onclick="popup()"><span class="fa fa-heart"></span></button>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+					 		<button type="submit" class="like btn btn-default"><span class="fa fa-heart"></span></button>
+						</sec:authorize>
+                        
                     </form>
                     </div>
                 </div>
@@ -196,84 +171,17 @@ const getList = (productNo,pageNo) => {
             <div class="row detail-section">
                 <div class="col-md-12">
                     <hr>
-                    <h3>| details |</h3>
+                    <h3>| Detail |</h3>
                     <hr>
                 </div>
-                <div class="col-md-12 product-description">
-                    <p>
-                       ${product.productContent}
-                    </p>
+                <div class="col-md-12 product-description" style="margin-top:100px; margin-bottom:50px;">
+                    <img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${detailImg.imgSname}&imgType=${detailImg.imgType}" style="padding-left:8%"/>
                 </div>
             </div>
 			
+           
 		
-           <div id="review">
-			  <%--  <div class="col-md-12" >
-			       <hr>
-			       <h3>| Reviews |</h3>
-			       <hr>
-			   </div>
-			     
-			   <c:forEach var="reviews" items="${rlist}">
-			    	<div class="col-md-12">
-			        <div class="row">
-			            <div class="col-md-4 review-part-left">
-			                <div class="row">
-			                    <div class="col-md-4">
-			                        <img src="http://placekitten.com/400/252">
-			                    </div>
-			                    <div class="col-md-4">
-			                        <p><fmt:formatDate value="${reviews.reviewRegdate}" pattern="yyyy-MM-dd"/></p>
-			                        <span>${reviews.userId}</span><br>
-			                    </div>
-			                </div>
-			            </div>
-			            <div class="col-md-6 review-part-right">
-			                <p>${reviews.reviewContent}</p>
-			            </div>
-			            <div class="col-md-2 review-part-right">
-			            	<c:if test=""></c:if>
-			            		<button class="btn review-btn" onclick="alert('삭제할 수 없습니다.')" type="button">remove</button>
-			            		<a class="btn review-btn" href="<%=application.getContextPath()%>/user/delreview?reviewNo=${reviews.reviewNo}&productNo=${reviews.productNo}">remove</a>                        	                                                 	                         
-			            </div>
-			        </div>
-			    	</div>
-			    </c:forEach>     
-			       
-			   <div class="col-5 text-center">
-						<div class="d-flex">
-							<div class="flex-grow-1">							
-							<!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
-								<button class="btn btn-outline-primary btn-sm"
-									onclick="getList(${product.productNo}, 1)">처음</button>
-						
-								<c:if test="${pager.groupNo>1}">
-								<button class="btn btn-outline-info btn-sm"
-								onclick="getList(${product.productNo}, ${pager.startPageNo-1})">이전</button>
-								</c:if>
-						
-								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-									<c:if test="${pager.pageNo!=i}">
-										<button class="btn btn-outline-success btn-sm"
-										onclick="getList(${product.productNo}, ${i})">${i}</button>
-									</c:if>
-									<c:if test="${pager.pageNo==i}">
-										<button class="btn btn-danger btn-sm"
-										onclick="getList(${product.productNo}, ${i})">${i}</button>
-									</c:if>
-								</c:forEach>
-						
-								<c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<button class="btn btn-outline-info btn-sm"
-									onclick="getList(${product.productNo}, ${pager.endPageNo+1})">다음</button>
-								</c:if>
-						
-								<button class="btn btn-outline-primary btn-sm"
-									onclick="getList(${product.productNo}, ${pager.totalPageNo})">맨끝</button>
-							</div>
-					</div>
-				</div>  --%>              
-			</div>
+           <div id="review"></div>
         </div> 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
