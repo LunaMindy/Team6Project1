@@ -134,7 +134,7 @@ const getList = (productNo,pageNo) => {
                     	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     	<input type="hidden" id="productNo" name="productNo" value="${product.productNo}" />
                     	<input type="hidden" id="userId" name="userId" value="" />
-                    	<input type="hidden" id="price" name="price" value="${product.productPrice}" />
+                    	<input type="hidden" id="price" name="price" value="${product.productPrice}₩" />
                     	<div style="margin-bottom:20%;">
                     		<input type="text" id="amount" name="amount" value="1" size="3" onchange="change()">
 												<input type="button" value=" + " onclick="add();">

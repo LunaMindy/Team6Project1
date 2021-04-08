@@ -44,26 +44,35 @@ var check = true;
 			  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 			};
 		       
-		const passwordCk = () => {
-					const userPassword = $('#userPassword').val();
+		$(function () {
+				$('.passwordCk').on("propertychange change keydown paste input", function () {
+			        const userPassword = $('#userPassword').val();
 					const userPasswordCk = $('#userPasswordCk').val();    
-	
-			        if(userPassword == userPasswordCk){
+			
+					if (userPassword == "" || userPasswordCk == "") {
+						pwckCheck = true;
+			            result = false;
+			            $("#nonSamePassword").css('display', 'none');
+			            $("#SamePassword").css('display', 'none');
+						$("#errorPassword").html("비밀번호를 입력하세요.");
+					}else if(userPassword == userPasswordCk){
 			            pwckCheck = true;
 			            result = true;
-			            $("#errorPassword").css('display', 'none');
 			            $("#nonSamePassword").css('display', 'none');
+			            $("#errorPassword").css('display', 'none');
 			            $("#SamePassword").html("비밀번호가 일치합니다.");
 			            $("#SamePassword").css('display', 'block');
 			        }else{
 			            pwckCheck = false;
 			            result = false;
-			            $("#errorPassword").css('display', 'none');
 			            $("#SamePassword").css('display', 'none');
+			            $("#errorPassword").css('display', 'none');
 			            $("#nonSamePassword").html("비밀번호가 일치하지 않습니다.");
 			            $("#nonSamePassword").css('display', 'block');
+			            
 			        }
-			};
+			     });
+			});
 
 		 const changePwValidate = () => {
 				event.preventDefault();

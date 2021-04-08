@@ -8,6 +8,15 @@
     color:#d15851;
 }
 
+.deletebtn {
+    position: relative;
+    left: 40%;
+    margin-right: 0;
+    background-color: #d15851; 
+    color: #f3f3f3;
+}
+
+
 /* 최신순, 인기순 버튼 */
 .wishlist-popular{
     width: 15%;

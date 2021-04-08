@@ -82,6 +82,7 @@ public class ProductsService {
 	
 	public List<Products> getProductsSearchListPager(Pager pager,String keyword){
 		List<Products> list = productsDao.selectBySearchPage(pager,keyword);
+		logger.info(list.get(0).getProductPrice());
 		return list;
 	}
 

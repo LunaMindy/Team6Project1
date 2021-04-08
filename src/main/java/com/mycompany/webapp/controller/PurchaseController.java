@@ -68,7 +68,7 @@ public class PurchaseController {
 
 		
 		List<Orders> list = ordersService.getOrdersPage(pager, userId);
-	
+
 		model.addAttribute("list", list);
 		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);

@@ -58,10 +58,10 @@ body{
     color: white;
 }
 /* mouse over link */
-.login-out ul li a:hover {
-    color: blue;
+/* .login-out ul li a:hover {
+    color: #ffff80;
     font-weight: bold;
-}
+} */
 
 /* 로고 위치 눈배경 */
 .center-img{
@@ -143,10 +143,10 @@ body{
     color: white;
 }
 /* mouse over link */
-.down-category ul li a:hover {
+/* .down-category ul li a:hover {
     color: hotpink;
 }
-
+ */
 /* 검색창 박스 */
 .search-box{
     margin:0;

@@ -185,8 +185,8 @@ public class ProductController {
 		
 	
 		List<Products> list = productsService.getProductsSearchListPager(pager,keyword);
-		logger.info(keyword);
-		logger.info(String.valueOf(list.size()));
+		
+		logger.info(list.get(0).getProductPrice());
 		model.addAttribute("list", list);
 		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);

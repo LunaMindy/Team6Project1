@@ -1,5 +1,6 @@
 package com.mycompany.webapp.controller;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,43 +59,15 @@ public class OrderController {
 	public String openCart(Authentication auth, Model model) {
 		String userId = auth.getName();
 		List<Cart> clist = cartService.getCart(userId);
-		//logger.info(String.valueOf(clist.size()));
+		
 		model.addAttribute("clist",clist);
 		model.addAttribute("size", clist.size());
 		cartArray = new Cart[clist.size()];
+
+		DecimalFormat formatter = new DecimalFormat("###,###");
 	
 		return "order/cart";
 	}
-
-	/*	@GetMapping("/cart")
-		public String openCart(Authentication auth, String pageNo, Model model, HttpSession session) {
-			String userId = auth.getName();
-
-			int intPageNo = 1;
-			if(pageNo == null ) {
-				Pager pager = (Pager)session.getAttribute("pager");
-				if (pager != null) {
-					intPageNo = pager.getPageNo();
-				}
-			} else {
-				intPageNo = Integer.parseInt(pageNo);
-			}
-
-			int totalRows = cartService.getTotalRows(userId);
-			Pager pager = new Pager(5, 5, totalRows, intPageNo);
-			session.setAttribute("pager", pager);		
-
-			List<Cart> clist = cartService.getCart(pager, userId);
-			cartArray = new Cart[clist.size()];
-
-			//logger.info(String.valueOf(clist.size()));
-			//logger.info(clist.getIndex(1).getIndex);
-			model.addAttribute("clist",clist);
-			model.addAttribute("pager", pager);	
-
-			return "order/cart";
-		}*/
-
 
 	//선택옵션 정보
 	@PostMapping(value = "/addcart", produces = "application/json;charset=UTF-8")
@@ -167,8 +140,7 @@ public class OrderController {
 
 		for(int i =0; i < cartArray.length; i++) {
 			cartArray[i] = new Cart();
-			//			logger.info(productName[i]);
-			//			logger.info(String.valueOf(productNo[i]));
+
 			if(cartArray[i].getProductName() == null) {
 				cartArray[i].setProductNo(Integer.parseInt(productNo[i]));
 				cartArray[i].setUserId(userId);
@@ -180,20 +152,12 @@ public class OrderController {
 				cartArray[i].setImgSname(imgSname[i]);
 				cartArray[i].setImgType(imgType[i]);							
 			}
-			//			logger.info(String.valueOf(cartArray[i].getProductNo()));
-			//			logger.info(cartArray[i].getUserId());
-			//			logger.info(String.valueOf(cartArray[i].getAmount()));
-			//			logger.info(String.valueOf(cartArray[i].getAllPrice()));
-			//			logger.info(cartArray[i].getProductName());
-			//			logger.info(cartArray[i].getImgOname());
-			//			logger.info(cartArray[i].getImgSname());
-			//			logger.info(cartArray[i].getImgType());			
+	
 		}
-
+		
 		String sum = request.getParameter("sum");
 		String count = request.getParameter("count");
-		//		logger.info(sum);
-		//		logger.info(count);
+
 		model.addAttribute("sum", Integer.parseInt(sum));
 		model.addAttribute("count", Integer.parseInt(count));
 
