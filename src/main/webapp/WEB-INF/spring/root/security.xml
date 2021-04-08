@@ -29,8 +29,6 @@
       <!-- POST 방식으로 요청해야함 -->
       <security:logout logout-url="/logout"/>
       
-      <!-- 403에러가 발생할 때 이동할 페이지  -->
-     <!--  <security:access-denied-handler error-page="/user/error403"/> -->
    </security:http>
    
    <!-- 사용자 인증 처리를 위한 설정 (DB 테이블 관련) -->

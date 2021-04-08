@@ -104,8 +104,7 @@ var pwckCheck = false;
 										  text: "수정이 완료되었습니다. 메인으로 이동하시겠습니까?",
 										  buttons: true,
 										  dangerMode: false,
-										})
-										.then((willDelete) => {
+										}).then((willDelete) => {
 										  if (willDelete) {
 											 window.location.href = getContextPath()+'/main';
 										  }

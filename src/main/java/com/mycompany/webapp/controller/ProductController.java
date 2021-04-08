@@ -90,9 +90,8 @@ public class ProductController {
 	
 	 @GetMapping("/getphoto")
 	   public void getPhoto(int cno, String imgSname, String imgType, HttpServletResponse response) {
+		 
 	      try {
-	 
-	    	  
 	         // 응답 HTTP 헤더에 저장될 바디의 타입
 	    	 response.setContentType(imgType);
 
@@ -131,8 +130,6 @@ public class ProductController {
 	      }
 	   }
 
-	
-	
 		/*
 		 * //이미지를 DB에 넣기위한 관리자 전용 페이지
 		 * 

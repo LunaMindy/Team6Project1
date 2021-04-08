@@ -109,7 +109,6 @@ public class OrderController {
 
 	@PostMapping("/updateamount")
 	public String updateAmount(Cart cart) {
-		//Products product = productsService.getProduct(cart.getProductNo());
 		
 		String price = cart.getPrice();
 		price = price.replaceAll(",", "");

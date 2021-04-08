@@ -10,7 +10,6 @@ const addCartCheck = () => {
 				price : $("#price").val(),
 				amount : $("#amount").val()
 			}
-		
 				$.ajax({
 						url: "user/addcart",
 						data: data,
