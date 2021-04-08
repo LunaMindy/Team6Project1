@@ -3,6 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
  
 <link href="<%=application.getContextPath() %>/resources/css/review.css" rel="stylesheet" type="text/css"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function popupReview(){
+	swal({
+		  title: "Error",
+		  text: "삭제할 수 없습니다.",
+		  dangerMode: true,
+		  button: "확인",
+		});
+}
+
+</script>
+
 
 <div class="row review-section">
    <div class="col-md-12" >
@@ -34,7 +47,7 @@
 	            		<a class="btn review-btn" href="<%=application.getContextPath()%>/user/delreview?reviewNo=${reviews.reviewNo}&productNo=${reviews.productNo}">remove</a>
 	            	</c:if>
 	            	<c:if test="${loginId != reviews.userId}">
-	            		<button class="btn review-btn" onclick="alert('삭제할 수 없습니다.')" type="button">remove</button>
+	            		<button class="btn review-btn" onclick="popupReview()" type="button">remove</button>
 	            	</c:if>			            		                        	                                                 	                         
 	            </div>
 	        </div>

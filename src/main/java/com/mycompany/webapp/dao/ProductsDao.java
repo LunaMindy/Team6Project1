@@ -15,7 +15,6 @@ public interface ProductsDao{
 	public List<Products> selectNewProduct();
 	public List<Products> selectByPage(@Param("pager") Pager pager, @Param("cno") int cno);
 	public List<Products> selectByBestPage(@Param("pager") Pager pager, @Param("cno") int cno);
-	public List<Products> selectByNewPage(@Param("pager") Pager pager, @Param("cno") int cno);
 	public int insert(Products product);
 	public List<Products> selectByPno(int productNo);
 	public int update(Products product);

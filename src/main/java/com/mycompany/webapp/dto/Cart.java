@@ -9,7 +9,7 @@ public class Cart {
 	private int allPrice;		//총 구매 가격
 	private Date regdate;		//카트 등록일
 	private String productName;	//상품 이름
-	private int price;			//상품 가격
+	private String price;			//상품 가격
 	private String imgOname;	//상품 이미지
 	private String imgSname;
 	private String imgType;
@@ -59,10 +59,10 @@ public class Cart {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public String getImgOname() {

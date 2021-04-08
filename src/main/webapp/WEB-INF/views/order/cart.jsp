@@ -90,19 +90,19 @@ function popup(){
                   </tr>
                   <tr>
                       <td>주문 수량</td>
-                      <td>${count}</td>
+                      <td>${count}개</td>
                   </tr>
                   <tr class="three-line">
                       <td>주문 금액</td>
-                      <td>${sum}</td>
+                      <td>${sum}₩</td>
                   </tr>
                   <tr>
                       <td>할인 금액</td>
-                      <td>0</td>
+                      <td>0₩</td>
                   </tr>
                   <tr>
                       <td class="estimated-payment">결제 예상 금액</td>
-                      <td class="estimated-payment">${sum}</td>
+                      <td class="estimated-payment">${sum}₩</td>
                   </tr>
               </table>         
 

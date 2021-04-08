@@ -54,7 +54,7 @@
                         </a>
                         <div class="wishlist-title">
                             <p>${wishlist.productName} </p>
-	                          <a class="btn btn-primary bt-sm " href="delwishlist?productNo=${wishlist.productNo}">삭제</a>
+	                          <a class="btn deletebtn" href="delwishlist?productNo=${wishlist.productNo}">삭제</a>
                            </p>
                         </div>
                     </div>

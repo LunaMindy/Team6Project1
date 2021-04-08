@@ -26,7 +26,7 @@
 				                        </a>
 				                        <div class="main-product-name">
 				                        <div>(Best) ${product.productName}</div>
-				                        <div class="price">${product.productPrice}원</div>
+				                        <div class="price">${product.productPrice}₩</div>
 				                        </div>
 				                    </div>
 				                </div>
@@ -55,7 +55,7 @@
 				                        </div>
 				                        <div class="main-product-name">
 				                            <div>(New) ${product.productName}</div>
-				                        <div class="price">${product.productPrice}원</div>
+				                        <div class="price">${product.productPrice}₩</div>
 				                        </div>
 				                    </div>
 				                </div>
@@ -66,6 +66,8 @@
         </div>
 
 
+
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
 
 

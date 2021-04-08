@@ -61,18 +61,10 @@
                                     <!-- 비밀번호 확인 진행 password.js 파일 -->
                                     <div class="input-group form-group" style="margin-bottom:0;">
                                         <div>
-                                            <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="비밀번호">
+                                            <input type="password" id="userPassword" name="userPassword" class="form-control passwordCk" placeholder="비밀번호">
                                         </div>
                                         <div>
-                                            <input type="password" id="userPasswordCk" name="userPasswordCk" class="form-control" placeholder="비밀번호 재입력">
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="button"
-                                                id="checkPassword"
-                                                class="btn btn-primary form-control signup-btn"
-                                                value="비밀번호 확인"
-                                               	onclick="passwordCk()">
+                                            <input type="password" id="userPasswordCk" name="userPasswordCk" class="form-control passwordCk" placeholder="비밀번호 재입력">
                                         </div>
                                     </div>
                                      <div id="nonSamePassword" class="error"></div>

@@ -132,7 +132,9 @@
 	 			WHERE 
 	 					p.product_category_no = #{cno}
         		ORDER BY 
-        				p.product_regdate desc
+        				p.product_no asc,
+        				p.product_regdate desc 
+        				
              )
              WHERE rownum &lt;= #{pager.endRowNo}
          )
@@ -235,7 +237,7 @@
 		SELECT 
 			 p.product_no as productNo, 
 			 p.product_name as productName, 
-			 p.product_price as productPrice,  
+			 to_char(p.product_price , '999,999,999,999,999') as productPrice, 
 			 p.product_hitcount as productHitcount, 
 			 p.product_sellcount as productSellcount, 
 			 c.category_no as productCategoryNo, 
@@ -298,17 +300,14 @@
 			 product_state, 
 			 product_regdate, 
 			 product_hitcount, 
-			 product_sellcount, 
-			 reviewcount)
+			 product_sellcount)
 		VALUES(
 			product_no,
 			#{categoryDto.getCategoryNo()},
 			#{productName},
 			#{productPrice},
-			#{productContent},
 			0,
 			sysdate,
-			0,
 			0,
 			0
 		)
@@ -384,28 +383,28 @@
 	
 	<select id="selectBySearchPage"  resultType="product">
 		select  rnum,
-				productNo,
-				productName,
-				to_char(productPrice , '999,999,999,999,999'),
-				productCategoryNo,
-				imgSname,
-				imgType
+				product_no as productNo, 
+				product_name as productName, 
+				to_char(product_price , '999,999,999,999,999') as productPrice,  
+				product_category_no as productCategoryNo,
+				img_sname as imgSname,
+				img_type as imgType
 	      from (
 	          select rownum as rnum,
-	          		 productNo,
-	          		 productName,
-	          		 productPrice,
-	          		 productCategoryNo,
-	          		 imgSname,
-	          		 imgType
+	          		product_no, 
+					product_name, 
+					product_price, 
+					product_category_no,
+					img_sname,
+					img_type
 	          from (
 				        SELECT 
-						 p.product_no as productNo, 
-						 p.product_name as productName, 
-						 p.product_price as productPrice, 
-						 p.product_category_no as productCategoryNo,
-						 i.img_sname as imgSname,
-						 i.img_type as imgType
+						 p.product_no, 
+						 p.product_name, 
+						 p.product_price, 
+						 p.product_category_no,
+						 i.img_sname,
+						 i.img_type
 					FROM 
 			      	  	 products p
 				  	JOIN 

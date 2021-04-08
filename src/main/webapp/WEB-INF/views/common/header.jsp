@@ -46,12 +46,12 @@
             
               <script type="text/javascript">
             $(document).on('click', '#btnSearch', function(e){
-                alert("검색");
                 e.preventDefault();
 
                 var url = "${pageContext.request.contextPath}/search";
 
                 url = url + "?keyword=" + $('#keyword').val();
+                url = url + "&pageNo=1";
 
                 location.href = url;
 

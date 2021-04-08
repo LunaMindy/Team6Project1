@@ -5,7 +5,25 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
         <link href="<%=application.getContextPath() %>/resources/css/review.css" rel="stylesheet" type="text/css"/>
         <link href="<%=application.getContextPath() %>/resources/css/mypage.css" rel="stylesheet" type="text/css"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function popup(){
+	event.preventDefault();
+	swal({
+		  title: "리뷰 작성",
+		  text: "작성 하시겠습니까?",
+		  buttons: true,
+		  dangerMode: false,
+		}).then((willDelete) => {
+		  if (willDelete) {
+			 $("#reviewForm")[0].submit(); //form에서 id로 찾아서 사용
+		  }
+		});
+		
+}
 
+
+</script>
 
 <script type="text/javascript" src="<%=application.getContextPath() %>/resources/js/review.js"></script>
 
@@ -32,7 +50,7 @@
       <hr/>
        
        <div class="review-content">
-	       	<form method="post" action="<%=application.getContextPath()%>/user/createreview">
+	       	<form id="reviewForm" method="post" action="<%=application.getContextPath()%>/user/createreview">
 	       		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	       		<div class="card-body">
 	              <div class="input-group form-group">
@@ -46,11 +64,11 @@
 	
 	              <!-- 한 줄 평 작성-->
 	              <div class="input-group form-group">
-	                  <input type="text" class="form-control" id="review-write" placeholder="한 줄 평 작성 (30자 이내)" name="reviewContent" maxlength='30' required>
+	                  <input type="text" class="form-control" id="review-write" placeholder="한 줄 평 작성 (30자 이내)" name="reviewContent" maxlength='30' onclick="" required>
 	              </div>
 	          	</div>
 	          	
-	            <button class="btn review-submit-btn">게시</button>         
+	            <input class="btn review-submit-btn" type="submit" value="게시" onclick="popup()">         
 	       </form>
        </div>
        

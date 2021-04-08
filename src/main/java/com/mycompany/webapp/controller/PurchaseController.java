@@ -99,22 +99,19 @@ public class PurchaseController {
 		List<OrderProducts> list = orderProductsService.getOrderDetail(orderNo, userId);
 		model.addAttribute("list",list);
 		
-		logger.info("상세보기 실행");
 		return "purchase/purchaseListDetail";
 	}
 	
 	/*환불*/
 	@PostMapping("/exchangerefund")
 	public String ExchangeRefund(int orderNo, Model model) {
-		logger.info(String.valueOf(orderNo));
-		model.addAttribute("orderNo", orderNo);		
 		
+		model.addAttribute("orderNo", orderNo);		
 		return "purchase/exchangeRefund";
 	}
 		
 	@PostMapping("/refundcomplete")
 	public String refundComplete(int orderNo, String reason) {
-		logger.info(String.valueOf(orderNo));
 		
 		int ono = orderNo;
 		String refundReason = "";
@@ -131,7 +128,6 @@ public class PurchaseController {
 			refundReason = "기타";
 		}		
 		
-		logger.info(refundReason);
 		productsRefundService.saveRefund(orderNo, refundReason);
 		ordersService.updateRefund(orderNo);
 		return "redirect:/user/purchaselist";
@@ -148,9 +144,6 @@ public class PurchaseController {
 	@PostMapping("/createreview")
 	public String updateReview(Authentication auth, int orderNo, int productNo, String reviewContent, RedirectAttributes redirect) {
 		String userId = auth.getName();
-		/*logger.info(String.valueOf(orderNo));
-		logger.info(String.valueOf(productNo));
-		logger.info(reviewContent);*/
 		reviewsService.saveReview(userId, orderNo, productNo, reviewContent);
 		orderProductsService.updateReview(userId, orderNo, productNo);
 		redirect.addAttribute("orderNo", orderNo);
@@ -160,8 +153,6 @@ public class PurchaseController {
 	@GetMapping("/delreview")
 	public String delReview(Authentication auth, int reviewNo, int productNo, RedirectAttributes redirect) {
 		String userId = auth.getName();
-		logger.info(String.valueOf(reviewNo));
-		logger.info(String.valueOf(productNo));
 		reviewsService.deleteReview(reviewNo, userId);
 		redirect.addAttribute("productNo", productNo);
 		return "redirect:/product";

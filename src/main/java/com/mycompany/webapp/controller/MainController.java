@@ -67,19 +67,16 @@ public class MainController {
 		}
 		
 		int totalCount = productsService.getTotalCount(cno);
-		logger.info(String.valueOf(totalCount));
-
 		Pager pager = new Pager(12, 5, totalCount, intPageNo); 
 		session.setAttribute("pager", pager);
 		session.setAttribute("categoryNo", cno);
 		
 		List<Products> list = new ArrayList<Products>();
-		if(kind == 1) {
-			list = productsService.getProductsList(pager, cno);
-		}else if(kind == 2) {
+		if(kind == 2) {
 			list = productsService.getProductsBestList(pager, cno);
 		}else {
-			list = productsService.getProductsNewList(pager, cno);
+			list = productsService.getProductsList(pager, cno);
+			
 		}
 
 		Products product = new Products();
@@ -101,22 +98,13 @@ public class MainController {
 	@GetMapping("/faq")
 	public String openFaq() {
 		
-		
 		return "main/faq";
 	}
 	
 	@PostMapping("/qna")
 	public String sendQna(Qna qna, HttpSession session) {
 		
-		/*Qna qna = new Qna();
-		qna.setUserId("a1@gmail.com");
-		qna.setEmail("a1@gmail.com");
-		qna.setQnaTitle("default");
-		qna.setQnaContent("s");
-		qnaService.insertFaq(qna);*/
-		
-		qnaService.insertFaq(qna);
-		
+		qnaService.insertFaq(qna);		
 		return "redirect:/main";
 	}
 

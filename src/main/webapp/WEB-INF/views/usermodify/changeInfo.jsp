@@ -8,7 +8,6 @@
 		<script src="<%=application.getContextPath() %>/resources/js/user/changeInfoValidate.js"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-		 
   <!-- 컨텐츠 -->
   <div >
 	   <!-- 마이페이지 타이틀 -->
@@ -50,7 +49,7 @@
 		              <th>
 		                  <label for="userPassword">비밀번호*</label>
 		              </th>
-		              <td><input type="password" id="userPassword" name="userPassword" minlength="4" maxlength="16">
+		              <td><input type="password" id="userPassword" class="passwordCk" name="userPassword" minlength="4" maxlength="16">
 		                  <small>*비밀번호는 4~16자리로 입력해주세요.</small>
 		              </td>
 		          </tr>
@@ -59,8 +58,7 @@
 		                  <label for="check_pw">비밀번호확인*</label>
 		              </th>
 		              <td>
-		              	<input type="password" id="userPasswordCk" name="userPasswordCk" minlength="4" maxlength="16">
-		              	 <input type="button" id="checkPassword" name="checkPassword" class="btn btn-info btn-sm"  value="비밀번호 확인" onclick="passwordCk()">
+		              	<input type="password" id="userPasswordCk" class="passwordCk" name="userPasswordCk" minlength="4" maxlength="16">
 		              </td>
 		            
 		          </tr>
@@ -112,7 +110,6 @@
 		              </td>
 		          </tr>
 		          <tr>
-		              
 		          </tr>
 		          <tr>
 		             

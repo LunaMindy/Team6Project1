@@ -7,14 +7,20 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 function popup(){
+	event.preventDefault();
 	swal({
-		  title: "Success",
-		  text: "탈퇴가 완료되었습니다.",
-		  dangerMode: false,
-		  button: "확인",
+		  title: "회원탈퇴",
+		  text: "탈퇴 하시겠습니까?",
+		  buttons: true,
+		  dangerMode: true,
+		}).then((willDelete) => {
+		  if (willDelete) {
+			 $("#withdrawForm")[0].submit(); //form에서 id로 찾아서 사용
+		  }
 		});
-		
 }
+
+
 </script>
 
   <!-- 컨텐츠 -->
@@ -35,7 +41,7 @@ function popup(){
   </div>
   
   
-  <form method="post" action="<%=application.getContextPath()%>/user/withdrawal">
+  <form id="withdrawForm" method="post" action="<%=application.getContextPath()%>/user/withdrawal" onsubmit="popup()">
   	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
      <div id="withdraw-reason">
 		<hr/>
@@ -62,13 +68,12 @@ function popup(){
          <input
              type="submit"
              id="withdraw-btn"
-             onclick="popup()"
              value="회원탈퇴">
 		
 		<input
              type="button"
              id="withdraw-btn"
-             onClick="location.href='<%=application.getContextPath()%>/main'"
+             onclick="location.href='<%=application.getContextPath()%>/main'"
          	 value="취소">
          
      </div>

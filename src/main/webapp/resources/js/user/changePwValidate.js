@@ -37,35 +37,44 @@ var check = true;
 			 		check = false;
 			 	}
 			});
-	}	
+		}	
 
-			function getContextPath() {
+		function getContextPath() {
 			  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 			  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 			};
 		       
-			const passwordCk = () => {
-					const userPassword = $('#userPassword').val();
+		$(function () {
+				$('.passwordCk').on("propertychange change keydown paste input", function () {
+			        const userPassword = $('#userPassword').val();
 					const userPasswordCk = $('#userPasswordCk').val();    
-	
-			        if(userPassword == userPasswordCk){
+			
+					if (userPassword == "" || userPasswordCk == "") {
+						pwckCheck = true;
+			            result = false;
+			            $("#nonSamePassword").css('display', 'none');
+			            $("#SamePassword").css('display', 'none');
+						$("#errorPassword").html("비밀번호를 입력하세요.");
+					}else if(userPassword == userPasswordCk){
 			            pwckCheck = true;
 			            result = true;
-			            $("#errorPassword").css('display', 'none');
 			            $("#nonSamePassword").css('display', 'none');
+			            $("#errorPassword").css('display', 'none');
 			            $("#SamePassword").html("비밀번호가 일치합니다.");
 			            $("#SamePassword").css('display', 'block');
 			        }else{
 			            pwckCheck = false;
 			            result = false;
-			            $("#errorPassword").css('display', 'none');
 			            $("#SamePassword").css('display', 'none');
+			            $("#errorPassword").css('display', 'none');
 			            $("#nonSamePassword").html("비밀번호가 일치하지 않습니다.");
 			            $("#nonSamePassword").css('display', 'block');
+			            
 			        }
-			};
+			     });
+			});
 
-			 const changePwValidate = () => {
+		 const changePwValidate = () => {
 				event.preventDefault();
 
 				//유효성 검사 코드
@@ -84,17 +93,32 @@ var check = true;
 				}
 		
 				if (result && pwckCheck && check) {
-					$.ajax({
-						url: "changepassword",
-						data: data,
-						method: "post"
-					}).done(data => {
-						if(data.result == "success"){
-							if(confirm('비밀번호를 수정하시겠습니까?')) {
-		               			 alert('비밀번호가 수정되었습니다.');
-		                		window.location.href = getContextPath()+'/auth/login';
-		           		 	}
-						}
+					swal({
+						title: "비밀번호 변경",
+						text: "정말 변경하시겠습니까?",
+						buttons: true,
+						dangerMode: true,
+					}).then((willDelete) => {
+					  if (willDelete) {
+						  $.ajax({
+								url: "changepassword",
+								data: data,
+								method: "post"
+							}).done(data => {
+								if(data.result == "success"){
+									swal({
+										  title: "비밀번호 변경",
+										  text: "수정이 완료되었습니다. 로그인창으로 이동하시겠습니까?",
+										  buttons: true,
+										  dangerMode: false,
+										}).then((willDelete) => {
+										  if (willDelete) {
+											 window.location.href = getContextPath()+'/auth/login';
+										  }
+									});
+								}
+							});
+					  	}							
 					});
 				}
 			};

@@ -39,11 +39,12 @@
 									<!-- data-target을 통해 내용물이 연결되게 함 -->
 									<!-- 처음 기본값은 aria-expended를 false로 default해서 닫혀있게 설정 -->
                                     <a
-                                        class="btn btn-link"
+                                    	class="btn btn-link"
                                         data-toggle="collapse"
                                         data-target="#collapseOne"
                                         aria-expanded="false"
-                                        aria-controls="collapseOne">[배송]배송완료인데 아직 못 받았어요.
+                                        aria-controls="collapseOne"
+                                        style="color:#f3f3f3;">[배송]배송완료인데 아직 못 받았어요.
                                         <i class="material-icons">add</i>
                                     </a>
                                 </h2>
@@ -55,7 +56,7 @@
                                 data-parent="#accordionExample">
                                 <div class="card-body">택배사 또는 해당 지역의 택배 기사님 사정에 의해 실제 물품 전달일이 1~2일 지연될 수 있습니다. 
                                 주문 시 작성하신 수령 정보 및 배송 메시지를 확인바랍니다. 이후에도 수령하지 못하셨다면 
-                                고객센터 02-000-0000 또는 QNA 문의를 통하여 연락 부탁드립니다.
+                                고객센터 010-2902-7969 또는 QNA 문의를 통하여 연락 부탁드립니다.
                                 </div>
                             </div>
                         </div>
@@ -67,7 +68,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseTwo"
                                         aria-expanded="false"
-                                        aria-controls="collapseTwo">[배송] 주문한 상품이 일부만 도착했어요
+                                        aria-controls="collapseTwo"
+                                        style="color:#f3f3f3;">[배송] 주문한 상품이 일부만 도착했어요
                                         <i class="material-icons">add</i>
                                     </a>
                                 </h2>
@@ -88,7 +90,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseThree"
                                         aria-expanded="false"
-                                        aria-controls="collapseThree">[환불] 상품 불량, 오배송 환불
+                                        aria-controls="collapseThree"
+                                        style="color:#f3f3f3;">[환불] 상품 불량, 오배송 환불
                                         <i class="material-icons">add</i>
                                     </a>
                                 </h2>
@@ -110,7 +113,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseFour"
                                         aria-expanded="false"
-                                        aria-controls="collapseFour">[배송] 주문한 상품과 다른 상품이 배송되었어요.<i class="material-icons">add</i>
+                                        aria-controls="collapseFour"
+                                        style="color:#f3f3f3;">[배송] 주문한 상품과 다른 상품이 배송되었어요.<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -131,7 +135,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseFive"
                                         aria-expanded="false"
-                                        aria-controls="collapseFive">[주문취소/환불] 입금 전 주문취소는 어떻게 하나요?<i class="material-icons">add</i>
+                                        aria-controls="collapseFive"
+                                        style="color:#f3f3f3;">[주문취소/환불] 입금 전 주문취소는 어떻게 하나요?<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -151,7 +156,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseSix"
                                         aria-expanded="false"
-                                        aria-controls="collapseSix">[배송] 잘못된 주소를 입력했습니다. 어떻게 해야 할까요?<i class="material-icons">add</i>
+                                        aria-controls="collapseSix"
+                                        style="color:#f3f3f3;">[배송] 잘못된 주소를 입력했습니다. 어떻게 해야 할까요?<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -171,7 +177,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseSeven"
                                         aria-expanded="false"
-                                        aria-controls="collapseSeven">[리뷰] 리뷰를 수정하고 싶습니다. 어디서 해야하나요?<i class="material-icons">add</i>
+                                        aria-controls="collapseSeven"
+                                        style="color:#f3f3f3;">[리뷰] 리뷰를 수정하고 싶습니다. 어디서 해야하나요?<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -260,12 +267,12 @@
                                     id="qnaContent"
                                     name="qnaContent"
                                     rows="5"
-                                    placeholder="Enter message"
+                                    placeholder=""
                                     required="required"
                                     ></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary float-right">
+                            <button type="submit" class="btn btn-danger float-right">
                                 <i class="fa fa-paper-plane"></i>
                                 제출
                             </button>

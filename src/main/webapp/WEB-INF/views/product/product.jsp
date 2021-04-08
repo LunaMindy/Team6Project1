@@ -14,11 +14,9 @@ function popup(){
 		  title: "Error",
 		  text: "로그인이 필요한 서비스입니다.",
 		  dangerMode: true,
-		  button: "확인",
+		  button: "확인"
 		});
-		
 }
-
 	
 function init () {
 	amount = document.amountForm.amount.value;
@@ -92,7 +90,6 @@ const getList = (productNo,pageNo) => {
 							</c:if>
                     	</c:forEach>
                         
-                        
                     </div>
                     <ul class="preview-thumbnail nav nav-tabs" style="border:none;">
                     	<c:forEach var="product" items="${list}" varStatus="status">
@@ -123,9 +120,9 @@ const getList = (productNo,pageNo) => {
                 <div
                     class="product-details col-md-6"
                     style="position:relative; left: 2%; top:25%; padding-top: 50px;">
-                    <h3 class="product-title">| ${product.productName} |</h3>
+                    <h3 class="product-title" style="padding-left: 0px;">| ${product.productName} |</h3>
                     <h5 class="product-price">price :
-                        <span>${product.productPrice}원</span></h5>
+                        <span>${product.productPrice}₩</span></h5>
                     <div class="quantity-section">
                         <h5 class="product-quantity">amount
                         </h5>
@@ -137,7 +134,7 @@ const getList = (productNo,pageNo) => {
                     	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     	<input type="hidden" id="productNo" name="productNo" value="${product.productNo}" />
                     	<input type="hidden" id="userId" name="userId" value="" />
-                    	<input type="hidden" id="price" name="price" value="${product.productPrice}" />
+                    	<input type="hidden" id="price" name="price" value="${product.productPrice}₩" />
                     	<div style="margin-bottom:20%;">
                     		<input type="text" id="amount" name="amount" value="1" size="3" onchange="change()">
 												<input type="button" value=" + " onclick="add();">
@@ -174,7 +171,7 @@ const getList = (productNo,pageNo) => {
                     <h3>| Detail |</h3>
                     <hr>
                 </div>
-                <div class="col-md-12 product-description" style="margin-top:100px; margin-bottom:50px;">
+                <div class="col-md-12 product-description" style="margin-top:100px; margin-bottom:50px; padding-left:10%;">
                     <img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${detailImg.imgSname}&imgType=${detailImg.imgType}" style="padding-left:8%"/>
                 </div>
             </div>

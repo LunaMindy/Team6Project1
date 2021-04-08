@@ -13,7 +13,7 @@
 }
 
 .accordion .card .card-header {
-	background: #39613a;
+	background: #7F8C7F;
 	padding-top: 7px;
 	padding-bottom: 7px;
 	border-radius: 0;
@@ -22,7 +22,10 @@
 }
 
 .accordion .card-header:hover {
-	background: #f8f8f8;
+	background: 
+	#829589;
+
+
 }
 
 .accordion .card-header h2 span {
@@ -37,6 +40,8 @@
 	text-align: left;
 	position: relative;
 	top: -2px;
+	color:#f2fcfe;
+	
 }
 
 .accordion .card-header i {
@@ -48,7 +53,7 @@
 }
 
 .accordion .card-header button:hover {
-	color: #3e4e23;
+	color: #E3CDB8;
 }
 
 .accordion .card-body {

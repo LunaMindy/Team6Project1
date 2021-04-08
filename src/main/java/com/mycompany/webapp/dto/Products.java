@@ -14,7 +14,6 @@ public class Products {
 	private Date productRegdate;
 	private int productHitcount;
 	private int productSellcount;
-	private int reviewCount;
 	
 	private String categoryName;
 	
@@ -88,13 +87,6 @@ public class Products {
 	public void setProductSellcount(int productSellcount) {
 		this.productSellcount = productSellcount;
 	}
-	public int getReviewCount() {
-		return reviewCount;
-	}
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
-
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -124,11 +116,5 @@ public class Products {
 	}
 	public void setImgType(String imgType) {
 		this.imgType = imgType;
-	}
-	
-	
-
-
-	
-	
+	}	
 }
