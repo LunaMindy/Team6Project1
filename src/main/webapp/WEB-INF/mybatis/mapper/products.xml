@@ -9,13 +9,11 @@
 			 product_no, 
 			 product_category_no, 
 			 product_name, 
-			 product_price, 
-			 product_content, 
+			 product_price,  
 			 product_state, 
 			 product_regdate, 
 			 product_hitcount, 
-			 product_sellcount, 
-			 reviewcount
+			 product_sellcount
 		FROM
 			 products
 		ORDER BY 
@@ -26,7 +24,7 @@
 		SELECT
             p.product_no as productNo,
 			p.product_name as productName, 
-			p.product_price as productPrice, 
+			to_char(p.product_price , '999,999,999,999,999') as productPrice, 
 			p.product_category_no as productCategoryNo,
 			i.img_oname as imgOname, 
 			i.img_sname as imgSname, 
@@ -62,7 +60,7 @@
 		SELECT
             p.product_no as productNo,
 			p.product_name as productName, 
-			p.product_price as productPrice, 
+			to_char(p.product_price , '999,999,999,999,999') as productPrice, 
 			p.product_category_no as productCategoryNo,
 			i.img_oname as imgOname, 
 			i.img_sname as imgSname, 
@@ -99,7 +97,7 @@
         SELECT  rnum, 
         	 	product_no as productNo,
 				product_name as productName, 
-				product_price as productPrice, 
+				to_char(product_price , '999,999,999,999,999') as productPrice, 
 				img_oname as imgOname, 
 			    img_sname as imgSname, 
 			   	img_type as imgType, 
@@ -134,7 +132,7 @@
 	 			WHERE 
 	 					p.product_category_no = #{cno}
         		ORDER BY 
-		           		p.product_no desc
+        				p.product_regdate desc
              )
              WHERE rownum &lt;= #{pager.endRowNo}
          )
@@ -145,7 +143,7 @@
         SELECT  rnum, 
         	 	product_no as productNo,
 				product_name as productName, 
-				product_price as productPrice, 
+				to_char(product_price , '999,999,999,999,999') as productPrice, 
 				img_oname as imgOname, 
 			    img_sname as imgSname, 
 			   	img_type as imgType, 
@@ -180,7 +178,7 @@
 	 			WHERE 
 	 					p.product_category_no = #{cno}
         		ORDER BY 
-		           		p.product_hitcount desc
+		           		p.product_sellcount desc
              )
              WHERE rownum &lt;= #{pager.endRowNo}
          )
@@ -191,7 +189,7 @@
         SELECT  rnum, 
         	 	product_no as productNo,
 				product_name as productName, 
-				product_price as productPrice, 
+				to_char(product_price , '999,999,999,999,999') as productPrice, 
 				img_oname as imgOname, 
 			    img_sname as imgSname, 
 			   	img_type as imgType, 
@@ -237,16 +235,15 @@
 		SELECT 
 			 p.product_no as productNo, 
 			 p.product_name as productName, 
-			 p.product_price as productPrice, 
-			 p.product_content as productContent, 
+			 p.product_price as productPrice,  
 			 p.product_hitcount as productHitcount, 
 			 p.product_sellcount as productSellcount, 
-			 p.reviewcount as reviewcount,
 			 c.category_no as productCategoryNo, 
 			 c.category_name as productCategoryName,
 			 i.img_oname as imgOname,
 			 i.img_sname as imgSname,
-			 i.img_type as imgType
+			 i.img_type as imgType,
+			 i.img_state as imgState
 		FROM 
       	  	 products p
 	  	JOIN 
@@ -260,6 +257,31 @@
 	 	WHERE 
 	 	  	 p.product_no = #{productNo}
 	</select>
+	
+	<!-- 상품 상세스크롤 사진을 가져오기 위한 -->
+	 <select id="selectByPnoDetail" parameterType="int" resultType="product">
+		SELECT 
+			 i.img_oname as imgOname,
+			 i.img_sname as imgSname,
+			 i.img_type as imgType,
+			 i.img_state as imgState
+		FROM 
+      	  	 products p
+	  	JOIN 
+	  		 products_img i	
+	  	ON 
+	  		 p.product_no = i.product_no
+	    JOIN
+	      	 product_categories c  
+	    ON	
+	    	 p.product_category_no = c.category_no
+	 	WHERE 
+	 	  	 p.product_no = #{productNo}
+	 	AND
+	 		 i.img_state = 2
+	</select>
+	
+	
      
 
 	<insert id="insert" parameterType="product">
@@ -273,7 +295,6 @@
 			 product_category_no, 
 			 product_name, 
 			 product_price, 
-			 product_content, 
 			 product_state, 
 			 product_regdate, 
 			 product_hitcount, 
@@ -299,8 +320,7 @@
 			products
 		SET
 			product_name = #{productName},
-			product_price = #{productPrice},
-			product_content = #{productContent},
+			product_price = #{productPrice}
 		WHERE
 			product_no = #{productNo}
 	</update>
@@ -318,12 +338,12 @@
 		UPDATE
 			products
 		SET
-			product_sellcount = product_sellcount+1
+			product_sellcount = product_sellcount + #{amount}
 		WHERE
 			product_no = #{productNo}
 	</update>
 	
-	<update id="updateState" parameterType="int">
+	<update id="updateState">
 		UPDATE
 			products
 		SET
@@ -363,9 +383,21 @@
 	
 	
 	<select id="selectBySearchPage"  resultType="product">
-		select rnum,productNo,productName,productPrice,productCategoryNo,imgSname,imgType
+		select  rnum,
+				productNo,
+				productName,
+				to_char(productPrice , '999,999,999,999,999'),
+				productCategoryNo,
+				imgSname,
+				imgType
 	      from (
-	          select rownum as rnum,productNo,productName,productPrice,productCategoryNo,imgSname,imgType
+	          select rownum as rnum,
+	          		 productNo,
+	          		 productName,
+	          		 productPrice,
+	          		 productCategoryNo,
+	          		 imgSname,
+	          		 imgType
 	          from (
 				        SELECT 
 						 p.product_no as productNo, 

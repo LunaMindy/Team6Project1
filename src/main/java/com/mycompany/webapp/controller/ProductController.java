@@ -5,14 +5,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -38,13 +36,23 @@ public class ProductController {
 
 
 	@GetMapping("/product")
-	public String openProduct(int productNo, Model model) 	{	
-		productsService.addHitCount(productNo);
-		List<Products> list = productsService.getProductDetail(productNo);
+	public String openProduct(int productNo, Model model, HttpSession session, String pageNo) {
 		
+		productsService.addHitCount(productNo);
+		
+		//상품 모든 사진뽑기
+		List<Products> list = productsService.getProductDetail(productNo);
 	
+		//상품 정보 뽑기
 		Products product = new Products();
 		product = list.get(0);
+		
+		
+		//상품 디테일 사진 뽑기
+		Products detailImg = productsService.getProductDetailImg(productNo);
+		if(detailImg != null) {
+			model.addAttribute("detailImg", detailImg);
+		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("product", product);
@@ -54,7 +62,6 @@ public class ProductController {
 	
 	@GetMapping("/list")
 	public String list(int productNo, Model model, String pageNo, HttpSession session) {
-		logger.info("상품 리뷰 보기");
 		
 		int intPageNo = 1;
 		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
@@ -68,20 +75,15 @@ public class ProductController {
 		}
 				
 		int totalRows = reviewsService.getTotalRows(productNo);
-		logger.info(String.valueOf(totalRows));
-		Pager pager = new Pager(4, 5, totalRows, intPageNo);
+		Pager pager = new Pager(5, 5, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
 		List<Reviews> rlist = reviewsService.getReview(productNo, pager);
-		logger.info(String.valueOf(rlist.size()));
-		//logger.info(rlist.get(1).getProductName());
 		model.addAttribute("rlist", rlist);
-		model.addAttribute("size", rlist.size());
+		model.addAttribute("size", totalRows);
 		model.addAttribute("pager", pager);	
 		model.addAttribute("productNo", productNo);
 		
-		//logger.info("pageno :" +  pageNo);
-		//logger.info("productno : " + productNo);					
 				
 		return "product/productReviews";
 	}
@@ -103,23 +105,19 @@ public class ProductController {
 	         InputStream is;
 	         OutputStream os;
 	    	 if(cno == 1) {
-	    		 is = new FileInputStream("D://상품사진들/캔들/" + imgSname + "." + imgType);
+	    		 is = new FileInputStream("D:/상품사진들/캔들/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 2) {
-	    		 is = new FileInputStream("D://상품사진들/조명/" + imgSname + "." + imgType);
-
+	    		 is = new FileInputStream("D:/상품사진들/조명/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else if(cno == 3) {
-
-	    		 is = new FileInputStream("D://상품사진들/트리/" + imgSname + "." + imgType);
-
+	    		 is = new FileInputStream("D:/상품사진들/트리/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }else {
-	    		 is = new FileInputStream("D://상품사진들/기타/" + imgSname + "." + imgType);
-
+	    		 is = new FileInputStream("D:/상품사진들/기타/" + imgSname + "." + imgType);
 		         os = response.getOutputStream();
 		         FileCopyUtils.copy(is, os);
 	    	 }
@@ -182,7 +180,7 @@ public class ProductController {
 		}
 
 		int totalRows = productsService.getTotalRows(keyword);
-		Pager pager = new Pager(12, 10, totalRows, intPageNo);
+		Pager pager = new Pager(12, 5, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 		
 	

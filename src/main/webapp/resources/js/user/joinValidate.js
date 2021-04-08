@@ -23,19 +23,34 @@ var overlap = false;
 						method: "post"
 					}).done(data => {
 						if(data.result == "success"){
-							alert('사용가능한 아이디입니다.');
+							swal({
+							  title: "Success",
+							  text: "사용 가능한 아이디입니다.",
+							  dangerMode: false,
+							  button: "확인",
+							});
 							$("#successId").html("통과");
 							$("#successId").css('display', 'block');
 							$("#errorId").css('display', 'none');
 							overlap = true;
 					 	}else if(data.result == "fail"){
-					 		alert('중복 아이디입니다.');
+					 		swal({
+							  title: "Error",
+							  text: "중복 아이디입니다.",
+							  dangerMode: true,
+							  button: "확인",
+							});
 					 		$("#errorId").html("다시 작성해주세요.");
 					 		$("#errorId").css('display', 'block');
 					 		$("#successId").css('display', 'none');
 							overlap = false;
 					 	}else{
-					 		alert('필수 사항입니다.');
+					 		swal({
+							  title: "Error",
+							  text: "필수 사항입니다.",
+							  dangerMode: true,
+							  button: "확인",
+							});
 					 		$("#errorId").html("필수 사항입니다.");
 					 		$("#errorId").css('display', 'block');
 					 		$("#successId").css('display', 'none');
@@ -59,12 +74,14 @@ var overlap = false;
             pwckCheck = true;
             result = true;
             $("#nonSamePassword").css('display', 'none');
+            $("#errorPassword").css('display', 'none');
             $("#SamePassword").html("비밀번호가 일치합니다.");
             $("#SamePassword").css('display', 'block');
         }else{
             pwckCheck = false;
             result = false;
             $("#SamePassword").css('display', 'none');
+            $("#errorPassword").css('display', 'none');
             $("#nonSamePassword").html("비밀번호가 일치하지 않습니다.");
             $("#nonSamePassword").css('display', 'block');
             
@@ -149,9 +166,19 @@ var overlap = false;
 		
 
 		if (result && pwckCheck && overlap) {
-			alert('회원가입이 완료되었습니다.');
-			$("#joinForm")[0].submit(); //form에서 id로 찾아서 사용
+			swal({
+			  title: "회원가입",
+			  text: "회원가입 하시겠습니까?",
+			  buttons: true,
+			  dangerMode: false,
+			}).then((willDelete) => {
+			  if (willDelete) {
+				 $("#joinForm")[0].submit(); //form에서 id로 찾아서 사용
+			  }
+			});
 		}
+		
+			
 
 	} 
 	 

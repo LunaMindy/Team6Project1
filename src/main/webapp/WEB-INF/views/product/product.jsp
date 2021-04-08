@@ -4,37 +4,22 @@
  
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=application.getContextPath() %>/resources/css/product.css" rel="stylesheet" type="text/css"/>
-
+<script src="<%=application.getContextPath() %>/resources/js/product/addCartWishlist.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-var amount;
 
+function popup(){
+	swal({
+		  title: "Error",
+		  text: "로그인이 필요한 서비스입니다.",
+		  dangerMode: true,
+		  button: "확인",
+		});
+		
+}
 
-const addCartCheck = () => {
 	
-		event.preventDefault();
-		
-		var data = {
-				userId : $("#userId").val(),
-				productNo : $("#productNo").val(),
-				price : $("#price").val(),
-				amount : $("#amount").val()
-			}
-		
-				$.ajax({
-						url: "user/addcart",
-						data: data,
-						method: "post"
-					}).done(data => {
-						if(data.result == "success"){
-							console.log("실행");
-							alert("장바구니에 추가되었습니다.")
-					 	}else if(data.result == "danger"){
-					 		alert('이미 추가된 상품입니다.');
-					 	}
-				});
-	}
-
 function init () {
 	amount = document.amountForm.amount.value;
 	change();
@@ -109,7 +94,7 @@ const getList = (productNo,pageNo) => {
                         
                         
                     </div>
-                    <ul class="preview-thumbnail nav nav-tabs">
+                    <ul class="preview-thumbnail nav nav-tabs" style="border:none;">
                     	<c:forEach var="product" items="${list}" varStatus="status">
 	                    	<c:if test="${status.count eq 1}"> 
 								 <li class="active">
@@ -139,10 +124,10 @@ const getList = (productNo,pageNo) => {
                     class="product-details col-md-6"
                     style="position:relative; left: 2%; top:25%; padding-top: 50px;">
                     <h3 class="product-title">| ${product.productName} |</h3>
-                    <h5 class="product-price">가격 :
+                    <h5 class="product-price">price :
                         <span>${product.productPrice}원</span></h5>
                     <div class="quantity-section">
-                        <h5 class="product-quantity">수량
+                        <h5 class="product-quantity">amount
                         </h5>
                     </div>
                     
@@ -157,23 +142,27 @@ const getList = (productNo,pageNo) => {
                     		<input type="text" id="amount" name="amount" value="1" size="3" onchange="change()">
 												<input type="button" value=" + " onclick="add();">
 												<input type="button" value=" - " onclick="del();"><br>
-											</div>
+						</div>
 											
 						<sec:authorize access="isAnonymous()">
-                     		<button class="add-to-cart btn btn-default" type="button" style="font-size:1rem;">장바구니에 담으려면 로그인하십시오.</button>
+                     		<input class="add-to-cart btn btn-default" type="button" value="add to cart" onclick="popup()"/>
 						</sec:authorize>
 						<sec:authorize access="isAuthenticated()">
-					 		<input class="add-to-cart btn btn-default" type="submit" value="장바구니 담기" />
+					 		<input class="add-to-cart btn btn-default" type="submit" value="add to cart" />
 						</sec:authorize>
 					</form>
-					<form method="post" action="<%=application.getContextPath()%>/user/addwishlist" style="display:inline-block">
-											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-											<input type="hidden" name="productNo" value="${product.productNo}" />
+					<form method="post" action="<%=application.getContextPath()%>/user/addwishlist" style="display:inline-block" onsubmit="addwishlistCheck()">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<input type="hidden" name="productNo" value="${product.productNo}" />
                     	<input type="hidden" name="userId" value="" />
-                        <button
-                            class="like btn btn-default"
-                            type="submit"
-                            onclick="alert('찜 리스트에 추가되었습니다.')"><span class="fa fa-heart"></span></button>
+                    	
+                    	<sec:authorize access="isAnonymous()">
+                    		<button type="button" class="like btn btn-default" onclick="popup()"><span class="fa fa-heart"></span></button>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+					 		<button type="submit" class="like btn btn-default"><span class="fa fa-heart"></span></button>
+						</sec:authorize>
+                        
                     </form>
                     </div>
                 </div>
@@ -182,16 +171,15 @@ const getList = (productNo,pageNo) => {
             <div class="row detail-section">
                 <div class="col-md-12">
                     <hr>
-                    <h3>| details |</h3>
+                    <h3>| Detail |</h3>
                     <hr>
                 </div>
-                <div class="col-md-12 product-description">
-                    <p>
-                       ${product.productContent}
-                    </p>
+                <div class="col-md-12 product-description" style="margin-top:100px; margin-bottom:50px;">
+                    <img class="product-img" src="<%=application.getContextPath()%>/getphoto?cno=${product.productCategoryNo}&imgSname=${detailImg.imgSname}&imgType=${detailImg.imgType}" style="padding-left:8%"/>
                 </div>
             </div>
 			
+           
 		
            <div id="review"></div>
         </div> 

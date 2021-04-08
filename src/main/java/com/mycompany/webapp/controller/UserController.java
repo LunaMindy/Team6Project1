@@ -43,7 +43,7 @@ public class UserController {
 		int result = usersService.join(user);
 		
 		
-		return "redirect:/main";
+		return "user/login";
 	}
 	
 	//회원가입 이메일 중복검사

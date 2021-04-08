@@ -51,32 +51,35 @@ public class MainController {
 
 	@GetMapping("/category")
 	public String openCategory(int cno, int kind, String pageNo, Model model, HttpSession session) {
-
-		//페이지 번호 
-		//새션에서 pager를 찾고, 있으면 pageNo를 설정하고 
 		int intPageNo = 1; 
-		if(pageNo == null) { 
-			Pager pager = (Pager)session.getAttribute("pager"); 
-			if(pager != null) { 
-				intPageNo = pager.getPageNo(); 
-			} 
-		}else { 
+		if(pageNo == null) {
+			Integer objCategoryNo = (Integer) session.getAttribute("categoryNo");
+			if(objCategoryNo != null) {
+				if(cno == objCategoryNo) {
+					Pager pager = (Pager)session.getAttribute("pager"); 
+					if(pager != null) { 
+						intPageNo = pager.getPageNo(); 
+					}
+				}
+			}
+		} else {
 			intPageNo = Integer.parseInt(pageNo); 
 		}
-
+		
 		int totalCount = productsService.getTotalCount(cno);
 		logger.info(String.valueOf(totalCount));
 
 		Pager pager = new Pager(12, 5, totalCount, intPageNo); 
 		session.setAttribute("pager", pager);
+		session.setAttribute("categoryNo", cno);
 		
 		List<Products> list = new ArrayList<Products>();
 		if(kind == 1) {
 			list = productsService.getProductsList(pager, cno);
 		}else if(kind == 2) {
-			list = productsService.getProductsNewList(pager, cno);
-		}else {
 			list = productsService.getProductsBestList(pager, cno);
+		}else {
+			list = productsService.getProductsNewList(pager, cno);
 		}
 
 		Products product = new Products();
@@ -86,8 +89,8 @@ public class MainController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("product", product);
 		model.addAttribute("cno", cno);
-		model.addAttribute("kind", kind);
-
+		model.addAttribute("kind", kind);		
+		
 		return "main/category";
 	}
 

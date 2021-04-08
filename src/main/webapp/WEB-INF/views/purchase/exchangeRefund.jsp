@@ -33,7 +33,7 @@
 
          <div class="exchangeBox">
          		<form method="post" action="<%=application.getContextPath()%>/user/refundcomplete">
-          	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
          		<div class="exchangeContent">
 	         			<hr/>
 	             <!-- 환불사유 선택 -->

@@ -67,25 +67,25 @@
             <div class="login-out">
                 <ul>
                     <li>
-                        <a href="<%=application.getContextPath()%>/faq">마이페이지</a>
+                        <a href="<%=application.getContextPath()%>/faq">MYPAGE</a>
                     </li>
                     <sec:authorize access="isAnonymous()">
                      <li>
-						 <a href="<%=application.getContextPath()%>/auth/login">로그인</a>
+						 <a href="<%=application.getContextPath()%>/auth/login">LOGIN</a>
 					</li>
 					<li>
-                        <a href="<%=application.getContextPath()%>/signup">회원가입</a>
+                        <a href="<%=application.getContextPath()%>/signup">SIGNUP</a>
                     </li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 					<li style="margin-top:0;">
-					<li>
-						사용자: <sec:authentication property="name"/>
+					
+						USER: <sec:authentication property="name"/>
 					</li>
 					<li>
 						<form method="post" class="d-inline-block" action="<%=application.getContextPath()%>/logout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-								<input type="submit" style="outline:0; border:0; background:transparent; color:white; padding-top:0px; padding-left:6px; padding-right:0;" value="로그아웃" />
+								<input type="submit" style="outline:0; border:0; background:transparent; color:white; padding-top:0px; padding-left:6px; padding-right:0;" value="LOGOUT" />
 						</form>
 					</li>
 					
@@ -100,22 +100,22 @@
                     <div class="shopping-basket	"></div>
                 </a>
                 <div class="shopping-basket-text-box">
-                    <div class="shopping-basket-text">장바구니</div>
+                    <div class="shopping-basket-text">CART</div>
                 </div>
             </div>
             <div class="down-category">
                 <ul>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=1&kind=0">캔들</a>
+                        <a href="<%=application.getContextPath()%>/category?cno=1&kind=0&pageNo=1">CANDLE</a>
                     </li>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=2&kind=0">조명</a>
+                        <a href="<%=application.getContextPath()%>/category?cno=2&kind=0&pageNo=1">LIGHT</a>
                     </li>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=3&kind=0">트리</a>
+                        <a href="<%=application.getContextPath()%>/category?cno=3&kind=0&pageNo=1">TREE</a>
                     </li>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=4&kind=0">기타</a>
+                        <a href="<%=application.getContextPath()%>/category?cno=4&kind=0&pageNo=1">ETC</a>
                     </li>
                 </ul>
                 <div class="search-box">

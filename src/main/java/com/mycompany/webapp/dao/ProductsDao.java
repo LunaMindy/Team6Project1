@@ -20,14 +20,12 @@ public interface ProductsDao{
 	public List<Products> selectByPno(int productNo);
 	public int update(Products product);
 	public int updatePhitcount(int productNo);
-	public int updatePsellcount(int productNo);
+	public int updatePsellcount(@Param("productNo") int productNo, @Param("amount") int amount);
 	public int updateState(int productNo);
 	public int deleteByPno(int productNo);
 	public int count(int cno);
 	public List<Products> selectBySearchPage(@Param("pager")Pager pager,@Param("keyword")String keyword);
 	
 	public int countKeyword(String keyword);
-	
-	
-		
+	public Products selectByPnoDetail(int productNo);		
 }

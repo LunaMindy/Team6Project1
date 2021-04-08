@@ -63,17 +63,17 @@ public class PurchaseController {
 		
 		String userId = auth.getName();
 		int totalRows = ordersService.getTotalRows(userId);
-		Pager pager = new Pager(12, 10, totalRows, intPageNo);
+		Pager pager = new Pager(4, 5, totalRows, intPageNo);
 		session.setAttribute("pager", pager);
 
 		
 		List<Orders> list = ordersService.getOrdersPage(pager, userId);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("size",list.size());
 		model.addAttribute("pager", pager);
 		model.addAttribute("userId",userId);
 
-		logger.info("주문페이지리스트 실행");
 		return "purchase/purchaseList";
 	}
 	
@@ -148,9 +148,9 @@ public class PurchaseController {
 	@PostMapping("/createreview")
 	public String updateReview(Authentication auth, int orderNo, int productNo, String reviewContent, RedirectAttributes redirect) {
 		String userId = auth.getName();
-		logger.info(String.valueOf(orderNo));
+		/*logger.info(String.valueOf(orderNo));
 		logger.info(String.valueOf(productNo));
-		logger.info(reviewContent);
+		logger.info(reviewContent);*/
 		reviewsService.saveReview(userId, orderNo, productNo, reviewContent);
 		orderProductsService.updateReview(userId, orderNo, productNo);
 		redirect.addAttribute("orderNo", orderNo);

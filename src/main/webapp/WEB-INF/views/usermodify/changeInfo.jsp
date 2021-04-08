@@ -6,7 +6,8 @@
         <link href="<%=application.getContextPath() %>/resources/css/changeInfo.css" rel="stylesheet" type="text/css"/>
         <link href="<%=application.getContextPath() %>/resources/css/login.css" rel="stylesheet" type="text/css"/>
 		<script src="<%=application.getContextPath() %>/resources/js/user/changeInfoValidate.js"></script>
-	
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 		 
   <!-- 컨텐츠 -->
   <div >
@@ -18,7 +19,7 @@
       <!-- 마이페이지 탭 목록 -->
        <div id="mypageList">
           <a href="<%=application.getContextPath()%>/user/purchaselist" class="mypage-tab">구매내역</a>
-          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">위시리스트</a>
+          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">찜목록</a>
           <a href="<%=application.getContextPath()%>/user/changeinfo" class="mypage-tab-clicked">개인정보수정</a>
           <a href="<%=application.getContextPath()%>/user/withdrawal" class="mypage-tab">회원탈퇴</a>
           <a href="<%=application.getContextPath()%>/faq" class="mypage-tab">FAQ</a>

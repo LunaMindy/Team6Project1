@@ -6,7 +6,6 @@ body{
     padding-right: 10%;
     position: relative;
     background-image: url(../images/배경.png);                                                              
-    background-size: cover;
     font-family: 'Noto Sans KR', serif;
 }
 .header{
@@ -39,13 +38,14 @@ body{
 } 
 .login-out ul li {
     color: white;
-    margin-top: 2.5px;
+    margin-top: 0px;
     margin-right: 0px;
     float: right;                        
     list-style-type: none;
     border-left:1px solid white;     
-    font-size: 0.3em;                   
+    font-size: 0.4em;                   
     padding: 0 15px;
+    padding-bottom:10px;
 }
 .login-out ul li:last-child{
     border-left:none;
