@@ -4,6 +4,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
         <link href="<%=application.getContextPath() %>/resources/css/signup.css" rel="stylesheet" type="text/css"/>
 		<script src="<%=application.getContextPath() %>/resources/js/user/changePwValidate.js"></script>	
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+
 	
   <!-- 컨텐츠 -->
          <div class="signup-content">

@@ -41,7 +41,7 @@
     height: 100%;
     position: relative;
     background-image: url(../images/배경.png);                                                              
-    background-size: cover;
+    background-size: cover; 
 }
 
 .cetegory-product{
@@ -63,6 +63,7 @@
 .category-title{
     margin: 30px;
     margin-top: 0;
+    padding-top:1px;
     width:80%;
     height: 90px;
     border-bottom: 1px solid #DDDDDD;

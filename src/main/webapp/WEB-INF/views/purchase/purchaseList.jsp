@@ -3,8 +3,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-        <link href="<%=application.getContextPath() %>/resources/css/purchaseList.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=application.getContextPath() %>/resources/css/mypage.css" rel="stylesheet" type="text/css"/>
+<link href="<%=application.getContextPath() %>/resources/css/purchaseList.css" rel="stylesheet" type="text/css"/>
+<link href="<%=application.getContextPath() %>/resources/css/mypage.css" rel="stylesheet" type="text/css"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function popup(){
+	swal({
+		  title: "Error",
+		  text: "이미 취소된 구매입니다.",
+		  dangerMode: true,
+		  button: "확인",
+		});
+}
+
+</script>
 
 
 <script type="text/javascript" src="<%=application.getContextPath() %>/resources/js/review.js"></script>
@@ -32,15 +44,15 @@
        <hr/>
        
        	<c:if test="${size eq 0}">
-             <div style="border:1px solid #f3f3f3; background-color:#f3f3f3; padding-left:38%; height:300px; margin-bottom:1%;">
-             	<h1 style="padding-left:15%; margin-top:10%;">
+             <div style="border:1px solid #f3f3f3; background-color:#f3f3f3; height:300px; margin-bottom:1%; padding-top:6%;">
+             	<h1 style="text-align:center;">
              		<i class="bi bi-bucket"></i>
              	</h1>
-          	 	<P style="padding-top:3%; font-size:2em;">구매내역이 없습니다.</P>
+          	 	<P style="text-align:center; font-size:2em;">구매내역이 없습니다.</P>
       		 </div>
 		</c:if>
 		
-		<c:if test="${size eq 1}">
+		<c:if test="${size >= 1}">
        
 	       <c:forEach var="order" items="${list}">
 	       	<form method="post" action="<%=application.getContextPath()%>/user/exchangerefund?orderNo=${order.orderNo}">
@@ -66,7 +78,7 @@
 	                	 </c:if>
 	                	 <c:if test="${order.orderState eq 1}">
 	                    	 <div class="col">
-	                    	   <button class="exchange-btn2" type="button" onclick="alert('이미 구매 취소된 주문입니다.')">교환/환불/구매취소</button>                        
+	                    	   <button class="exchange-btn2" type="button" onclick="popup()">교환/환불/구매취소</button>                        
 	                    	</div>
 	                	 </c:if>
 			       </div>

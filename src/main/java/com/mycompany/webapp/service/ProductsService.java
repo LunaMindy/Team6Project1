@@ -39,10 +39,11 @@ public class ProductsService {
 		List<Products> list = productsDao.selectByPage(pager, cno);
 		return list;
 	}
-	public List<Products> getProductsNewList(Pager pager, int cno) {
-		List<Products> list = productsDao.selectByNewPage(pager, cno);
-		return list;
-	}
+	
+	/*
+	 * public List<Products> getProductsNewList(Pager pager, int cno) {
+	 * List<Products> list = productsDao.selectByNewPage(pager, cno); return list; }
+	 */
 
 	public List<Products> getProductsBestList(Pager pager, int cno) {
 		List<Products> list = productsDao.selectByBestPage(pager, cno);

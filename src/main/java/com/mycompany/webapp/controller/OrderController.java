@@ -104,7 +104,11 @@ public class OrderController {
 		cart.setUserId(auth.getName());
 		
 		Products product = productService.getProductDetail(cart.getProductNo()).get(0);
-		int allprice = cart.getAmount() * (Integer.parseInt(product.getProductPrice()));
+		String price = product.getProductPrice();
+		price = price.replaceAll(",", "");
+		price = price.replaceAll(" ", "");
+		
+		int allprice = cart.getAmount() * (Integer.parseInt(price));
 		cart.setAllPrice(allprice);
 		
 		int result = cartService.getCartCheckCount(cart.getProductNo(), auth.getName());
@@ -137,7 +141,12 @@ public class OrderController {
 	@PostMapping("/updateamount")
 	public String updateAmount(Cart cart) {
 		//Products product = productsService.getProduct(cart.getProductNo());
-		int allprice = cart.getAmount() * cart.getPrice();
+		
+		String price = cart.getPrice();
+		price = price.replaceAll(",", "");
+		price = price.replaceAll(" ", "");
+		
+		int allprice = cart.getAmount() * Integer.parseInt(price);
 		cart.setAllPrice(allprice);
 		cartService.updateAmount(cart);
 		return "redirect:/user/cart";
@@ -166,7 +175,7 @@ public class OrderController {
 				cartArray[i].setAmount(Integer.parseInt(amount[i]));
 				cartArray[i].setAllPrice(Integer.parseInt(allPrice[i]));
 				cartArray[i].setProductName(productName[i]);
-				cartArray[i].setPrice(Integer.parseInt(price[i]));
+				cartArray[i].setPrice(price[i]);
 				cartArray[i].setImgOname(imgOname[i]);
 				cartArray[i].setImgSname(imgSname[i]);
 				cartArray[i].setImgType(imgType[i]);							
@@ -274,9 +283,6 @@ public class OrderController {
 	public String addWishlist(Authentication auth, Wishlist wishlist) {
 		
 		wishlist.setUserId(auth.getName());
-		
-		boolean check = true;
-
 		
 		int result = wishlistService.getwishListCheckCount(wishlist.getProductNo(), auth.getName());
 		

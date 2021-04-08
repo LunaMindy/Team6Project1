@@ -46,12 +46,12 @@
             
               <script type="text/javascript">
             $(document).on('click', '#btnSearch', function(e){
-                alert("검색");
                 e.preventDefault();
 
                 var url = "${pageContext.request.contextPath}/search";
 
                 url = url + "?keyword=" + $('#keyword').val();
+                url = url + "&pageNo=1";
 
                 location.href = url;
 
@@ -106,16 +106,16 @@
             <div class="down-category">
                 <ul>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=1&kind=0">CANDLE</a>
+                        <a href="<%=application.getContextPath()%>/category?pageNo=1&cno=1&kind=0">CANDLE</a>
                     </li>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=2&kind=0">LIGHT</a>
+                        <a href="<%=application.getContextPath()%>/category?pageNo=1&cno=2&kind=0">LIGHT</a>
                     </li>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=3&kind=0">TREE</a>
+                        <a href="<%=application.getContextPath()%>/category?pageNo=1&cno=3&kind=0">TREE</a>
                     </li>
                     <li>
-                        <a href="<%=application.getContextPath()%>/category?cno=4&kind=0">ETC</a>
+                        <a href="<%=application.getContextPath()%>/category?pageNo=1&cno=4&kind=0">ETC</a>
                     </li>
                 </ul>
                 <div class="search-box">

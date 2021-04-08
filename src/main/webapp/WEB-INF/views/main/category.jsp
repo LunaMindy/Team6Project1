@@ -30,16 +30,16 @@
                     </div>
                     <div class="new-popular">
                     	<c:if test="${kind==0}">
-							<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=1">최신순</a>
-                        	<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=2">인기순</a>
+							<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=1">new</a>
+                        	<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=2">best</a>
 						</c:if>
 						<c:if test="${kind==1}">
-							<a class="text" style="color:red; text-decoration:underline;"href="<%=application.getContextPath()%>/category?cno=${cno}&kind=1">최신순</a>
-                        	<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=2">인기순</a>
+							<a class="text" style="color:red; text-decoration:underline;"href="<%=application.getContextPath()%>/category?cno=${cno}&kind=1">new</a>
+                        	<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=2">best</a>
 						</c:if>
 						<c:if test="${kind==2}">
-							<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=1">최신순</a>
-                        	<a class="text" style="color:red; text-decoration:underline;" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=2">인기순</a>
+							<a class="text" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=1">new</a>
+                        	<a class="text" style="color:red; text-decoration:underline;" href="<%=application.getContextPath()%>/category?cno=${cno}&kind=2">best</a>
 						</c:if>
                     </div>
                 </div>
@@ -51,14 +51,28 @@
 						</c:if>
 								<div class="col-3">
                             		<a href="<%=application.getContextPath() %>/product?productNo=${product.productNo}">
-                                		<div class="cetegory-product">
+										   	<div class="cetegory-product">
+										   		<c:if test="${cno eq 3}"> 
+													<img style="height:175%" src="<%=application.getContextPath()%>/getphoto?cno=${cno}&imgSname=${product.imgSname}&imgType=${product.imgType}">
+												</c:if>
+												<c:if test="${cno != 3}"> 
 													<img src="<%=application.getContextPath()%>/getphoto?cno=${cno}&imgSname=${product.imgSname}&imgType=${product.imgType}">
-		                                </div>
+												</c:if>
+		                                	</div>
                             		</a>
-               			            <div class="category-title">
+                            		<c:if test="${cno eq 3}"> 
+										<div class="category-title" style="margin-top:50%;">
 	                                	<p>${product.productName}</p>
-	                                	<p class="price">${product.productPrice}원</p>
-                            		</div>
+	                                	<p class="price">${product.productPrice}₩</p>
+                            			</div>
+									</c:if>
+									<c:if test="${cno != 3}"> 
+										<div class="category-title">
+	                                	<p>${product.productName}</p>
+	                                	<p class="price">${product.productPrice}₩</p>
+                            			</div>
+									</c:if>
+               			            
                         		</div>
    						<c:if test="${status.count % 4 eq 0}"> 
 						   		</div>

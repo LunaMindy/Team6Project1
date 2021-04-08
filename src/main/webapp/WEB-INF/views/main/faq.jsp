@@ -43,7 +43,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseOne"
                                         aria-expanded="false"
-                                        aria-controls="collapseOne">[배송]배송완료인데 아직 못 받았어요.
+                                        aria-controls="collapseOne"
+                                        style="color:#f3f3f3; font-weight:bold;">[배송]배송완료인데 아직 못 받았어요.
                                         <i class="material-icons">add</i>
                                     </a>
                                 </h2>
@@ -67,7 +68,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseTwo"
                                         aria-expanded="false"
-                                        aria-controls="collapseTwo">[배송] 주문한 상품이 일부만 도착했어요
+                                        aria-controls="collapseTwo"
+                                        style="color:#f3f3f3; font-weight:bold;">[배송] 주문한 상품이 일부만 도착했어요
                                         <i class="material-icons">add</i>
                                     </a>
                                 </h2>
@@ -88,7 +90,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseThree"
                                         aria-expanded="false"
-                                        aria-controls="collapseThree">[환불] 상품 불량, 오배송 환불
+                                        aria-controls="collapseThree"
+                                        style="color:#f3f3f3; font-weight:bold;">[환불] 상품 불량, 오배송 환불
                                         <i class="material-icons">add</i>
                                     </a>
                                 </h2>
@@ -110,7 +113,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseFour"
                                         aria-expanded="false"
-                                        aria-controls="collapseFour">[배송] 주문한 상품과 다른 상품이 배송되었어요.<i class="material-icons">add</i>
+                                        aria-controls="collapseFour"
+                                        style="color:#f3f3f3; font-weight:bold;">[배송] 주문한 상품과 다른 상품이 배송되었어요.<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -131,7 +135,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseFive"
                                         aria-expanded="false"
-                                        aria-controls="collapseFive">[주문취소/환불] 입금 전 주문취소는 어떻게 하나요?<i class="material-icons">add</i>
+                                        aria-controls="collapseFive"
+                                        style="color:#f3f3f3; font-weight:bold;">[주문취소/환불] 입금 전 주문취소는 어떻게 하나요?<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -151,7 +156,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseSix"
                                         aria-expanded="false"
-                                        aria-controls="collapseSix">[배송] 잘못된 주소를 입력했습니다. 어떻게 해야 할까요?<i class="material-icons">add</i>
+                                        aria-controls="collapseSix"
+                                        style="color:#f3f3f3; font-weight:bold;">[배송] 잘못된 주소를 입력했습니다. 어떻게 해야 할까요?<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>
@@ -171,7 +177,8 @@
                                         data-toggle="collapse"
                                         data-target="#collapseSeven"
                                         aria-expanded="false"
-                                        aria-controls="collapseSeven">[리뷰] 리뷰를 수정하고 싶습니다. 어디서 해야하나요?<i class="material-icons">add</i>
+                                        aria-controls="collapseSeven"
+                                        style="color:#f3f3f3; font-weight:bold;">[리뷰] 리뷰를 수정하고 싶습니다. 어디서 해야하나요?<i class="material-icons">add</i>
                                     </a>
                                 </h2>
                             </div>

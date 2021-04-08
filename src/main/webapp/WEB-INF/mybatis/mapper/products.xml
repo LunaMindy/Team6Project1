@@ -10,7 +10,6 @@
 			 product_category_no, 
 			 product_name, 
 			 product_price, 
-			 product_content, 
 			 product_state, 
 			 product_regdate, 
 			 product_hitcount, 
@@ -134,7 +133,9 @@
 	 			WHERE 
 	 					p.product_category_no = #{cno}
         		ORDER BY 
-        				p.product_regdate desc
+        				p.product_no asc,
+        				p.product_regdate desc 
+        				
              )
              WHERE rownum &lt;= #{pager.endRowNo}
          )
@@ -187,7 +188,7 @@
          WHERE rnum &gt;= #{pager.startRowNo}
      </select>  
      
-     <select id="selectByNewPage"  resultType="product">
+    <!--  <select id="selectByNewPage"  resultType="product">
         SELECT  rnum, 
         	 	product_no as productNo,
 				product_name as productName, 
@@ -231,17 +232,15 @@
              WHERE rownum &lt;= #{pager.endRowNo}
          )
          WHERE rnum &gt;= #{pager.startRowNo}
-     </select>  
+     </select>   -->
   
      <select id="selectByPno" parameterType="int" resultType="product">
 		SELECT 
 			 p.product_no as productNo, 
 			 p.product_name as productName, 
-			 p.product_price as productPrice, 
-			 p.product_content as productContent, 
+			 to_char(p.product_price , '999,999,999,999,999') as productPrice, 
 			 p.product_hitcount as productHitcount, 
 			 p.product_sellcount as productSellcount, 
-			 p.reviewcount as reviewcount,
 			 c.category_no as productCategoryNo, 
 			 c.category_name as productCategoryName,
 			 i.img_oname as imgOname,
@@ -299,21 +298,17 @@
 			 product_category_no, 
 			 product_name, 
 			 product_price, 
-			 product_content, 
 			 product_state, 
 			 product_regdate, 
 			 product_hitcount, 
-			 product_sellcount, 
-			 reviewcount)
+			 product_sellcount)
 		VALUES(
 			product_no,
 			#{categoryDto.getCategoryNo()},
 			#{productName},
 			#{productPrice},
-			#{productContent},
 			0,
 			sysdate,
-			0,
 			0,
 			0
 		)
@@ -326,7 +321,6 @@
 		SET
 			product_name = #{productName},
 			product_price = #{productPrice},
-			product_content = #{productContent},
 		WHERE
 			product_no = #{productNo}
 	</update>

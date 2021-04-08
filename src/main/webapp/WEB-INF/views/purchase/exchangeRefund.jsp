@@ -4,7 +4,22 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=application.getContextPath() %>/resources/css/mypage.css" rel="stylesheet" type="text/css"/>
 <link href="<%=application.getContextPath() %>/resources/css/exchangeRefund.css" rel="stylesheet" type="text/css"/>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function popup(){
+	event.preventDefault();
+	swal({
+		  title: "교환/환불",
+		  text: "신청하시겠습니까?",
+		  buttons: true,
+		  dangerMode: true,
+		}).then((willDelete) => {
+		  if (willDelete) {
+			 $("#exchangeRefundForm")[0].submit(); //form에서 id로 찾아서 사용
+		  }
+		});		
+}
+</script>
 
   <!-- 컨텐츠 -->
   <div >
@@ -32,7 +47,7 @@
      <div class="container-fluid border">
 
          <div class="exchangeBox">
-         		<form method="post" action="<%=application.getContextPath()%>/user/refundcomplete">
+         		<form id="exchangeRefundForm" method="post" action="<%=application.getContextPath()%>/user/refundcomplete" onsubmit="popup()">
           		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
          		<div class="exchangeContent">
 	         			<hr/>
@@ -63,7 +78,7 @@
 	             <hr/>
 	             <!-- 교환환불 버튼 -->
 	             <div id="refund-btn-div">
-	                 <input id="btnRefund" type="submit" onclick="alert('신청이 완료되었습니다.')" value="교환/환불 신청">
+	                 <input id="btnRefund" type="submit" value="교환/환불 신청">
 	             </div>
 	             <hr/>
 
