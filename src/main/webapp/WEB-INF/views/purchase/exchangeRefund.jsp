@@ -40,7 +40,7 @@ function popup(){
 
   <div>
      <!-- 구매내역-교환/환불신청 타이틀 -->
-     <h3 id="mypageTitle-under">구매내역 - 교환/환불 신청</h3>
+     <h3 id="mypageTitle-under">환불/구매취소 신청</h3>
      <hr/>
 
      <!-- 교환/환불하고자하는 상품의 구매내역 상세정보 -->

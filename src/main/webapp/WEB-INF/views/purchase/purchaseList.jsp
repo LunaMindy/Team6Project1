@@ -69,7 +69,7 @@ function popup(){
 			           <div class="col-2" style="padding-top:40px; float:left; border-bottom:0.5px solid #d9d9d9;">
 			               <div>
 				               <a href="<%=application.getContextPath()%>/user/purchaselistdetail?orderNo=${order.orderNo}" 
-				               class="btn purchase-btn">주문 상세정보</a>			               
+				               class="btn purchase-btn">구매상세내역</a>			               
 			               </div>
 			               <div>
 				               <c:if test="${order.orderState eq 0}">
